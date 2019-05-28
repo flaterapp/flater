@@ -1,14 +1,11 @@
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://source.unsplash.com/1600x900/?apartment); height: 60vh">
+<div class="banner home">
   <div class="container d-flex justify-content-between">
     <div>
-      <h1>
-      <span><strong>Flater</strong>Services<sup>&trade;</sup></span>
-      The best platform for flat visits & more
-      </h1>
-      <p class="lead">As a flat owner or as a concierge, we render services to each other.</p>
+      <h1><span><strong>Flater</strong><sup>&trade;</sup></span></h1>
+      <p class="lead">As a flat owner or as a tenant <strong id="typed"></strong></p>
 
-      <%= link_to 'Create a task', new_task_path, class: 'btn btn-primary' %>
-      <%= link_to 'Apply to tasks', tasks_path, class: 'btn btn-outline-light' %>
+      <%= link_to 'Manage applications', new_task_path, class: 'btn btn-primary btn-lg' %>
+      <%= link_to 'Apply to rentals', tasks_path, class: 'btn btn-outline-light btn-lg' %>
     </div>
 
     <% unless user_signed_in? %>
@@ -20,5 +17,5 @@
 </div>
 
 <div class="container">
-  <%= render 'pages/flaterdescription' %>
+  <%= render 'pages/flater-description' %>
 </div>
