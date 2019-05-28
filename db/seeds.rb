@@ -90,15 +90,44 @@ User.all.each do |user|
     )
 
     # Creating pending rental for each flat
-  #     Rental.create!(
-  #       flat_id: flat.id.to_i,
-  #       tenant: nil,
-  #       description: "A great flat, which is available!",
-  #       start_date: Date.today,
-  #       pending: true,
-  #       initial_rent: 800
-  #     )
+      rental = Rental.create!(
+        flat: flat,
+        tenant: nil,
+        description: "A great flat, which is available!",
+        start_date: Date.today,
+        pending: true,
+        initial_rent: 800
+      )
+
+    candidate =  User.create!(
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      email: Faker::Internet.email,
+      password: pswd,
+      role: nil
+    )
+
+    # Creating a dossier for each rental
+      Dossier.create!(
+        rental: rental,
+        candidate: candidate,
+        start_date: Date.today
+      )
+
   end
+
+
+  # t.bigint "rental_id"
+  # t.bigint "candidate_id"
+  # t.date "start_date"
+  # t.date "end_date"
+  # t.integer "status"
+  # t.string "tax_proof"
+  # t.float "monthly_revenues"
+  # t.string "revenues_proof"
+  # t.string "activity"
+  # t.string "activity_proof"
+  # t.string "identity_proof"
 
 end
 
