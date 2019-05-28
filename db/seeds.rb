@@ -8,6 +8,7 @@
 
 # seeding database
 require 'faker'
+require 'date'
 
 separator = "------------------------------------------------"
 
@@ -16,13 +17,18 @@ puts "Seed starts..."
 
 puts separator
 puts "0. Destroy existing datas... "
+
+Flat.destroy_all
+User.destroy_all
+Rental.destroy_all
+Dossier.destroy_all
 Assignment.destroy_all
 Task.destroy_all
-User.destroy_all
+
 puts "... Database is empty! ✔"
 
 puts separator
-puts "1. Creating users... "
+puts "1. Creating flat owners... "
 pswd = '123flater'
 # Create team accounts
 team = [
@@ -34,141 +40,67 @@ team = [
 team.each do |teamate|
   User.create!(teamate)
 end
-# Create fake accounts
-100.times do
-  User.create!(
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
-    email: Faker::Internet.email,
-    password: pswd,
-    role: nil
-  )
-end
-puts "... users created! ✔"
 
-puts separator
-puts "2. Creating random tasks and assignments... "
-users = User.first(10)
 addresses = [
-  {street_number: '5', street_name: 'Rue Trarieux', zipcode: '69003', city: 'Lyon'},
-  {street_number: '18', street_name: 'Rue Franklin', zipcode: '69002', city: 'Lyon'},
-  {street_number: '58', street_name: 'Rue Pasteur', zipcode: '69007', city: 'Lyon'},
-  {street_number: '22', street_name: 'Rue Smith', zipcode: '69002', city: 'Lyon'},
-  {street_number: '32', street_name: 'Avenue Felix Faure', zipcode: '69003', city: 'Lyon'},
-  {street_number: '8', street_name: 'Rue Rollet', zipcode: '69003', city: 'Lyon'},
-  {street_number: '52', street_name: 'Rue de Sèze', zipcode: '69006', city: 'Lyon'},
-  {street_number: '10', street_name: 'Rue Mazenod', zipcode: '69003', city: 'Lyon'},
-  {street_number: '30', street_name: 'Rue Cuvier', zipcode: '69006', city: 'Lyon'},
-  {street_number: '72', street_name: 'Boulevard Vivier Merle', zipcode: '69003', city: 'Lyon'},
-  {street_number: '45', street_name: 'Rue de la république', zipcode: '69002', city: 'Lyon'},
-  {street_number: '67', street_name: 'Rue du Président Edouard Herriot', zipcode: '69003', city: 'Lyon'},
-  {street_number: '98', street_name: 'Rue Paul Bert', zipcode: '69003', city: 'Lyon'},
-  {street_number: '20', street_name: 'Rue des capucins', zipcode: '69001', city: 'Lyon'},
-  {street_number: '3', street_name: 'Avenue Lacassagne', zipcode: '69003', city: 'Lyon'},
-  {street_number: '132', street_name: 'Avenue Lacassagne', zipcode: '69003', city: 'Lyon'},
-  {street_number: '48', street_name: 'Rue Garibaldi ', zipcode: '69003', city: 'Lyon'},
-  {street_number: '10', street_name: 'Rue de la charité', zipcode: '69002', city: 'Lyon'},
-  {street_number: '57', street_name: 'Rue de Marseille', zipcode: '69007', city: 'Lyon'},
-  {street_number: '3', street_name: 'Rue Chevreul', zipcode: '69007', city: 'Lyon'},
-  {street_number: '12', street_name: 'Rue de la Thibaudière', zipcode: '69007', city: 'Lyon'},
-  {street_number: '3', street_name: 'Rue Père Chevrier', zipcode: '69007', city: 'Lyon'},
-  {street_number: '7', street_name: 'Rue du Plat', zipcode: '69002', city: 'Lyon'},
-  {street_number: '9', street_name: 'Rue de Condé', zipcode: '69002', city: 'Lyon'},
-  {street_number: '5', street_name: 'Rue Servient', zipcode: '69003', city: 'Lyon'},
-  {street_number: '65', street_name: 'Rue Bossuet', zipcode: '69006', city: 'Lyon'},
-  {street_number: '12', street_name: 'Rue de la république', zipcode: '69002', city: 'Lyon'},
-  {street_number: '45', street_name: 'Rue Trarieux', zipcode: '69003', city: 'Lyon'}
+  '5 Rue Trarieux, Lyon',
+  '18 Rue Franklin, Lyon',
+  '58 Rue Pasteur, Lyon',
+  '22 Rue Smith, Lyon',
+  '32 Avenue Felix Faure, Lyon',
+  '8 Rue Rollet, Lyon',
+  '52 Rue de Sèze, Lyon',
+  '10 Rue Mazenod, Lyon',
+  '30 Rue Cuvier, Lyon',
+  '72 Boulevard Vivier Merle, Lyon',
+  '45 Rue de la république, Lyon',
+  '67 Rue du Président Edouard Herriot, Lyon',
+  '98 Rue Paul Bert, Lyon',
+  '20 Rue des capucins, Lyon',
+  '3 Avenue Lacassagne, Lyon',
+  '132 Avenue Lacassagne, Lyon',
+  '48 Rue Garibaldi, Lyon',
+  '10 Rue de la charité, Lyon',
+  '57 Rue de Marseille, Lyon',
+  '3 Rue Chevreul, Lyon',
+  '12 Rue de la Thibaudière, Lyon',
+  '3 Rue Père Chevrier, Lyon',
+  '7 Rue du Plat, Lyon',
+  '9 Rue de Condé, Lyon',
+  '5 Rue Servient, Lyon',
+  '65 Rue Bossuet, Lyon',
+  '12 Rue de la république, Lyon',
+  '45 Rue Trarieu, Lyon'
 ]
 
-80.times do
-  # Creating tasks
-  address = addresses.sample
-  task = Task.create!(
-    action: Task::ACTIONS.sample,
-    status: (0..(Task::STATUS.size - 1)).to_a.sample,
-    location: "#{address[:street_number]} #{address[:street_name]}, #{address[:zipcode]} #{address[:city]}",
-    price: (5..50).to_a.sample,
-    user: users.sample
-  )
-  # Creating assignments
-  rand(4).times do |i|
-    Assignment.create!(
-      task: task,
-      validated: (i == 0) ? [true, false].sample : false,
-      user: users.sample
-    )
-  end
-end
-# A task can't be in progress or done if it is not assigned
-Task.where('tasks.id NOT IN (SELECT task_id FROM assignments a WHERE a.validated = TRUE)').update_all(status: 0)
-puts "... random tasks and assignments created! ✔"
+puts "2. Creating flats for owners... "
 
-puts separator
-puts "3. Creating realistic tasks and assignments... "
+User.all.each do |user|
 
-# dareth = User.find_by(email: 'dareth@gmail.com')
-# pierre = User.find_by(email: 'pierre@gmail.com')
-max = User.find_by(email: 'max@gmail.com')
-
-max.tasks.destroy_all
-
-# 3.1. Creating "NOT ASSIGNED TASKS"
-2.times do
-  # Creating tasks
-  address = addresses.sample
-  task = Task.create!(
-    action: Task::ACTIONS.sample,
-    status: 0,
-    location: "#{address[:street_number]} #{address[:street_name]}, #{address[:zipcode]} #{address[:city]}",
-    price: (5..50).to_a.sample,
-    user: max
-  )
-  # Creating assignments
+  # Creating flats 
   3.times do |i|
-    Assignment.create!(
-      task: task,
-      validated: nil,
-      user: users.sample
+    flat = Flat.create!(
+      address: addresses.sample,
+      owner: user,
+      #NB: important to write "owner" and not to use "owner_id"
+      to_rent: true,
+      surface: rand(30..50),
+      nb_rooms: rand(2..4),
+      furnished: true,
+      description: "Very nice flat with awesome view!"
     )
-  end
-end
 
-# 3.2. Creating "WIP TASKS"
-2.times do
-  # Creating tasks
-  address = addresses.sample
-  task = Task.create!(
-    action: Task::ACTIONS.sample,
-    status: 1,
-    location: "#{address[:street_number]} #{address[:street_name]}, #{address[:zipcode]} #{address[:city]}",
-    price: (5..50).to_a.sample,
-    user: max
-  )
-  # Creating assignments
-  Assignment.create!(task: task, validated: true, user: users.sample)
-  4.times do
-    Assignment.create!(task: task, validated: false, user: users.sample)
+    # Creating pending rental for each flat
+  #     Rental.create!(
+  #       flat_id: flat.id.to_i,
+  #       tenant: nil,
+  #       description: "A great flat, which is available!",
+  #       start_date: Date.today,
+  #       pending: true,
+  #       initial_rent: 800
+  #     )
   end
-end
 
-# 3.3. Creating "DONE TASKS"
-2.times do
-  # Creating tasks
-  address = addresses.sample
-  task = Task.create!(
-    action: Task::ACTIONS.sample,
-    status: 2,
-    location: "#{address[:street_number]} #{address[:street_name]}, #{address[:zipcode]} #{address[:city]}",
-    price: (5..50).to_a.sample,
-    user: max
-  )
-  # Creating assignments
-  Assignment.create!(task: task, validated: true, user: users.sample)
-  4.times do
-    Assignment.create!(task: task, validated: false, user: users.sample)
-  end
 end
-puts "... tasks and assignments created for Max! ✔"
 
 puts separator
 puts "Seed is finished ;-)"
