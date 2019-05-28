@@ -1,7 +1,18 @@
 class User < ApplicationRecord
+  # As a OWNER
+  has_many :flats, foreign_key: "owner_id", dependent: :destroy
+  has_many :rentals, through: :flats
+
+  # As a TENANT
+  has_one :rental
+
+  # As a CANDIDATE
+  has_many :dossiers, foreign_key: "candidate_id", dependent: :destroy
+
+  # As a OWNER or CONCIERGE
   has_many :tasks
   has_many :assignments
-  
+
   ROLES = %w[owner concierge tenant]
 
   # Include default devise modules. Others available are:

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_22_165130) do
+ActiveRecord::Schema.define(version: 2019_05_28_133007) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,52 @@ ActiveRecord::Schema.define(version: 2019_05_22_165130) do
     t.datetime "updated_at", null: false
     t.index ["task_id"], name: "index_assignments_on_task_id"
     t.index ["user_id"], name: "index_assignments_on_user_id"
+  end
+
+  create_table "dossiers", force: :cascade do |t|
+    t.bigint "rental_id"
+    t.bigint "candidate_id"
+    t.date "start_date"
+    t.date "end_date"
+    t.integer "status"
+    t.string "tax_proof"
+    t.float "monthly_revenues"
+    t.string "revenues_proof"
+    t.string "activity"
+    t.string "activity_proof"
+    t.string "identity_proof"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["candidate_id"], name: "index_dossiers_on_candidate_id"
+    t.index ["rental_id"], name: "index_dossiers_on_rental_id"
+  end
+
+  create_table "flats", force: :cascade do |t|
+    t.string "address"
+    t.bigint "owner_id"
+    t.boolean "to_rent"
+    t.string "type"
+    t.float "surface"
+    t.integer "nb_rooms"
+    t.boolean "furnished"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["owner_id"], name: "index_flats_on_owner_id"
+  end
+
+  create_table "rentals", force: :cascade do |t|
+    t.bigint "flat_id"
+    t.bigint "tenant_id"
+    t.text "description"
+    t.boolean "pending"
+    t.date "start_date"
+    t.date "end_date"
+    t.float "initial_rent"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["flat_id"], name: "index_rentals_on_flat_id"
+    t.index ["tenant_id"], name: "index_rentals_on_tenant_id"
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -50,11 +96,19 @@ ActiveRecord::Schema.define(version: 2019_05_22_165130) do
     t.string "first_name"
     t.string "last_name"
     t.string "role"
+    t.string "phone"
+    t.date "birthdate"
+    t.string "sex"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "assignments", "tasks"
   add_foreign_key "assignments", "users"
+  add_foreign_key "dossiers", "rentals"
+  add_foreign_key "dossiers", "users", column: "candidate_id"
+  add_foreign_key "flats", "users", column: "owner_id"
+  add_foreign_key "rentals", "flats"
+  add_foreign_key "rentals", "users", column: "tenant_id"
   add_foreign_key "tasks", "users"
 end
