@@ -1,0 +1,41 @@
+<div class="container">
+	<header class="d-flex justify-content-between pt-3">
+		<h1 class="title d-flex justify-content-between">
+      #<%= @task.id %> <%= @task.action.capitalize %>
+      <%# # DON'T DISPLAY THIS PART %>
+      <% if false %>
+        <%# TASK STATUS %>
+        <%# FLAT OWNER %>
+        </strong><%= @task.user_id %> / <%= current_user.id %>
+      <% end %>
+    </h1>
+    <%# ACTIONS %>
+		<div id="user-menu">
+      <strong class="px-5" style="font-size: 1.5rem;"><%= @task.price %> €</strong>
+      <%= link_to "Apply for it" , new_task_assignment_path(@task), class: 'btn btn-info' %>
+      <%= link_to raw('<i class="fas fa-pen"></i> Edit') , edit_task_path(@task), class: 'btn btn-sm' if current_user.id == @task.user_id %>
+		</div>
+	</header>
+
+  <%# TASK DETAILS %>
+  <ul class="lead text-muted d-flex justify-content-between pb-3">
+    <li><i class="fas fa-map-marker-alt"></i> <%= @task.location %></li>
+    <% status = Task::STATUS[@task.status.to_i] %>
+    <li><%= status.capitalize %> on <i class="far fa-calendar-alt"></i> <%= @task.date %></li>
+    <li><i class="fas fa-users"></i> <%= pluralize(@task.assignments.count, 'applicant') %></li>
+  </ul>
+</div>
+
+<%# MAPBOX %>
+<div id="map" style="width: 100%; height: 60vh;" data-marker="<%= @marker.to_json %>" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+</div>
+
+<%# APPLICANTS LIST %>
+<% if @task.assignments.count > 0 && @task.user_id == current_user.id %>
+  <div id="applicants-list" class="container">
+    <h2><%= pluralize(@task.assignments.count, 'applicant') %></h2>
+    <% @task.assignments.each do |assignment| %> 
+      <%= render 'assignments/applicant-card', assignment: assignment %>
+    <% end %>
+  </div>
+<% end %>
