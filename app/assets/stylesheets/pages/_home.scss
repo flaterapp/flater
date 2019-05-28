@@ -1,21 +1,35 @@
 .form-container {
 	width: 30%;
-	background-color: #FFFFFFCC;
+	background-color: rgba($light-gray, .9);
 	padding: 25px;
-	color: $gray;
-}
+	color: $night;
 
-section {
-	margin-top: 2em;
+	h2 {
+		font-size: 2rem;
 
-	.cards {
-		.card {
-			width: 30%;
+		&:after {
+			content: '›';
+			font-weight: 100;
+			padding-left: .25em;
+			color: $primary;
+		}
+	}
 
-			img {
-				object-fit: contain;
-				margin-bottom: 1em;
-			}
+	a {
+		color: $night;
+		transition: $transition;
+		text-decoration: none;
+	}
+
+	a:hover {
+		color: $primary;
+	}
+
+	form {
+		& + a {
+			display: inline-block;
+			margin-top: 1em;
+			font-size: .5em;
 		}
 	}
 }
