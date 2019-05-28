@@ -1,6 +1,6 @@
-.navbar-lewagon {
+.navbar {
   justify-content: space-between;
-  background: white;
+  background: rgba($light-gray, .95);
   height: 10vh;
   position: sticky;
   top: 0;
@@ -11,7 +11,12 @@
   }
   
   .navbar-brand img {
-    width: 40px;
+    height: 8vh;
+  }
+
+  .navbar-nav {
+    font-family: $headings-font-family;
+    text-transform: uppercase;
   }
 }
 

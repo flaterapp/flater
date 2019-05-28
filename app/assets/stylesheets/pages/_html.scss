@@ -1,0 +1,23 @@
+body {
+	background: rgba($light-gray,.5), url('shattered.png');
+}
+
+h2 {
+	font-size: 2.5em;
+	font-weight: 900;
+}
+
+section {
+	margin-top: 2em;
+
+	.cards {
+		.card {
+			width: 30%;
+
+			img {
+				object-fit: contain;
+				margin-bottom: 1em;
+			}
+		}
+	}
+}

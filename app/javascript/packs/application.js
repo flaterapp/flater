@@ -14,3 +14,7 @@ import flatpickr from "flatpickr";
 // var datepicker = document.querySelector(".datepicker")
 // console.log(datepicker)
 flatpickr(".datepicker")
+
+// TYPEDJS
+import initTyped from "./inittyped.js";
+initTyped()
