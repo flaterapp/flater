@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  has_many :flats
+  has_one :rental
+  has_many :rentals, through: :flats
   has_many :tasks
   has_many :assignments
   
