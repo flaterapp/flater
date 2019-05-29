@@ -2,8 +2,11 @@
 	<header class="bs-canvas-header p-3 overflow-auto">
 		<h4>
 			<%# USER HEADER %>
-      <% if user_signed_in? %>
-				<%= image_tag "https://res.cloudinary.com/dtwpyokni/image/upload/v1558705228/maxime.jpg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+			<% if user_signed_in? %>
+				<% avatar_url = current_user.facebook_picture_url || "http://placehold.it/90x90" %>
+				<%= image_tag avatar_url, class: "avatar dropdown-toggle", id: "avatar", "data-toggle" => "dropdown" %>
+
+				<%#= image_tag "https://res.cloudinary.com/dtwpyokni/image/upload/v1558705228/maxime.jpg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
 				Hello <%= current_user.first_name %>!
 			<%# GUEST HEADER %>
 			<% else %>

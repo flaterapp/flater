@@ -13,9 +13,6 @@
       <%= link_to "Home", root_path, class: "nav-link" %>
       </li>
       <% if user_signed_in? %>
-      <% avatar_url = current_user.facebook_picture_url || "http://placehold.it/30x30" %>
-      <%= image_tag avatar_url, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
-
         <li class="nav-item">
         <%= link_to "My dashboard", my_tasks_path, class: "nav-link" %>
         </li>
