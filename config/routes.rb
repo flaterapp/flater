@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+
+  #Routes for Flats, Rentals and Dossiers
   resources :flats, only: [:index, :show, :new, :edit, :create, :update] do
     resources :rentals, only: [:index, :show, :new, :edit, :create]
   end

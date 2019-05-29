@@ -99,20 +99,27 @@ User.all.each do |user|
         initial_rent: 800
       )
 
-    candidate =  User.create!(
-      first_name: Faker::Name.first_name,
-      last_name: Faker::Name.last_name,
-      email: Faker::Internet.email,
-      password: pswd,
-      role: nil
-    )
+    # Creating several dossiers for each rental
+    12.times do
 
-    # Creating a dossier for each rental
-      Dossier.create!(
-        rental: rental,
-        candidate: candidate,
-        start_date: Date.today
+      candidate =  User.create!(
+        first_name: Faker::Name.first_name,
+        last_name: Faker::Name.last_name,
+        email: Faker::Internet.email,
+        password: pswd,
+        role: nil
       )
+
+        Dossier.create!(
+          rental: rental,
+          candidate: candidate,
+          start_date: Date.today,
+          status: ["not_selected","to_improve","ok_for_visit","visiting"].sample,
+          monthly_revenues: [1600, 2100, 2800, 3200, 4600].sample
+        )
+
+
+    end
 
   end
 

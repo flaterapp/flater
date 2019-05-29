@@ -1,6 +1,12 @@
 class RentalsController < ApplicationController
 	before_action :set_flat, only: [:new, :create, :confirmation]
 
+
+	def show
+	  @rental = Rental.find(params[:id])
+	  @flat = Flat.find(params[:flat_id])
+	end
+
 	def new
 	  @rental = Rental.new
 	end
@@ -13,9 +19,6 @@ class RentalsController < ApplicationController
 	  # TO TWEAK: IF OK ... else ...
 	end
 
-	def confirmation
-	  @rental = Rental.find(params[:rental_id])
-	end
 	private
 
 	def rental_params
