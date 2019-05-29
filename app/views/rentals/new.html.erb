@@ -1,0 +1,14 @@
+<h1>New rental for flat <%= @flat.id %></h1>
+
+<%= simple_form_for([@flat, @rental]) do |f| %>
+  <div class="form-inputs">
+    <%= f.input :description %>
+    <%= f.input :start_date, as: :date, html5:true,:input_html => { :value => Date.today, class: "datepicker"} %>
+    <%= f.input :end_date, as: :date, html5:true,:input_html => { :value => Date.today, class: "datepicker"} %>
+    <%= f.input :initial_rent %>
+  </div>
+  
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn btn-primary" %>
+  </div>
+<% end %>

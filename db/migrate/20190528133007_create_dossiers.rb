@@ -5,7 +5,7 @@ class CreateDossiers < ActiveRecord::Migration[5.2]
       t.references :candidate, foreign_key: {to_table: :users}
       t.date :start_date
       t.date :end_date
-      t.integer :status
+      t.string :status
       t.string :tax_proof
       t.float :monthly_revenues
       t.string :revenues_proof

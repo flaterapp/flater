@@ -1,11 +1,18 @@
 Rails.application.routes.draw do
   
-  # FLATS
-  resources :flats
 
+  #Routes for Flats, Rentals and Dossiers
+  resources :flats, only: [:index, :show, :new, :edit, :create, :update] do
+    resources :rentals, only: [:index, :show, :new, :edit, :create]
+  end
+  
+
+
+  #Routes for Tasks and Assignments
+  
   # TASKS
   resources :tasks, only: [:index, :show, :new, :edit, :create, :update] do
-    resources :assignments, only: [ :index, :new, :create ]
+    resources :assignments, only: [ :index, :new, :create, :confirmation ]
   end
   
   # ASSIGNMENTS

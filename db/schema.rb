@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_22_165130) do
+ActiveRecord::Schema.define(version: 2019_05_28_154929) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 2019_05_22_165130) do
     t.bigint "candidate_id"
     t.date "start_date"
     t.date "end_date"
-    t.integer "status"
+    t.string "status"
     t.string "tax_proof"
     t.float "monthly_revenues"
     t.string "revenues_proof"

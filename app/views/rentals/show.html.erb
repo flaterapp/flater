@@ -1,0 +1,51 @@
+<h1>PAGE "SHOW" of rental <%= @rental.id %> (for flat <%= @flat.id %>)</h1>
+
+<div>
+	<p>Rental is <strong><%= @rental.pending ? "pending" : "closed" %></strong></p>
+	<p><strong>Reminder of rental details:</strong></p>
+	<p>Initial rent: <%= @rental.initial_rent %> € / month</p>
+</div>
+
+
+<% if @rental.pending == true %>
+	
+	<p><strong>Your current applicants (<%= @rental.dossiers.count %>):</strong></p>
+
+	
+	<div>
+		<% ["visiting", "ok_for_visit", "to_improve", "not_selected"].each do  |status|%>
+			<div>
+				<p><strong><%= status %>: <%= @rental.dossiers.where(status: status).count %> applicants</strong></p>
+					<ul>
+					<% @rental.dossiers.each do |dossier| %>
+							<% if dossier.status == status%>
+								<li>
+						<!-- DESCRIPTION -->
+									<%= "dossier: id #{dossier.id} - #{dossier.monthly_revenues} €/m - [all docs?] - status: #{dossier.status}" %>
+						<!-- BUTTONS -->
+									<% if dossier.status == "ok_for_visit" %>
+									<%= "[BOUTON Don't select]" %>
+									<% end %>
+									<% if dossier.status == "to_improve" ||  dossier.status == "not_selected"%>
+									<%= "[BOUTON Ok for visits]" %>
+									<% end %>
+								</li>
+							<% end %>
+					</ul>
+
+				<% end %>
+				<br>
+			</div>
+		<% end %>
+
+	</div>
+
+<!-- IF RENTAL IS NOT PENDING -->
+	<% else %>
+	<%= @rental.tenant.id "is your current tenant"%>
+
+<% end %>
+
+<div>
+	<p>Send message to "ok_for_visit" candidates</p>
+</div>
