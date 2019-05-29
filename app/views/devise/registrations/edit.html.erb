@@ -11,27 +11,82 @@
         <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
       <% end %>
 
-      <%= f.input :current_password,
-                  hint: "we need your current password to confirm your changes",
-                  required: true,
-                  input_html: { autocomplete: "current-password" } %>
-      <%= f.input :password,
-                  hint: "leave it blank if you don't want to change it",
-                  required: false,
-                  input_html: { autocomplete: "new-password" } %>
-      <%= f.input :password_confirmation,
-                  required: false,
-                  input_html: { autocomplete: "new-password" } %>
+      <h3>Information</h3>
+
+      <div class="form-row">
+        <div class="col-md-4 mb-3">
+          <%= f.input :first_name,
+                      required: true,
+                      input_html: { value: current_user.first_name } %>
+        </div>
+        <div class="col-md-4 mb-3">
+          <%= f.input :last_name,
+                      required: true,
+                      input_html: { value: current_user.last_name } %>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col-md-4 mb-3">
+          <%= f.input :email,
+                      required: true,
+                      input_html: { value: current_user.email } %>
+        </div>
+        <div class="col-md-4 mb-3">
+          <%= f.input :phone,
+                      required: true,
+                      input_html: { value: current_user.phone } %>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col-md-4 mb-3">
+	        <%#= f.input :birthdate, as: :birthdate, html5:true, :input_html => { :value => current_user.birthdate, class: "datepicker"} %>
+	        <%= f.input :birthdate, html5:true, :input_html => { :value => current_user.birthdate, class: "datepicker"} %>
+        </div>
+        <div class="col-md-4 mb-3">
+          <%# TODO Radio buttons edit user form %>
+          <%#= f.collection_radio_buttons :sex, [['male', 'Male'], ['Female', 'female'], ['Other', 'other'], ['test', 'test']] %>
+        </div>
+      </div>
+
+      <h3>Password</h3>
+
+      <div class="form-row">
+        <div class="col-md-4 mb-3">
+          <%= f.input :current_password,
+                      hint: "we need your current password to confirm your changes",
+                      required: true,
+                      input_html: { autocomplete: "current-password" } %>
+        </div>
+        <div class="col-md-4 mb-3">
+          <%= f.input :password,
+                      label: 'New password',
+                      hint: "leave it blank if you don't want to change it",
+                      required: false,
+                      input_html: { autocomplete: "new-password" } %>
+        </div>
+        <div class="col-md-4 mb-3">
+          <%= f.input :password_confirmation,
+                      required: false,
+                      input_html: { autocomplete: "new-password" } %>
+        </div>
+      </div>
     </div>
 
     <div class="form-actions">
       <%= f.button :submit, "Update", class: 'btn btn-primary' %>
+      <%= link_to "Back", :back, class: 'btn btn-secondary' %>
     </div>
   <% end %>
 
-  <h3>Cancel my account</h3>
+  <hr>
 
-  <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+  <h2>Cancel my account</h2>
 
-  <%= link_to "Back", :back %>
+  <p>We're sorry that you may be unhappy. <strong>Are you sure you want to leave us?</strong></p>
+  <div class="form-actions">
+    <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-primary' %>
+    <%= link_to "Back", :back, class: 'btn btn-secondary' %>
+  </div>
 </div>
