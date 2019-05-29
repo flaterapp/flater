@@ -1,0 +1,12 @@
+<h1>Confirmation: </h1>
+
+
+<p>You have created a rental (id <%= @rental.id %>) for your flat (id <%= @flat.id %>):</p>
+
+<p>You can use the following link in your add, so candidates can provide their application documents:</p>
+<p><em><%= "www.flater.co/flats/#{@flat.id}/rentals/#{@rental.id}/dossier" %></em> [ROUTE TO BE UPDATED]</p>
+
+
+<p><strong>CUSTOMIZE LINK: back to dashboard</strong></p>
+
+<%= link_to "Back to dashboard", root_path , {:class=>"btn btn-primary"} %>
