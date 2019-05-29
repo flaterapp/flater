@@ -10,11 +10,8 @@ import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 // FLATPICKR
 import flatpickr from "flatpickr";
-// const flatpickr = require("flatpickr");
-// var datepicker = document.querySelector(".datepicker")
-// console.log(datepicker)
 flatpickr(".datepicker")
 
 // TYPEDJS
-import initTyped from "./inittyped.js";
+import initTyped from '../plugins/init_typed';
 initTyped()

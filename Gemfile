@@ -20,6 +20,8 @@ gem 'geocoder'
 
 gem 'cloudinary', '~> 1.9.1'
 gem 'omniauth-facebook'
+gem 'forest_liana'
+
 
 group :development do
   gem 'web-console', '>= 3.3.0'

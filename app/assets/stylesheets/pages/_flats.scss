@@ -1,0 +1,18 @@
+.card-flats {
+	@extend .card;
+
+	position: absolute;
+	top: 12vh;
+	left: 2vh;
+	z-index: 10;
+	text-align: left;
+	width: 30vw;
+
+	h1 {
+		font-size: 1.8rem;
+
+		.fas {
+			@extend .text-muted;
+		}
+	}
+}

@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   
+  mount ForestLiana::Engine => '/forest'
+  # FLATS
+  resources :flats
 
   #Routes for Flats and Rentals
   resources :flats, only: [:index, :show, :new, :edit, :create, :update] do
