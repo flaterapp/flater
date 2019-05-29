@@ -6,7 +6,8 @@
 	left: 2vh;
 	z-index: 10;
 	text-align: left;
-	width: 30vw;
+	width: calc(480px - 4vh);
+	background: rgba($light-gray,.95);
 
 	h1 {
 		font-size: 1.8rem;
@@ -18,5 +19,20 @@
 
 	.list-group-item {
 		padding: .75rem 0;
+		background: transparent;
+
+		.actions {
+			white-space: nowrap;
+
+			a.badge-primary {
+				transition: $transition;
+			}
+	
+			a.badge-primary:hover > .fas:after {
+				@extend .actions;
+				content: 'Details';
+				padding-left: .5rem;
+			}
+		}
 	}
 }
