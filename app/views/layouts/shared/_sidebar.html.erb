@@ -4,31 +4,33 @@
 			<%# USER HEADER %>
 			<% if user_signed_in? %>
 				<% avatar_url = current_user.facebook_picture_url || "http://placehold.it/90x90" %>
-				<%= image_tag avatar_url, class: "avatar dropdown-toggle", id: "avatar", "data-toggle" => "dropdown" %>
+				<%= image_tag avatar_url, class: "avatar", id: "avatar" %>
 
 				<%#= image_tag "https://res.cloudinary.com/dtwpyokni/image/upload/v1558705228/maxime.jpg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-				Hello <%= current_user.first_name %>!
+				Hi <%= current_user.first_name %>!
 			<%# GUEST HEADER %>
 			<% else %>
 				You must be logged in
 			<% end %>
-			<button type="button" class="bs-canvas-close float-right close" aria-label="Close" aria-expanded="false">
-				<span aria-hidden="true" class="text-primary">&rsaquo;</span>
-			</button>
 		</h4>
+		<button type="button" class="bs-canvas-close btn close" aria-label="Close" aria-expanded="false">
+			<i class="fas fa-reply"></i>
+		</button>
 	</header>
 	<div class="dropdown-divider"></div>
 	<%# USER MENU %>
 	<% if user_signed_in? %>
 		<h5 class="nav-link text-primary small">Renting</h5>
-		<%= link_to "My flats", flats_path, class: "dropdown-item" %>
-		<%= link_to "My applications", '#', class: "dropdown-item" %>
-		<%= link_to "My contracts", '#', class: "dropdown-item" %>
+		<%= link_to raw("<i class=\"fas fa-tachometer-alt\"></i> My dashboard"), dashboard_path, class: "dropdown-item" %>
+		<%= link_to raw("<i class=\"fas fa-building\"></i> My flats <span class=\"badge badge-pill badge-primary\">#{current_user.flats.count}</span>"), flats_path, class: "dropdown-item" %>
+		<%= link_to raw("<i class=\"fas fa-file-import\"></i> My applications"), '#', class: "dropdown-item" %>
+		<%= link_to raw("<i class=\"fas fa-street-view\"></i>My visits"), '#', class: "dropdown-item" %>
+		<%= link_to raw("<i class=\"fas fa-file-signature\"></i>My contracts"), '#', class: "dropdown-item" %>
 		<div class="dropdown-divider"></div>
 		<h5 class="nav-link text-primary small">Informations</h5>
-		<%= link_to "Edit my account", edit_user_registration_path, class: "dropdown-item" %>
+		<%= link_to raw("<i class=\"fas fa-user-edit\"></i> Edit my account"), edit_user_registration_path, class: "dropdown-item" %>
 		<div class="dropdown-divider"></div>
-		<%= link_to "Logout", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+		<%= link_to raw("<i class=\"fas fa-sign-out-alt\"></i> Logout"), destroy_user_session_path, method: :delete, class: "dropdown-item" %>
 	<%# GUESY MENU %>
 	<% else %>
 		<%= link_to "Sign in", new_user_session_path, class: "btn btn-primary" %> or 

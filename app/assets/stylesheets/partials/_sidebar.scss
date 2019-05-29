@@ -17,7 +17,15 @@
 	z-index: 1110;
 	overflow-x: hidden;
 	overflow-y: auto;
-	width: 330px;		
+	width: 330px;
+
+	.dropdown-item {
+		.fas {
+			@extend .text-muted;
+			@extend .mr-1;
+			width: 20px;
+		}
+	}
 }
 
 .bs-canvas-left {
@@ -28,4 +36,18 @@
 .bs-canvas-right {
 	right: 0;
 	margin-right: -330px;
+}
+
+.bs-canvas-header {
+	@extend .d-flex;
+	@extend .justify-content-between;
+	align-items: center;
+
+	* {
+		margin: 0;
+		transition: $transition;
+	}
+	.fas {
+		@extend .text-muted;
+	}
 }
