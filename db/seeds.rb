@@ -76,13 +76,15 @@ puts "2. Creating flats for owners... "
 
 User.all.each do |user|
 
-  # Creating flats 
-  3.times do |i|
+  # Creating flats with pending rentals (and applications)
+  2.times do |i|
+
     flat = Flat.create!(
       address: addresses.sample,
       owner: user,
       #NB: important to write "owner" and not to use "owner_id"
       to_rent: true,
+      # NOTE REALLY USED!
       surface: rand(30..50),
       nb_rooms: rand(2..4),
       furnished: true,
@@ -101,7 +103,6 @@ User.all.each do |user|
 
     # Creating several dossiers for each rental
     12.times do
-
       candidate =  User.create!(
         first_name: Faker::Name.first_name,
         last_name: Faker::Name.last_name,
@@ -109,7 +110,6 @@ User.all.each do |user|
         password: pswd,
         role: nil
       )
-
         Dossier.create!(
           rental: rental,
           candidate: candidate,
@@ -117,24 +117,43 @@ User.all.each do |user|
           status: ["not_selected","to_improve","ok_for_visit","visiting"].sample,
           monthly_revenues: [1600, 2100, 2800, 3200, 4600].sample
         )
-
-
     end
-
   end
 
+    # Creating flats which are already rented
+    3.times do |i|
+      flat = Flat.create!(
+        address: addresses.sample,
+        owner: user,
+        #NB: important to write "owner" and not to use "owner_id"
+        to_rent: false,
+        # NOTE REALLY USED!
+        surface: rand(30..50),
+        nb_rooms: rand(2..4),
+        furnished: true,
+        description: "Very nice flat with awesome view!"
+      )
 
-  # t.bigint "rental_id"
-  # t.bigint "candidate_id"
-  # t.date "start_date"
-  # t.date "end_date"
-  # t.integer "status"
-  # t.string "tax_proof"
-  # t.float "monthly_revenues"
-  # t.string "revenues_proof"
-  # t.string "activity"
-  # t.string "activity_proof"
-  # t.string "identity_proof"
+      # Creating an on-going rental for each flat
+        candidate =  User.create!(
+          first_name: Faker::Name.first_name,
+          last_name: Faker::Name.last_name,
+          email: Faker::Internet.email,
+          password: pswd,
+          role: nil
+        )
+
+        rental = Rental.create!(
+          flat: flat,
+          tenant: nil,
+          description: "A great flat, which is now rented!",
+          start_date: Date.today,
+          pending: false,
+          initial_rent: 800
+        )
+  end
+
+########### ISSUE: need to allocate a candidate to a flat (as tenant)
 
 end
 
