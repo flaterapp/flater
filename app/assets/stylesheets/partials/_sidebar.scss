@@ -1,0 +1,31 @@
+.bs-canvas-overlay {
+	opacity: 0;
+	z-index: -1;
+}
+
+.bs-canvas-overlay.show {
+	opacity: 0.85;
+	z-index: 1100;
+}
+
+.bs-canvas-overlay, .bs-canvas {
+	transition: $transition;
+}
+
+.bs-canvas {
+	top: 0;
+	z-index: 1110;
+	overflow-x: hidden;
+	overflow-y: auto;
+	width: 330px;		
+}
+
+.bs-canvas-left {
+	left: 0;
+	margin-left: -330px;
+}
+
+.bs-canvas-right {
+	right: 0;
+	margin-right: -330px;
+}
