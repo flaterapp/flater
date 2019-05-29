@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
   
 
-  #Routes for Flats, Rentals and Dossiers
+  #Routes for Flats and Rentals
   resources :flats, only: [:index, :show, :new, :edit, :create, :update] do
     resources :rentals, only: [:index, :show, :new, :edit, :create]
   end
   
+
 
 
   #Routes for Tasks and Assignments
@@ -24,8 +25,9 @@ Rails.application.routes.draw do
   end
   
   # CUSTOM PAGES
-  get 'my-tasks', to: 'tasks#mytasks'
   get 'dashboard', to: 'pages#dashboard'
+  get 'my-tasks', to: 'tasks#mytasks'
+  get 'my-applications', to: 'rentals#my_applications'
 
   # USERS
   # devise_for :users

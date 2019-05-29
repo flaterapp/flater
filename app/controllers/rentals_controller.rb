@@ -1,5 +1,5 @@
 class RentalsController < ApplicationController
-	before_action :set_flat, only: [:new, :create, :confirmation]
+	before_action :set_flat, only: [:new, :create]
 
 
 	def show
@@ -17,6 +17,10 @@ class RentalsController < ApplicationController
 	  @rental.flat = @flat
 	  @rental.save!
 	  # TO TWEAK: IF OK ... else ...
+	end
+
+	def my_applications
+	  @pending_rentals = Rental.where(pending: true)
 	end
 
 	private
