@@ -1,18 +1,12 @@
 Rails.application.routes.draw do
   
+  # FOREST ADMIN
   mount ForestLiana::Engine => '/forest'
+  
   # FLATS
-  resources :flats
-
-  #Routes for Flats and Rentals
   resources :flats, only: [:index, :show, :new, :edit, :create, :update] do
     resources :rentals, only: [:index, :show, :new, :edit, :create]
   end
-  
-
-
-
-  #Routes for Tasks and Assignments
   
   # TASKS
   resources :tasks, only: [:index, :show, :new, :edit, :create, :update] do

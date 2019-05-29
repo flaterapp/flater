@@ -15,4 +15,8 @@
 			@extend .text-muted;
 		}
 	}
+
+	.list-group-item {
+		padding: .75rem 0;
+	}
 }

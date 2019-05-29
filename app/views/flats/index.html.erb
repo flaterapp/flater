@@ -10,7 +10,10 @@
 		<li class="list-group-item d-flex justify-content-between">
 			<%= flat.address %>
 			<div class="action">
-				<%= raw('<strong class="badge badge-pill badge-warning">To rent</strong>') if flat.to_rent %>
+				<%# TODO Find pending rental true => rental #show %>
+				<%# ??? %>
+				<%# OPTIMIZE Wording to create a new rental %>
+				<%= raw("<a href=\"#{new_flat_rental_path(flat.id)}\" class=\"badge badge-pill badge-warning\">new rental</a>") if flat.to_rent %>
 				<%= link_to raw("<a href=\"#{flat_path(flat.id)}\" class=\"badge badge-pill badge-primary\">Details</a>") %>
 			</div>
 		</li>
