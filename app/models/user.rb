@@ -10,7 +10,7 @@ class User < ApplicationRecord
   has_many :dossiers, foreign_key: "candidate_id", dependent: :destroy
 
   # As a OWNER or CONCIERGE
-  has_many :tasks
+  has_many :tasks, dependent: :destroy
   has_many :assignments
 
   devise :omniauthable, omniauth_providers: [:facebook]
