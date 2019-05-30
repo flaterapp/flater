@@ -5,7 +5,7 @@
 	<p><strong>You have selected the following candidates for the visit:</strong></p>
 		<ul>
 			<% @rental.dossiers.each do |dossier| %>
-				<% if dossier.status == "ok_for_visit"%>
+				<% if dossier.status == "visiting"%>
 					<li>
 			<!-- DESCRIPTION -->
 						<%= "dossier: id #{dossier.id} - #{dossier.candidate.first_name} #{dossier.candidate.last_name} (#{dossier.candidate.email})" %>

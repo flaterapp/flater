@@ -27,6 +27,8 @@ class RentalsController < ApplicationController
 	  @rental = Rental.find(params[:id])
 	  @flat = Rental.find(params[:flat_id])
 	  @task = Task.new
+	  @invited_participants = @rental.dossiers.where(status: "ok_for_visit")
+	  @invited_participants.update(status: "visiting")
 	end
 
 	private
