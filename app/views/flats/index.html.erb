@@ -9,11 +9,11 @@
 	<% @flats.each do |flat| %>
 		<li class="list-group-item d-flex justify-content-between">
 			<%= flat.address %>
+
+			
 			<div class="actions">
-				<%# TODO Find pending rental true => rental #show %>
-				<%# ??? %>
-				<%# OPTIMIZE Wording to create a new rental %>
-				<%= raw("<a href=\"#{new_flat_rental_path(flat.id)}\" class=\"badge badge-pill badge-warning\">new rental</a>") if flat.to_rent %>
+				<%= link_to "Candidates (#{flat.num_candidates})", flat_rental_path(flat, flat.pending_rental_id) if flat.pending_rental? %>
+				<%= raw("<a href=\"#{new_flat_rental_path(flat.id)}\" class=\"badge badge-pill badge-warning\">new rental #{flat.to_rent ? "(urgent)" : "(not urgent)"}</a>") if flat.pending_rental? == false %>
 				<%= link_to raw("<a href=\"#{flat_path(flat.id)}\" class=\"badge badge-pill badge-primary\"><i class=\"fas fa-info\"></i></a>") %>
 			</div>
 		</li>
