@@ -1,5 +1,6 @@
 class Task < ApplicationRecord
   belongs_to :user
+  belongs_to :rental
   has_many :assignments, dependent: :destroy
   
   geocoded_by :location
