@@ -4,4 +4,21 @@ class Flat < ApplicationRecord
 
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
+
+  def num_candidates
+    self.rentals.where(pending: true).first.dossiers.count
+  end
+
+  def pending_rental?
+ 	self.rentals.exists?(pending: true)
+  end
+
+  def pending_rental
+ 	self.rentals.where(pending: true)
+  end
+
+  def pending_rental_id
+    self.rentals.where(pending: true).first.id
+  end
 end
+

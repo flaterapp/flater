@@ -1,0 +1,32 @@
+<h1>PAGE "SHOW" of flat <%= @flat.id %></h1>
+
+<div>
+	<p><strong>Key information of the flat:</strong></p>
+	<ul>
+		<li>Address: <%= @flat.address %></li>
+	    <li>Type: <%=  @flat.type %></li>
+	    <li>Surface: <%=  @flat.surface %> m²</li>
+	    <li>Number of rooms:<%=  @flat.nb_rooms %></li>
+	    <li>Furnished: <%=  @flat.furnished %></li>
+    </ul>
+</div>
+
+<div>
+	ADD A MAP
+	<br><br>
+</div>
+
+<div>
+	<p><strong>Flat rentals:</strong></p>
+	<% @flat.rentals.each do |rental| %>
+		<div>
+			<%= link_to "Rental #{rental.id}" , flat_rental_path(@flat, rental)%> - Status: <%= rental.pending ? "Pending" : "Closed" %> <br>
+			<%= "#{rental.initial_rent} €/month - Start date: #{rental.start_date}" %>
+			<br>
+			<%= rental.pending ? "Tenant to be selected (#{rental.dossiers.count} candidates)" : "Current tenant (id): #{rental.tenant_id}" %> <br>
+
+		</div>
+		
+	<% end %>
+</div>
+
