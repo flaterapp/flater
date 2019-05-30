@@ -728,6 +728,22 @@
       "relationship": "HasMany",
       "widget": null,
       "validations": []
+    }, {
+      "field": "tasks",
+      "type": ["Number"],
+      "default_value": null,
+      "enums": null,
+      "integration": null,
+      "is_filterable": false,
+      "is_read_only": false,
+      "is_required": false,
+      "is_sortable": true,
+      "is_virtual": false,
+      "reference": "Task.id",
+      "inverse_of": "rental",
+      "relationship": "HasMany",
+      "widget": null,
+      "validations": []
     }],
     "segments": [],
     "actions": []
@@ -918,7 +934,7 @@
       "is_sortable": true,
       "is_virtual": false,
       "reference": "Rental.id",
-      "inverse_of": null,
+      "inverse_of": "tasks",
       "relationship": "BelongsTo",
       "widget": null,
       "validations": []
