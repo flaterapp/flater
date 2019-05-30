@@ -23,6 +23,12 @@ class RentalsController < ApplicationController
 	  @pending_rentals = Rental.where(pending: true)
 	end
 
+	def organize_visit
+	  @rental = Rental.find(params[:id])
+	  @flat = Rental.find(params[:flat_id])
+	  @task = Task.new
+	end
+
 	private
 
 	def rental_params
