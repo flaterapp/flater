@@ -1,14 +1,34 @@
-<h1>New rental for flat <%= @flat.id %></h1>
+<div class="container">
+	<h1>New rental</h1>
+	<h3><%= @flat.address %></h2>
+	<p><%= @flat.nb_rooms %> rooms - <%= @flat.surface.to_i %> m2 - <%= @flat.furnished ? "Furnished"  : "Not furnished" %> </p>
+	
+	<br>
+	<div>
+		<%= simple_form_for([@flat, @rental]) do |f| %>
+		  <div class="form-inputs">
+		    <%= f.input :description %>
+		    <%= f.input :start_date, as: :date, html5:true,:input_html => { :value => Date.today, class: "datepicker"} %>
 
-<%= simple_form_for([@flat, @rental]) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :description %>
-    <%= f.input :start_date, as: :date, html5:true,:input_html => { :value => Date.today, class: "datepicker"} %>
-    <%= f.input :end_date, as: :date, html5:true,:input_html => { :value => Date.today, class: "datepicker"} %>
-    <%= f.input :initial_rent %>
-  </div>
-  
-  <div class="form-actions">
-    <%= f.button :submit, class: "btn btn-primary" %>
-  </div>
-<% end %>
+		    <%= f.input :initial_rent %>
+		  </div>
+		  <p><u>Info</u>: Typical rent from 
+		  	<strong><%= (@flat.surface*14).to_i %> €/m </strong>
+		  	 to 
+		  	<strong><%=(@flat.surface*16).to_i%> €/m</strong>
+		  	  for a
+		  	<strong><%= @flat.surface.to_i %> m²</strong>
+		  	  flat with
+		  	  <strong><%= @flat.nb_rooms%> rooms</strong>
+		  	  in this neighbourhood
+		  </p>
+			<br>  
+		  <div class="form-actions">
+		    <%= f.button :submit, class: "btn btn-primary" %>
+		  </div>
+		<% end %>
+	</div>
+	
+
+</div>
+
