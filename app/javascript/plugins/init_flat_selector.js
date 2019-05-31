@@ -1,4 +1,9 @@
-add event l
-const element = docum query selector
+const flatSelector = () => {
+  document.querySelectorAll(".list-group").forEach((element) => {
+  element.addEventListener("click", (event) => {
+    console.log("cliked");
+  });
+});
+};
 
-then rajoute dans le dom
+export default flatSelector;
