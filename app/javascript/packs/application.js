@@ -15,3 +15,7 @@ flatpickr(".datepicker")
 // TYPEDJS
 import initTyped from '../plugins/init_typed';
 initTyped()
+
+// FLAT SELECTOR IN THE MAP
+import flatSelector from '../plugins/init_flat_selector';
+flatSelector()
