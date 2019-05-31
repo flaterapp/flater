@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 2019_05_30_154706) do
     t.bigint "candidate_id"
     t.date "start_date"
     t.date "end_date"
-    t.string "status"
+    t.integer "status"
     t.string "tax_proof"
     t.float "monthly_revenues"
     t.string "revenues_proof"
