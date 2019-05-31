@@ -41,38 +41,43 @@ team.each do |teamate|
   User.create!(teamate)
 end
 
-addresses = [
-  '5 Rue Trarieux, Lyon',
-  '18 Rue Franklin, Lyon',
-  '58 Rue Pasteur, Lyon',
-  '22 Rue Smith, Lyon',
-  '32 Avenue Felix Faure, Lyon',
-  '8 Rue Rollet, Lyon',
-  '52 Rue de Sèze, Lyon',
-  '10 Rue Mazenod, Lyon',
-  '30 Rue Cuvier, Lyon',
-  '72 Boulevard Vivier Merle, Lyon',
-  '45 Rue de la république, Lyon',
-  '67 Rue du Président Edouard Herriot, Lyon',
-  '98 Rue Paul Bert, Lyon',
-  '20 Rue des capucins, Lyon',
-  '3 Avenue Lacassagne, Lyon',
-  '132 Avenue Lacassagne, Lyon',
-  '48 Rue Garibaldi, Lyon',
-  '10 Rue de la charité, Lyon',
-  '57 Rue de Marseille, Lyon',
-  '3 Rue Chevreul, Lyon',
-  '12 Rue de la Thibaudière, Lyon',
-  '3 Rue Père Chevrier, Lyon',
-  '7 Rue du Plat, Lyon',
-  '9 Rue de Condé, Lyon',
-  '5 Rue Servient, Lyon',
-  '65 Rue Bossuet, Lyon',
-  '12 Rue de la république, Lyon',
-  '45 Rue Trarieu, Lyon'
-]
-
+puts separator
 puts "2. Creating flats for owners... "
+addresses = [
+  '65 rue Bossuet, Lyon',
+  '20 rue des Capucins, Lyon',
+  '10 rue de la Charité, Lyon',
+  '3 rue Chevreul, Lyon',
+  '9 rue de Condé, Lyon',
+  '30 rue Cuvier, Lyon',
+  '34 avenue Debourg, Lyon',
+  '32 avenue Felix Faure, Lyon',
+  '18 rue Franklin, Lyon',
+  '48 rue Garibaldi, Lyon',
+  '3 rue Père Chevrier, Lyon',
+  '3 avenue Lacassagne, Lyon',
+  '132 avenue Lacassagne, Lyon',
+  '57 rue de Marseille, Lyon',
+  '10 rue Mazenod, Lyon',
+  '58 rue Pasteur, Lyon',
+  '98 rue Paul Bert, Lyon',
+  '4 quai Perrache, Lyon',
+  '70 quai Perrache, Lyon',
+  '7 rue du Plat, Lyon',
+  '67 rue du Président Edouard Herriot, Lyon',
+  '12 rue de la République, Lyon',
+  '45 rue de la République, Lyon',
+  '57 rue de la République, Lyon',
+  '8 rue Rollet, Lyon',
+  '11 rue Sainte-Catherine, Lyon',
+  '5 rue Servient, Lyon',
+  '52 rue de Sèze, Lyon',
+  '22 rue Smith, Lyon',
+  '12 rue de la Thibaudière, Lyon',
+  '5 rue Trarieux, Lyon',
+  '45 rue Trarieux, Lyon',
+  '72 boulevard Vivier Merle, Lyon'
+]
 
 User.all.each do |user|
 
@@ -102,7 +107,7 @@ User.all.each do |user|
       )
 
     # Creating several dossiers for each rental
-    12.times do
+    rand(2..12).times do
       candidate =  User.create!(
         first_name: Faker::Name.first_name,
         last_name: Faker::Name.last_name,
