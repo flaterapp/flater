@@ -119,7 +119,7 @@ User.all.each do |user|
           rental: rental,
           candidate: candidate,
           start_date: Date.today,
-          status: ["not_selected","to_improve","ok_for_visit","visiting"].sample,
+          status: ["not_selected","to_improve","ok_for_visit"].sample,
           monthly_revenues: [1600, 2100, 2800, 3200, 4600].sample
         )
     end

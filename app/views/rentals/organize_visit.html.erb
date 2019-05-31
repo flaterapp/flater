@@ -1,35 +1,41 @@
-<h1>Organize visit for rental <%= @rental.id %> (for flat <%= @flat.id %>)</h1>
+<div class="container">
+	
 
-<div>
+	<h1>Organize a visit</h1>
 
-	<p><strong>You will send a message to the following candidates for the visit:</strong></p>
-		<ul>
-			<% @rental.dossiers.each do |dossier| %>
-				<% if dossier.status == "visiting"%>
-					<li>
-			<!-- DESCRIPTION -->
-						<strong>
-						<%= "#{dossier.candidate.first_name} #{dossier.candidate.last_name}" %>
-						</strong>
-						<%= "(#{dossier.candidate.email})" %>
-					</li>
+	<h3><%= @flat.address %></h1>
+
+	<div>
+		<br>
+		<p>You will <strong>send a message</strong> to the following candidates for the visit:</p>
+			<ul>
+				<% @rental.dossiers.each do |dossier| %>
+					<% if dossier.status == "visiting"%>
+						<li>
+				<!-- DESCRIPTION -->
+							<strong>
+							<%= "#{dossier.candidate.first_name} #{dossier.candidate.last_name}" %>
+							</strong>
+							<%= "(#{dossier.candidate.email})" %>
+						</li>
+					<% end %>
 				<% end %>
-			<% end %>
-		</ul>
+			</ul>
 
 
-	<%= simple_form_for (@task) do |f| %>
-		<%= f.error_notification %>
-		<%= f.input :user_id, :as => :hidden, :input_html => { :value => current_user.id } %>
-		<%= f.input :rental_id, :as => :hidden, :input_html => { :value => @rental.id } %>
-		<%= f.input :location, :as => :hidden, :input_html => { :value => @rental.flat.address } %>
-		<%= f.input :status, :as => :hidden, :input_html => { :value => 0 } %>
-		<%= f.input :action, :as => :hidden, :input_html => { :value => 'Visit' } %>
-		<%= f.input :date, as: :date, html5:true,:input_html => { :value => Date.today, class: "datepicker"} %>
-		<%= f.input :complementary_info, label: "Complementary information (added to the message)" %>
-		<%= link_to "Back", "#" , {:class=>"btn btn-info"} %>
-		<%= f.button :submit, "Create Visit", class: "btn-primary" %>
-	<% end %>
+		<%= simple_form_for (@task) do |f| %>
+			<%= f.error_notification %>
+			<%= f.input :user_id, :as => :hidden, :input_html => { :value => current_user.id } %>
+			<%= f.input :rental_id, :as => :hidden, :input_html => { :value => @rental.id } %>
+			<%= f.input :location, :as => :hidden, :input_html => { :value => @rental.flat.address } %>
+			<%= f.input :status, :as => :hidden, :input_html => { :value => 0 } %>
+			<%= f.input :action, :as => :hidden, :input_html => { :value => 'Visit' } %>
+			<%= f.input :date, as: :date, html5:true,:input_html => { :value => Date.today, class: "datepicker"} %>
+			<%= f.input :complementary_info, label: "Complementary information (added to the message)" %>
+			<%= link_to "Back", "#" , {:class=>"btn btn-info"} %>
+			<%= f.button :submit, "Create Visit", class: "btn-primary" %>
+		<% end %>
+
+	</div>
 
 </div>
-
