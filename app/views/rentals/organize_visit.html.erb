@@ -24,7 +24,7 @@
 		<%= f.input :action, :as => :hidden, :input_html => { :value => 'Visit' } %>
 		<%= f.input :date, as: :date, html5:true,:input_html => { :value => Date.today, class: "datepicker"} %>
 		<%= link_to "Back", "#" , {:class=>"btn btn-info"} %>
-		<%= f.button :submit, class: "btn-primary" %>
+		<%= f.button :submit, "Create Visit", class: "btn-primary" %>
 	<% end %>
 
 </div>
