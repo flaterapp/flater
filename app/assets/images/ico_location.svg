@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1273 1920" style="enable-background:new 0 0 1273 1920;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#01D1B2;}
+	.st1{filter:url(#b);}
+	.st2{mask:url(#a_1_);}
+	.st3{fill:#58595B;}
+</style>
+<filter  filterUnits="userSpaceOnUse" height="88.056" id="b" width="358.16" x="454.64" y="1613.3">
+	<feColorMatrix  values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"></feColorMatrix>
+</filter>
+<path class="st0" d="M647,111.7c-319.2,0-578,258.8-578,578c0,148.6,56.1,284.1,148.3,386.5L598,1572.9c27,35.2,71.1,35.2,98,0
+	l380.7-496.8c92.2-102.4,148.3-237.9,148.3-386.5C1225,370.5,966.2,111.7,647,111.7L647,111.7z M647,874.1
+	c-133.4,0-241.6-108.2-241.6-241.6S513.5,390.9,647,390.9s241.6,108.2,241.6,241.6C888.6,766,780.4,874.1,647,874.1z"/>
+<defs>
+	<filter id="Adobe_OpacityMaskFilter" filterUnits="userSpaceOnUse" x="454.6" y="1613.3" width="358.2" height="88.1">
+		<feColorMatrix  type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+	</filter>
+</defs>
+<mask maskUnits="userSpaceOnUse" x="454.6" y="1613.3" width="358.2" height="88.1" id="a_1_">
+	<g class="st1">
+		
+			<image style="overflow:visible;enable-background:new    ;" width="364" height="93" xlink:href="73EF07BF2D4959A8.jpg"  transform="matrix(0.9973 0 0 1 452.4 1611)">
+		</image>
+	</g>
+</mask>
+<g class="st2">
+	<ellipse class="st3" cx="633.7" cy="1657.3" rx="179.1" ry="44"/>
+</g>
+</svg>
