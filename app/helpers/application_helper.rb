@@ -22,10 +22,10 @@ module ApplicationHelper
     return text.length > size ? "#{text.first(size / 2)}... #{text.last(size / 3)}" : text
   end
 
-  def bagde(data, format, icon = '', link = '')
+  def badge(data, format = 'primary', icon = '', link = '', hide = true)
     badge_class = "badge-custom badge-#{format}"
     icon = "<i class=\"fas fa-#{icon}\"></i>" if icon != ''
-    data = "<strong>#{data}</strong>" if data != ''
+    data = hide ? "<strong>#{data}</strong>" : "<b>#{data}</b>"
     if link != ''
       "<a href=\"#{link}\" class=\"#{badge_class}\">#{icon}#{data}</a>"
     else
