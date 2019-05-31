@@ -1,10 +1,15 @@
-<h1>Confirmation: </h1>
+<div class="container">
+	<h1>Rental created! </h1>
+
+	<br>
+	<p>You have created a <strong>new rental</strong> for your flat located <strong><%= @flat.address %></strong>:</p>
 
 
-<p>You have created a rental (id <%= @rental.id %>) for your flat (id <%= @flat.id %>):</p>
+	<p>You can use <strong>the following link</strong> in your add, so candidates can provide their application documents:</p>
+	<p><em><%= "www.flater.co/flats/#{@flat.id}/rentals/#{@rental.id}/dossier/new" %></em></p>
 
-<p>You can use the following link in your add, so candidates can provide their application documents:</p>
-<p><em><%= "www.flater.co/flats/#{@flat.id}/rentals/#{@rental.id}/dossier/new" %></em></p>
+	<br>
 
+	<%= link_to "Back to my flats", flats_path , {:class=>"btn btn-primary"} %>
 
-<%= link_to "Back to dashboard", dashboard_path , {:class=>"btn btn-primary"} %>
+</div>
