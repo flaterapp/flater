@@ -13,6 +13,11 @@ class Flat < ApplicationRecord
  	self.rentals.exists?(pending: true)
   end
 
+  def has_visits?
+  self.rentals.where(pending: true).first.tasks.exists?(action: "Visit")
+  end
+
+
   def pending_rental
  	self.rentals.where(pending: true)
   end

@@ -12,6 +12,7 @@
 			<div class="actions">
 				<%# TO RENT BUTTON %>
 				<% if flat.pending_rental? %>
+					<%= flat.has_visits? ? "V" : "" %>
 					<% bagde_class = flat.num_candidates == 0 ? 'danger' : 'info' %>
 					<%= link_to raw(bagde(pluralize(flat.num_candidates, 'candidate'), bagde_class, 'street-view', flat_rental_path(flat, flat.pending_rental_id))) %>
 				<% else %>

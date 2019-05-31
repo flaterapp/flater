@@ -30,8 +30,8 @@
 			<%= f.input :location, :as => :hidden, :input_html => { :value => @rental.flat.address } %>
 			<%= f.input :status, :as => :hidden, :input_html => { :value => 0 } %>
 			<%= f.input :action, :as => :hidden, :input_html => { :value => 'Visit' } %>
-			<%= f.input :date, as: :date, html5:true,:input_html => { :value => Date.today, class: "datepicker"} %>
-			<%= f.input :complementary_info, label: "Complementary information (added to the message)" %>
+			<%= f.input :date, label: "Date of the visit:", html5:true,:input_html => { :value => Date.today, class: "datepicker"} %>
+			<%= f.input :complementary_info, label: "Complementary information (added to the message):" %>
 			<%= link_to "Back", "#" , {:class=>"btn btn-info"} %>
 			<%= f.button :submit, "Create Visit", class: "btn-primary" %>
 		<% end %>
