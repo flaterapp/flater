@@ -13,8 +13,8 @@
 				<%# TO RENT BUTTON %>
 				<% if flat.pending_rental? %>
 					<%= flat.has_visits? ? "V" : "" %>
-					<% bagde_class = flat.num_candidates == 0 ? 'danger' : 'info' %>
-					<%= link_to raw(bagde(pluralize(flat.num_candidates, 'candidate'), bagde_class, 'street-view', flat_rental_path(flat, flat.pending_rental_id))) %>
+					<% badge_class = flat.num_candidates == 0 ? 'danger' : 'info' %>
+					<%= link_to raw(badge(pluralize(flat.num_candidates, 'candidate'), badge_class, 'street-view', flat_rental_path(flat, flat.pending_rental_id))) %>
 				<% else %>
 					<% badge_class = flat.to_rent ? 'danger' : 'warning' %>
 					<%= link_to raw(badge('New rental', badge_class, 'file-import', new_flat_rental_path(flat.id))) %>
