@@ -16,4 +16,16 @@ module ApplicationHelper
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
   end
+
+  # CUSTOM GLOBAL METHODS
+  def bagde(data, format, icon = '', link = '')
+    badge_class = "badge-custom badge-#{format}"
+    icon = "<i class=\"fas fa-#{icon}\"></i>" if icon != ''
+    data = "<strong>#{data}</strong>" if data != ''
+    if link != ''
+      "<a href=\"#{link}\" class=\"#{badge_class}\">#{icon}#{data}</a>"
+    else
+      "<span class=\"#{badge_class}\">#{icon}#{data}</span>"
+    end
+  end
 end
