@@ -5,7 +5,11 @@ Rails.application.routes.draw do
 
   # FLATS
   resources :flats, only: [:index, :show, :new, :edit, :create, :update] do
-    resources :rentals, only: [:index, :show, :new, :edit, :create]
+    resources :rentals, only: [:index, :show, :new, :edit, :create] do
+      member do
+        get 'organize_visit', to: 'rentals#organize_visit'
+      end 
+    end
   end
 
   # TASKS

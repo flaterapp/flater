@@ -22,13 +22,15 @@
     <li><i class="fas fa-map-marker-alt"></i> <%= @task.location %></li>
     <% status = Task::STATUS[@task.status.to_i] %>
     <li><%= status.capitalize %> on <i class="far fa-calendar-alt"></i> <%= @task.date %></li>
-    <li><i class="fas fa-users"></i> <%= pluralize(@task.assignments.count, 'applicant') %></li>
+    <li><i></i>  <%= link_to "#{pluralize(@task.rental.dossiers.where(status: "visiting").count, 'candidate')} invited" ,  flat_rental_path(@task.rental.flat, @task.rental) if @task.rental.nil? == false %> </li>
+    <li><i class="fas fa-users"></i> <%= pluralize(@task.assignments.count, 'applicant') %> (as concierge)</li>
   </ul>
 </div>
 
 <%# MAPBOX %>
 <div id="map" style="width: 100%; height: 60vh;" data-marker="<%= @marker.to_json %>" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
 </div>
+
 
 <%# APPLICANTS LIST %>
 <% if @task.assignments.count > 0 && @task.user_id == current_user.id %>
