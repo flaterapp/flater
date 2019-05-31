@@ -8,13 +8,12 @@
 	<ul class="list-group list-group-flush">
 	<% @flats.each do |flat| %>
 		<li class="list-group-item d-flex justify-content-between">
-			<%= flat.address %>
+			<%= short_text(flat.address) %>
 			<div class="actions">
-				<%#= link_to "Candidates (#{flat.num_candidates})", flat_rental_path(flat, flat.pending_rental_id) if flat.pending_rental? %>
-				<%#= raw("<a href=\"#{new_flat_rental_path(flat.id)}\" class=\"badge badge-pill badge-warning\">new rental #{flat.to_rent ? "(urgent)" : "(not urgent)"}</a>") if flat.pending_rental? == false %>
 				<%# TO RENT BUTTON %>
 				<% if flat.pending_rental? %>
-					<%= link_to raw(bagde(pluralize(flat.num_candidates, 'candidate'), 'danger', 'street-view', flat_rental_path(flat, flat.pending_rental_id))) %>
+					<% bagde_class = flat.num_candidates == 0 ? 'danger' : 'info' %>
+					<%= link_to raw(bagde(pluralize(flat.num_candidates, 'candidate'), bagde_class, 'street-view', flat_rental_path(flat, flat.pending_rental_id))) %>
 				<% else %>
 					<% bagde_class = flat.to_rent ? 'danger' : 'warning' %>
 					<%= link_to raw(bagde('New rental', bagde_class, 'file-import', new_flat_rental_path(flat.id))) %>

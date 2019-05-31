@@ -5,6 +5,10 @@ class Rental < ApplicationRecord
   has_many :tasks, dependent: :destroy
 
   def pending?
-    self.pending == true
+    pending == true
   end
+
+  # def initial_rent
+  #   initial_rent.round(2)
+  # end
 end

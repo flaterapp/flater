@@ -18,6 +18,10 @@ module ApplicationHelper
   end
 
   # CUSTOM GLOBAL METHODS
+  def short_text(text, size = 40)
+    return text.length > size ? "#{text.first(size / 2)}... #{text.last(size / 3)}" : text
+  end
+
   def bagde(data, format, icon = '', link = '')
     badge_class = "badge-custom badge-#{format}"
     icon = "<i class=\"fas fa-#{icon}\"></i>" if icon != ''
