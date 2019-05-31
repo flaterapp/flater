@@ -9,9 +9,11 @@
 
 	& > strong {
 		display: none;
+	}
+	& > strong, & > b {
 		margin-left: .35rem;
 	}
-	
+
 	&:hover > strong {
 		display: block;
 	}
