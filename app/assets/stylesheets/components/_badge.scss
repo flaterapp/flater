@@ -1,0 +1,18 @@
+.badge-custom {
+	@extend .badge;
+	@extend .badge-pill;
+
+	transition: $transition;
+	display: inline-flex;
+	justify-content: center;
+	min-width: 1.5rem;
+
+	& > strong {
+		display: none;
+		margin-left: .35rem;
+	}
+	
+	&:hover > strong {
+		display: block;
+	}
+}

@@ -23,16 +23,6 @@
 
 		.actions {
 			white-space: nowrap;
-
-			a.badge-primary {
-				transition: $transition;
-			}
-	
-			a.badge-primary:hover > .fas:after {
-				@extend .actions;
-				content: 'Details';
-				padding-left: .5rem;
-			}
 		}
 	}
 }

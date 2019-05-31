@@ -191,7 +191,7 @@
       "validations": []
     }, {
       "field": "status",
-      "type": "String",
+      "type": "Number",
       "default_value": null,
       "enums": null,
       "integration": null,
