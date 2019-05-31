@@ -5,7 +5,9 @@ class FlatsController < ApplicationController
     @markers = @flats.map do |flat|
       {
         lat: flat.latitude,
-        lng: flat.longitude
+        lng: flat.longitude,
+        infoWindow: render_to_string(partial: "flats/infowindow", locals: { flat: flat }),
+        image_url: helpers.asset_url('key-icon-grey.png')
       }
     end
   end
@@ -13,8 +15,4 @@ class FlatsController < ApplicationController
   def show
     @flat = Flat.find(params[:id])
   end
-
-
-
-
 end

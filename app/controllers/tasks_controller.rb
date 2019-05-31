@@ -48,7 +48,7 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     respond_to do |format|
       if @task.save!
-        format.html { redirect_to @task, notice: 'task was successfully created.' }
+        format.html { redirect_to flats_path, notice: 'Visit was successfully created.' }
         # format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new }
@@ -89,6 +89,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:action, :status, :location, :price, :date, :user_id)
+    params.require(:task).permit(:action, :status, :location, :price, :date, :user_id, :rental_id)
   end
 end
