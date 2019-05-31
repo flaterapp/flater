@@ -1,32 +1,35 @@
-<h1>PAGE "SHOW" of flat <%= @flat.id %></h1>
+<div class="container">
+	<h1>PAGE "SHOW" of flat <%= @flat.id %></h1>
 
-<div>
-	<p><strong>Key information of the flat:</strong></p>
-	<ul>
-		<li>Address: <%= @flat.address %></li>
-	    <li>Type: <%=  @flat.type %></li>
-	    <li>Surface: <%=  @flat.surface %> m²</li>
-	    <li>Number of rooms:<%=  @flat.nb_rooms %></li>
-	    <li>Furnished: <%=  @flat.furnished %></li>
-    </ul>
-</div>
-
-<div>
-	ADD A MAP
-	<br><br>
-</div>
-
-<div>
-	<p><strong>Flat rentals:</strong></p>
-	<% @flat.rentals.each do |rental| %>
-		<div>
-			<%= link_to "Rental #{rental.id}" , flat_rental_path(@flat, rental)%> - Status: <%= rental.pending ? "Pending" : "Closed" %> <br>
-			<%= "#{rental.initial_rent} €/month - Start date: #{rental.start_date}" %>
-			<br>
-			<%= rental.pending ? "Tenant to be selected (#{rental.dossiers.count} candidates)" : "Current tenant (id): #{rental.tenant_id}" %> <br>
-
+	<div class="row">
+		<%# FLAT INFORMATION %>
+		<div class="col col-sm-12 col-lg-6">
+			<h2>Flat information</h2>
+			<ul>
+				<li>Address: <%= @flat.address %></li>
+				<li>Type: <%=  @flat.type %></li>
+				<li>Surface: <%=  @flat.surface %> m²</li>
+				<li>Number of rooms:<%=  @flat.nb_rooms %></li>
+				<li>Furnished: <%=  @flat.furnished %></li>
+			</ul>
+			<div>
+				<%# TO DO ADD A MAP %>
+				<%#= raw(ap @flat) %>
+<div id="map" style="width: 100%; height: 400px;" data-markers="<%= @markers.to_json %>" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+			</div>
 		</div>
-		
-	<% end %>
+		<%# RENTAL %>
+		<div class="col col-sm-12 col-lg-6">
+			<h2>Flat rentals</h2>
+			<% @flat.rentals.each do |rental| %>
+				<div>
+					<%= link_to "Rental #{rental.id}" , flat_rental_path(@flat, rental)%> - Status: <%= rental.pending ? "Pending" : "Closed" %> <br>
+					<%= "#{rental.initial_rent} €/month - Start date: #{rental.start_date}" %>
+					<br>
+					<%= rental.pending ? "Tenant to be selected (#{rental.dossiers.count} candidates)" : "Current tenant (id): #{rental.tenant_id}" %> <br>
+				</div>
+			<% end %>
+		</div>
+	</div>
 </div>
 
