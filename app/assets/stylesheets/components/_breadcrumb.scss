@@ -1,0 +1,19 @@
+.breadcrumb {
+	background: none;
+	padding: .75rem 0;
+
+	a {
+		color: $secondary;
+		text-decoration: none;
+		transition: $transition;
+	}
+
+	a:hover {
+		color: $primary;
+	}
+
+	a:after {
+		content: '›';
+		padding: 0 1rem;
+	}
+}
