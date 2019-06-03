@@ -1,0 +1,10 @@
+header.dashboard {
+	position: fixed;
+	width: 100%;
+	background: rgba($light-grey, .95);
+	z-index: 9;
+}
+
+header + .container {
+	margin-top: 100px;
+}

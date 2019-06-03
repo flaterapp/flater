@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 2019_05_31_100114) do
     t.string "address"
     t.bigint "owner_id"
     t.boolean "to_rent"
-    t.string "type"
+    t.string "a_type"
     t.float "surface"
     t.integer "nb_rooms"
     t.boolean "furnished"

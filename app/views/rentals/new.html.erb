@@ -1,26 +1,32 @@
 <div class="container">
-	<h1>New rental</h1>
-	<h3><%= @flat.address %></h2>
-	<p><%= @flat.nb_rooms %> rooms - <%= @flat.surface.to_i %> m2 - <%= @flat.furnished ? "Furnished"  : "Not furnished" %> </p>
+	<h1>Create a new rental for <strong>flat #<%= @flat.id %></strong></h1>
+	<p class="lead d-flex justify-content-between">
+		<span><i class="fas fa-map-marker-alt text-primary"></i> <%= @flat.address %></span>
+		<span><i class="fas fa-bed text-primary"></i> <%= pluralize(@flat.nb_rooms, 'room') %></span>
+		<span><i class="fas fa-vector-square text-primary"></i> <%= @flat.surface.to_i %> m<sup>2</sup></span>
+		<span><i class="fas fa-couch text-primary"></i> <%= @flat.furnished ? "Furnished"  : "Not furnished" %></span>
+	</p>
 	
-	<br>
 	<div>
 		<%= simple_form_for([@flat, @rental]) do |f| %>
 		  <div class="form-inputs">
-		    <%= f.input :description %>
-		    <%= f.input :start_date, as: :date, html5:true,:input_html => { :value => Date.today, class: "datepicker"} %>
-
+				<%= f.input :description, :input_html => { :value => @flat.description } %>
+		    <%= f.input :start_date, as: :date, html5:true, :input_html => { :value => Date.today, class: "datepicker"} %>
 		    <%= f.input :initial_rent %>
 		  </div>
 		  <p><u>Info</u>: Typical rent from 
 		  	<strong><%= (@flat.surface*14).to_i %> €/m </strong>
 		  	 to 
 		  	<strong><%=(@flat.surface*16).to_i%> €/m</strong>
-		  	  for a
-		  	<strong><%= @flat.surface.to_i %> m²</strong>
-		  	  flat with
-		  	  <strong><%= @flat.nb_rooms%> rooms</strong>
-		  	  in this neighbourhood
+		  	  for a 
+		  	<strong>
+				<%= 'furnished ' if @flat.furnished %>
+				<%= @flat.surface.to_i %> m²</strong>
+				flat with
+				<strong>
+					<%= pluralize(@flat.nb_rooms, 'room') %> 
+				</strong>
+				in this neighbourhood
 		  </p>
 			<br>  
 		  <div class="form-actions">

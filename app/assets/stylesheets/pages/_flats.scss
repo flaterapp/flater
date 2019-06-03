@@ -7,7 +7,7 @@
 	z-index: 10;
 	text-align: left;
 	width: calc(480px - 4vh);
-	background: rgba($light-gray,.95);
+	background: rgba($light-grey,.95);
 
 	h1 {
 		font-size: 1.8rem;
@@ -17,19 +17,51 @@
 		}
 	}
 	
-	.list-group li:hover {
-		background-color: lightgrey;
-		cursor: pointer;
-	}
-
+	
 	.list-group-item {
 		padding: .75rem .25rem;
 		background: transparent;
-
+		white-space: nowrap;
+		
 		.actions {
 			white-space: nowrap;
 		}
 	}
+	
+	.list-group-item:hover {
+		background-color: $white-alt;
+		cursor: pointer;
+	}
+}
 
+.bubble-flat {
+	padding: 0;
+	width: 240px;
 
+	.flat-img {
+		background: url('../../assets/flats/flat5.jpg') 50% 50% no-repeat;
+		background-size: cover;
+		height: 100px;
+		padding: .5rem;
+		font-size: 1rem;
+
+		.badge-light {
+			background: transparent;
+			color: $white-alt;
+		}
+	}
+
+	.flat-info {
+		padding: 1rem;
+		font-size: 1rem;
+
+		span {
+			display: block;
+
+			.fas {
+				min-width: 24px;
+				text-align: center;
+			}
+		}
+	}
 }

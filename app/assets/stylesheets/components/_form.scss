@@ -2,7 +2,7 @@ form {
 
 	label {
 		color: rgba($night, .6);
-		font-size: 1rem;
+		font-size: .75rem;
 		margin: 0;
 
 		abbr[title="required"] {
@@ -14,18 +14,21 @@ form {
 		border-radius: 0;
 		border: none;
 		border-bottom: 1px solid rgba($night, .2);
-		background: rgba($light-gray, .2);
+		background: rgba($light-grey, .2);
 		transition: $transition;
 	}
 
 	.form-control:focus {
 		border: none;
 		border-bottom: 1px solid $primary;
-		background: rgba($light-gray, .5);
+		background: rgba($light-grey, .5);
 		box-shadow: none;
 
 	}
 
+	.datepicker.flatpickr-input {
+		background: transparent;
+	}
 	/* Animate labels - NOK
 	label {
 		position: relative;
@@ -39,9 +42,4 @@ form {
 		color: red;
 	}
 	*/
-}
-
-form {
-	width:70%,
-	
 }
