@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   # CUSTOM PAGES
   get 'dashboard', to: 'pages#dashboard'
   get 'my-tasks', to: 'tasks#mytasks'
-  get 'my-applications', to: 'rentals#my_applications'
+  get 'my_visits', to: 'rentals#my_visits'
 
   # USERS
   # devise_for :users
