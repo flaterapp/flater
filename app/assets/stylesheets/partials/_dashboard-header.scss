@@ -3,6 +3,10 @@ header.dashboard {
 	width: 100%;
 	background: rgba($light-gray, .95);
 	z-index: 9;
+	
+	h1 {
+		font-size: 2rem;
+	}
 }
 
 header + .container {
