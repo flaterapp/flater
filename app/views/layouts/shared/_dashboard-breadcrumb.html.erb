@@ -1,0 +1,26 @@
+<% # VARIABLES 
+	 # links (breadcrumb items)
+	 # 	[ { text: text, link: link, icon: icon} ]
+	 # action (call to action) - optional
+	 # 	string
+	 dashboard_text = links.nil? ? ' My dashboard' : ''
+%>
+<header class="dashboard">
+	<div class="container">
+		<h1 class="d-flex justify-content-between align-items-baseline">
+			<ul class="breadcrumb">
+				<li><%= link_to(raw("<i class=\"fas fa-tachometer-alt\"></i>#{dashboard_text}"), dashboard_path ) %></li>
+				<% if links %>
+					<% links.each do |item| %>
+						<li><%= item[:link] ? raw(link_to(item[:text], item[:link])) : raw(item[:text]) %></li>
+					<% end %>
+				<% end %>
+			</ul>
+			<% if action %>
+				<div>
+					<%= raw(action) %>
+				</div>
+			<% end %>
+		</h1>
+	</div>
+</header>
