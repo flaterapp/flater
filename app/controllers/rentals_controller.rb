@@ -33,11 +33,6 @@ class RentalsController < ApplicationController
 	  @invited_participants = @rental.dossiers.where(status: "ok_for_visit")
 	end
 
-  def my_visits
-    
-    @all_flats = current_user.flats.order('id ASC')
-    @flats_with_pending_rentals = @all_flats.joins(:rentals).where(rentals: { pending: true }).uniq
-  end
 
   private
 
