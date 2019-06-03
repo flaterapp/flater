@@ -1,0 +1,18 @@
+<div class="container">
+<h1>MY VISITS</h1>
+
+
+	<div> <% @pending_rentals.each do |rental| %>
+		<ul>
+			<li>
+			<%= rental.flat.address %>	
+			- Rental id: <%= rental.id %>
+			- Nb tasks: <%= rental.tasks.count %>	
+			- Nb dossiers: <%= rental.dossiers.count %>	
+			</li>
+		</ul>
+		<% end %>
+		
+	</div>
+</div>
+
