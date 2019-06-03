@@ -35,7 +35,9 @@ class RentalsController < ApplicationController
 	end
 
   def my_visits
-    @pending_rentals = Rental.where(pending: true)
+    
+    @all_flats = current_user.flats.order('id ASC')
+    @flats_with_pending_rentals = @all_flats.joins(:rentals).where(rentals: { pending: true }).uniq
   end
 
   private

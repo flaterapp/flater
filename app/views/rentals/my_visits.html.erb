@@ -2,14 +2,28 @@
 <h1>MY VISITS</h1>
 
 
-	<div> <% @pending_rentals.each do |rental| %>
+	<div> <% @flats_with_pending_rentals.each do |flat| %>
 		<ul>
 			<li>
-			<%= rental.flat.address %>	
-			- Rental id: <%= rental.id %>
-			- Nb tasks: <%= rental.tasks.count %>	
-			- Nb dossiers: <%= rental.dossiers.count %>	
+				<%= flat.address %>
 			</li>
+			<li>
+				Pening rental: <%= flat.rentals.last.pending %>
+			</li>
+			<li>
+				Dossiers recieved: <%= flat.rentals.last.dossiers.count %>
+			</li>
+			<li>
+				Candidates visiting: <%= flat.rentals.last.dossiers.where(status: "visiting").count %>
+			</li>
+			<% if 	flat.rentals.last.tasks.count > 0 %>
+				<li>
+					Visit(s) scheduled on:
+					<% flat.rentals.last.tasks.each do |visit| %>
+						<%= visit.date %>
+					<% end %>
+				</li>
+			<% end %>
 		</ul>
 		<% end %>
 		
