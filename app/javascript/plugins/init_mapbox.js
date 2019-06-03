@@ -27,10 +27,15 @@ const elementLiOut = (e) => {
   hideMarkerJs(e.currentTarget.dataset.flatId)
 }
 
+
 const initFlatBinding = () => {
-  document.querySelectorAll(".list-group li").forEach((element) => {
+  document.querySelectorAll("#flats-map li").forEach((element) => {
     element.addEventListener("mouseover", elementLiOver)
     element.addEventListener("mouseout", elementLiOut)
+    element.addEventListener("click", (event) => {
+      const path = event.currentTarget.dataset.flatId;
+      window.location.href = `/flats/${path}`
+    })
   })
 }
 

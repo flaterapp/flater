@@ -7,7 +7,7 @@
     		<span class="badge badge-pill badge-primary"><%= current_user.flats.count %></span>
     	</h1>
 
-    	<ul class="list-group list-group-flush">
+    	<ul id="flats-map" class="list-group list-group-flush">
     	<% @flats.each do |flat| %>
     		<li class="list-group-item d-flex justify-content-between" data-flat-id="<%= flat.id %>">
     			<%= short_text(flat.address) %>
