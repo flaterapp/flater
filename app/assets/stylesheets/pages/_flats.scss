@@ -1,9 +1,15 @@
+.flat-container {
+display: flex;
+justify-content: center;
+
+}
+
 .card-flats {
 	@extend .card;
 
-	position: absolute;
-	top: 12vh;
-	left: 2vh;
+	// position: absolute;
+	// top: 12vh;
+	// left: 2vh;
 	z-index: 10;
 	text-align: left;
 	width: calc(480px - 4vh);
@@ -16,18 +22,18 @@
 			@extend .text-muted;
 		}
 	}
-	
-	
+
+
 	.list-group-item {
 		padding: .75rem .25rem;
 		background: transparent;
 		white-space: nowrap;
-		
+
 		.actions {
 			white-space: nowrap;
 		}
 	}
-	
+
 	.list-group-item:hover {
 		background-color: $white-alt;
 		cursor: pointer;
