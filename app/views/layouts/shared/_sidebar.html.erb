@@ -29,6 +29,7 @@
 		<div class="dropdown-divider"></div>
 		<h5 class="nav-link text-primary small">Informations</h5>
 		<%= link_to raw("<i class=\"fas fa-user-edit\"></i> Edit my account"), edit_user_registration_path, class: "dropdown-item" %>
+		<%= link_to raw("<i class=\"fas fa-bolt text-primary\"></i> Upgrade to Premium Plans"), '#', class: "dropdown-item text-primary" %>
 		<div class="dropdown-divider"></div>
 		<%= link_to raw("<i class=\"fas fa-sign-out-alt\"></i> Logout"), destroy_user_session_path, method: :delete, class: "dropdown-item" %>
 	<%# GUESY MENU %>
@@ -36,5 +37,10 @@
 		<%= link_to "Sign in", new_user_session_path, class: "btn btn-primary" %> or 
 		<%= link_to "Create an account", new_user_registration_path, class: "btn" %>
 	<% end %>
+	<%# COMMON MENU %>
+	<h5 class="nav-link text-primary small mt-5">About Flater</h5>
+	<%= link_to raw("About us"), '#', class: "dropdown-item small" %>
+	<%= link_to raw("FAQ"), '#', class: "dropdown-item small" %>
+	<%= link_to raw("Contact us"), '#', class: "dropdown-item small" %>
+	<%= link_to raw("Legal notices"), '#', class: "dropdown-item small" %>
 </div>
-
