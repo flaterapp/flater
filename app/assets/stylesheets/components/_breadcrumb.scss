@@ -8,12 +8,17 @@
 		transition: $transition;
 	}
 
-	a:hover {
+	li:hover a {
 		color: $primary;
 	}
 
-	a:after {
+	li:after {
 		content: '›';
 		padding: 0 1rem;
+		color: $primary;
+	}
+
+	li:last-of-type:after {
+		content: '';
 	}
 }
