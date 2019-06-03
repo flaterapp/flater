@@ -1,13 +1,33 @@
 .card-dashboard {
-	@extend .card;
-
-	background: $light-grey;
 	border: none;
 	box-shadow: none;
 	text-align: left;
+	padding: 0 1rem 1rem 0;
 
-	h2 {
-		font-size: 1.5rem;
-		color: red;
+	.card-content {
+		background: $white-alt;
+		padding: 1rem;
+
+		a {
+			text-decoration: none;
+		}
+		
+		a h2 {
+			font-size: 1.5rem;
+			color: $gray;
+			transition: $transition;
+		}
+
+		a h2:hover {
+			color: $primary;
+		}
+
+		a h2:after {
+			content: "›";
+			position: absolute;
+			right: 2rem;
+			z-index: 1;
+			color: $primary
+		}
 	}
 }
