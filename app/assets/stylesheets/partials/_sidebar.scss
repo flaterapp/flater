@@ -18,9 +18,13 @@
 	overflow-x: hidden;
 	overflow-y: auto;
 	width: 330px;
-	background: rgba($light-grey, .95);
+	background: rgba($light-gray, .95);
 
 	.dropdown-item {
+		.fas.text-primary {
+			@extend .text-primary;
+		}
+		
 		.fas {
 			@extend .text-muted;
 			@extend .mr-1;
