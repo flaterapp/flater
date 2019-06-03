@@ -8,35 +8,37 @@
 		<span><i class="fas fa-couch text-primary"></i> <%= @flat.furnished ? "Furnished"  : "Not furnished" %></span>
 	</p>
 
-	<br>
-	<div>
-		<%= simple_form_for([@flat, @rental]) do |f| %>
+	<div class="row">
+		<div class="col col-sm-12 col-lg-8">
+			<%= simple_form_for([@flat, @rental]) do |f| %>
 		  <div class="form-inputs">
 				<%= f.input :description, label: "Complementary information", :input_html => { :value => @flat.description } %>
 		    <%= f.input :start_date, as: :date, html5:true, :input_html => { :value => Date.today, class: "datepicker"} %>
 		    <%= f.input :initial_rent, label: "Initial rent (€ / month, excl. charges)" %>
+		    <%= f.button :submit, class: "btn btn-primary" %>
+      	<%= link_to "‹ Back", :back, class: 'btn btn-secondary' %>
 		  </div>
-		  <p><u>Info</u>: Typical rent from 
-		  	<strong><%= (@flat.surface*14).to_i %> €/m </strong>
-		  	 to 
-		  	<strong><%=(@flat.surface*16).to_i%> €/m</strong>
-		  	  for a 
-		  	<strong>
+		</div>
+		<div class="col col-sm-12 col-lg-4">
+			<%# OPTIMIZE Create a partial %>
+			<div class="flater-bubble"><strong class="text-primary">Flater Bot:</strong> Hey <%= current_user.first_name %>! Do you know typical rent in this neighbourhood goes from 
+				<p><strong><%= (@flat.surface*14).to_i %> €/m </strong>
+					to 
+				<strong><%=(@flat.surface*16).to_i%> €/m</strong>
+					for a 
+				<strong>
 				<%= 'furnished ' if @flat.furnished %>
 				<%= @flat.surface.to_i %> m²</strong>
-				flat with
-				<strong>
-					<%= pluralize(@flat.nb_rooms, 'room') %> 
-				</strong>
-				in this neighbourhood
-		  </p>
-			<br>  
-		  <div class="form-actions">
-		    <%= f.button :submit, class: "btn btn-primary" %>
-		  </div>
+				flat with <strong><%= pluralize(@flat.nb_rooms, 'room') %></strong>?</p>
+				If you have any question, just ask!
+				<p class="d-flex justify-content-between mt-3">
+					<%= link_to 'Previous tip', '#', class: 'btn btn-sm btn-outline-primary' %>
+					<%= link_to 'Next tip', '#', class: 'btn btn-sm btn-outline-primary' %>
+				</p>
+			</div>
+			<div class="flater-bot"></div>
+		</div>
 		<% end %>
 	</div>
-	
-
 </div>
 
