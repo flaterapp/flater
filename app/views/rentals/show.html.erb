@@ -2,20 +2,15 @@
 dossier_total = @rental.dossiers.count
 dossier_to_validate = dossier_total - @rental.dossiers.where(status: 'not_selected').count
 %>
-<header class="dashboard">
-	<div class="container">
-		<h1 class="d-flex justify-content-between align-items-baseline">
-			<div class="breadcrumb">
-				<%= link_to(raw("<i class=\"fas fa-tachometer-alt\"></i>"), dashboard_path ) %>
-				<%= link_to("My flat ##{@flat.id}", flat_path(@flat.id)) %>
-				Rental #<%= @rental.id %>
-			</div>
-			<div class="rent">
-				<i class="fas fa-hand-holding-usd"></i> <%= @rental.initial_rent %>€ <small class="text-muted">/ month</small>
-			</div>
-		</h1>
-	</div>
-</header>
+
+<%# HEADER %>
+<%= render 'layouts/shared/dashboard-breadcrumb',
+		links: [
+			{ text: "My flat ##{@flat.id}", link: flat_path(@flat.id) },
+			{ text: "Rental ##{@rental.id}" }
+		],
+		action: "<i class=\"fas fa-hand-holding-usd\"></i> #{@rental.initial_rent}€ <small class=\"text-muted\">/ month</small>"
+%>
 
 <div class="container">
 	<p class="lead">This rental is currently <strong><%= @rental.pending ? "pending" : "closed" %></strong></p>
