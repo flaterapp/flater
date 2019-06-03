@@ -11,7 +11,7 @@
 		<p>You will <strong>send a message</strong> to the following candidates for the visit:</p>
 			<ul>
 				<% @rental.dossiers.each do |dossier| %>
-					<% if dossier.status == "visiting"%>
+					<% if dossier.status == "ok_for_visit"%>
 						<li>
 				<!-- DESCRIPTION -->
 							<strong>
