@@ -37,7 +37,7 @@ documents = ['Latest revenues', 'Tax notice', 'ID', 'Garantors']
 								<%# ORGANIZE VISIT BUTTON %>
 								<% if status == 'visiting' && @rental.dossiers.where(status: status).count > 0 %>
 									<div>
-										<%= link_to "Organize cons-visit", organize_visit_flat_rental_path(@flat, @rental), class: 'btn btn-primary'  %>
+										<%= link_to "Organize another visit", "#", class: 'btn btn-info'  %>
 									</div>
 								<% end %>
 								<% if status == 'ok_for_visit' && @rental.dossiers.where(status: status).count > 0 %>
