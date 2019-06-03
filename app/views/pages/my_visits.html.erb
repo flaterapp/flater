@@ -1,32 +1,37 @@
 <div class="container">
-<h1>MY VISITS</h1>
+	<h1>My visits</h1>
 
-
-	<div> <% @flats_with_pending_rentals.each do |flat| %>
-		<ul>
-			<li>
-				<%= flat.address %>
-			</li>
-			<li>
-				Pening rental: <%= flat.rentals.last.pending %>
-			</li>
-			<li>
-				Dossiers recieved: <%= flat.rentals.last.dossiers.count %>
-			</li>
-			<li>
-				Candidates visiting: <%= flat.rentals.last.dossiers.where(status: "visiting").count %>
-			</li>
-			<% if 	flat.rentals.last.tasks.count > 0 %>
-				<li>
-					Visit(s) scheduled on:
-					<% flat.rentals.last.tasks.each do |visit| %>
-						<%= visit.date %>
-					<% end %>
-				</li>
-			<% end %>
-		</ul>
-		<% end %>
-		
+	<br>
+	<div class="row">
+		<div class="col-4">
+			<strong>Flat:</strong>
+		</div>
+		<div class="col-4">
+			<strong>Candidates visiting:</strong>
+		</div>
+		<div class="col-4">
+			<strong>Visit dates:</strong>
+		</div>
 	</div>
+	<% @flats_with_pending_rentals.each do |flat| %>
+	<div class="row">
+		<div class="col-4">
+			<%= flat.address %>
+		</div>
+		<div class="col-4">
+			<li>
+			<%= link_to "#{flat.rentals.last.dossiers.where(status: "visiting").count} (for #{flat.rentals.last.dossiers.count} candidates overall)", flat_rental_path(flat, flat.pending_rental.first.id)  %>
+			</li>
+		</div>
+		<div class="col-4">
+			<% if 	flat.rentals.last.tasks.count > 0 %>
+					<% flat.rentals.last.tasks.each do |visit| %>
+						<li><%= visit.date %></li>
+					<% end %>
+			<% end %>
+		</div>
+	</div>
+	<% end %>
+
 </div>
 
