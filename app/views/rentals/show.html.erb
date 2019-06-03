@@ -1,30 +1,30 @@
 <% # VARIABLES
+flat = @flat.attributes
+flat[:initial_rent] = @rental.initial_rent
 dossier_total = @rental.dossiers.count
 dossier_to_validate = dossier_total - @rental.dossiers.where(status: 'not_selected').count
+is_are = dossier_to_validate > 1 ? 'are' : 'is'
 documents = ['Latest revenues', 'Tax notice', 'ID', 'Garantors']
 # TODO documents should supply: type of document (title), id (for modal), validation (true or false), document URL / content (for modal)
 %>
 
 <%# HEADER %>
 <%= render 'layouts/shared/dashboard-breadcrumb',
+		title: "#{pluralize(dossier_to_validate, 'applicant')} on #{dossier_total} #{is_are} waiting for validation",
 		links: [
 			{ text: "My flat ##{@flat.id}", link: flat_path(@flat.id) },
-			{ text: "Rental ##{@rental.id}" }
+			{ text: "Rental ##{@rental.id} (#{@rental.pending ? "pending" : "closed"})" }
 		],
-		action: "<i class=\"fas fa-hand-holding-usd\"></i> #{@rental.initial_rent}€ <small class=\"text-muted\">/ month</small>"
+		action: "",
+		flat: @flat
 %>
 
 <div class="container">
-	<p class="lead">This rental is currently <strong><%= @rental.pending ? "pending" : "closed" %></strong></p>
-
 	<div class="row">
 		<div class="col col-12">
 			<div class="card-dashboard">
 			<%# THERE IS AT LEAST 1 DOSSIER %>
 			<% if @rental.pending %>
-				<% is_are = dossier_to_validate > 1 ? 'are' : 'is' %>
-				<h2><%= pluralize(dossier_to_validate, 'applicant') %> on <%= dossier_total %> <%= is_are %> waiting for validation</h2>
-				
 				<%# DISPLAY DOSSIERS %>
 				<% if dossier_total > 0 %>
 				<div>
@@ -51,6 +51,7 @@ documents = ['Latest revenues', 'Tax notice', 'ID', 'Garantors']
 								<% @rental.dossiers.each do |dossier| %>
 									<% if dossier.status == status%>
 										<% candidate = User.find(dossier.candidate_id) %>
+										<%# TODO Debug init_flat_selector %>
 										<li class="list-group-item d-flex justify-content-between align-items-center">
 											<div class="w-100">
 												<h4 class="d-flex align-items-center">
@@ -58,9 +59,10 @@ documents = ['Latest revenues', 'Tax notice', 'ID', 'Garantors']
 																:transformation=>[{ :gravity=>"face", :radius=>"max", :crop=>"crop"}, {:width=>'200', :crop=>"scale"}], :class => "avatar avatar-large mr-3"
 															) %>
 													<div>
-														<div class="dossier-id"><i class="fas fa-file-import"></i> <%= "Dossier ##{dossier.id}" %></div>
 														<div class="dossier-details d-flex align-items-center">
 															<span class="mr-2"><%= "#{candidate.first_name.capitalize}" %> <%= "#{candidate.last_name.upcase}" %></span>
+														</div>
+														<div>
 															<% messages_count = [0, 1, rand(0..10)].sample %>
 															<% message_class = 'info' if status == 'visiting' %>
 															<% message_class = 'primary' if status == 'ok_for_visit' %>

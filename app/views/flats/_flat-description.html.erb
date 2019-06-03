@@ -1,0 +1,5 @@
+<span><i class="fas fa-map-marker-alt text-primary"></i> <%= flat.address %></span>
+<span><i class="fas fa-bed text-primary"></i> <%= pluralize(flat.nb_rooms, 'room') %></span>
+<span><i class="fas fa-vector-square text-primary"></i> <%= flat.surface.to_i %> m<sup>2</sup></span>
+<span><i class="fas fa-couch text-primary"></i> <%= flat.furnished ? "Furnished"  : "Not furnished" %></span>
+<span><i class="fas fa-hand-holding-usd text-primary"></i> <%= number_with_precision(flat.initial_rent, precision: 2) %><span class="text-muted">€ / month</span></span>

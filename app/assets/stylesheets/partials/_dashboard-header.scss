@@ -5,10 +5,11 @@ header.dashboard {
 	z-index: 9;
 	
 	h1 {
-		font-size: 2rem;
+		font-size: 2.5rem;
+		margin: 1.5rem 0;
 	}
 }
 
 header + .container {
-	margin-top: 100px;
+	margin-top: 220px;
 }

@@ -1,13 +1,16 @@
-<div class="container">
-	<h1>Create a new rental</strong></h1>
-	<br>
-	<p class="lead d-flex justify-content-between">
-		<span><i class="fas fa-map-marker-alt text-primary"></i> <%= @flat.address %></span>
-		<span><i class="fas fa-bed text-primary"></i> <%= pluralize(@flat.nb_rooms, 'room') %></span>
-		<span><i class="fas fa-vector-square text-primary"></i> <%= @flat.surface.to_i %> m<sup>2</sup></span>
-		<span><i class="fas fa-couch text-primary"></i> <%= @flat.furnished ? "Furnished"  : "Not furnished" %></span>
-	</p>
+<%# HEADER %>
+<%= render 'layouts/shared/dashboard-breadcrumb',
+		title: 'Create a new rental',
+		links: [
+			{ text: "My flat ##{@flat.id}", link: flat_path(@flat.id) },
+			{ text: "Create a new rental" }
+		],
+		action: 'test',
+		flat: @flat
+%>
 
+<div class="container">
+	<%# CREATE A NEW RENTAL %>
 	<div class="row">
 		<div class="col col-sm-12 col-lg-8">
 			<%= simple_form_for([@flat, @rental]) do |f| %>

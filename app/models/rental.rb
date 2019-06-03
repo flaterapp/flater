@@ -8,6 +8,7 @@ class Rental < ApplicationRecord
     pending == true
   end
 
+  # OPTIMIZE Debug infinite loop
   # def initial_rent
   #   initial_rent.round(2)
   # end
