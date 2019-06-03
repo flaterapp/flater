@@ -43,15 +43,19 @@ end
 
 puts separator
 puts "2. Creating flats for owners... "
-addresses = [
+addresses_for_pending = [
   '65 rue Bossuet, Lyon',
   '20 rue des Capucins, Lyon',
   '10 rue de la Charité, Lyon',
-  '3 rue Chevreul, Lyon',
+  '3 rue Chevreul, Lyon']
+
+addresses_fo_rented = [
   '9 rue de Condé, Lyon',
   '30 rue Cuvier, Lyon',
   '34 avenue Debourg, Lyon',
-  '32 avenue Felix Faure, Lyon',
+  '32 avenue Felix Faure, Lyon']
+
+other_adresses = [
   '18 rue Franklin, Lyon',
   '48 rue Garibaldi, Lyon',
   '3 rue Père Chevrier, Lyon',
@@ -82,15 +86,15 @@ addresses = [
 User.all.each do |user|
 
   # Creating flats with pending rentals (and applications)
-  rand(3..7).times do |i|
+  addresses_for_pending.each do |address|
     nb_rooms = rand(2..4)
     flat = Flat.create!(
-      address: addresses.sample,
+      address: address,
       owner: user,
       #NB: important to write "owner" and not to use "owner_id"
       to_rent: true,
       # NOTE REALLY USED!
-      a_type: "T#{nb_rooms - 1}",
+      a_type: "T#{nb_rooms + 1}",
       nb_rooms: nb_rooms,
       surface: nb_rooms * rand(15..21),
       furnished: true,
@@ -127,15 +131,15 @@ User.all.each do |user|
   end
 
   # Creating flats which are already rented
-  rand(2..4).times do |i|
+  addresses_fo_rented.each do |address|
     nb_rooms = rand(2..4)
     flat = Flat.create!(
-      address: addresses.sample,
+      address: address,
       owner: user,
       #NB: important to write "owner" and not to use "owner_id"
       to_rent: false,
       # NOTE REALLY USED!
-      a_type: "T#{nb_rooms - 1}",
+      a_type: "T#{nb_rooms + 1}",
       nb_rooms: nb_rooms,
       surface: nb_rooms * rand(15..21),
       furnished: true,
@@ -143,6 +147,15 @@ User.all.each do |user|
     )
 
     # Creating an on-going rental for each flat
+    rental = Rental.create!(
+      flat: flat,
+      tenant: nil,
+      description: "A great flat, which is now rented!",
+      start_date: Date.today,
+      pending: false,
+      initial_rent: rand(13..19) * flat.surface
+    )
+
     candidate =  User.create!(
       first_name: Faker::Name.first_name,
       last_name: Faker::Name.last_name,
@@ -151,13 +164,12 @@ User.all.each do |user|
       role: nil
     )
 
-    rental = Rental.create!(
-      flat: flat,
-      tenant: nil,
-      description: "A great flat, which is now rented!",
+    Dossier.create!(
+      rental: rental,
+      candidate: candidate,
       start_date: Date.today,
-      pending: false,
-      initial_rent: rand(13..19) * flat.surface
+      status: "contracted",
+      monthly_revenues: rand(12..50) * 100
     )
   end
 

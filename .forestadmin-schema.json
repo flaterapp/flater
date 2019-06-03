@@ -398,10 +398,10 @@
       "widget": null,
       "validations": []
     }, {
-      "field": "type",
-      "type": "Enum",
+      "field": "a_type",
+      "type": "String",
       "default_value": null,
-      "enums": [],
+      "enums": null,
       "integration": null,
       "is_filterable": true,
       "is_read_only": false,

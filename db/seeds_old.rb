@@ -1,3 +1,39 @@
+addresses_long_list = [
+  '65 rue Bossuet, Lyon',
+  '20 rue des Capucins, Lyon',
+  '10 rue de la Charité, Lyon',
+  '3 rue Chevreul, Lyon',
+  '9 rue de Condé, Lyon',
+  '30 rue Cuvier, Lyon',
+  '34 avenue Debourg, Lyon',
+  '32 avenue Felix Faure, Lyon',
+  '18 rue Franklin, Lyon',
+  '48 rue Garibaldi, Lyon',
+  '3 rue Père Chevrier, Lyon',
+  '3 avenue Lacassagne, Lyon',
+  '132 avenue Lacassagne, Lyon',
+  '57 rue de Marseille, Lyon',
+  '10 rue Mazenod, Lyon',
+  '58 rue Pasteur, Lyon',
+  '98 rue Paul Bert, Lyon',
+  '4 quai Perrache, Lyon',
+  '70 quai Perrache, Lyon',
+  '7 rue du Plat, Lyon',
+  '67 rue du Président Edouard Herriot, Lyon',
+  '12 rue de la République, Lyon',
+  '45 rue de la République, Lyon',
+  '57 rue de la République, Lyon',
+  '8 rue Rollet, Lyon',
+  '11 rue Sainte-Catherine, Lyon',
+  '5 rue Servient, Lyon',
+  '52 rue de Sèze, Lyon',
+  '22 rue Smith, Lyon',
+  '12 rue de la Thibaudière, Lyon',
+  '5 rue Trarieux, Lyon',
+  '45 rue Trarieux, Lyon',
+  '72 boulevard Vivier Merle, Lyon'
+]
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
