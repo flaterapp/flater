@@ -14,14 +14,14 @@ form {
 		border-radius: 0;
 		border: none;
 		border-bottom: 1px solid rgba($night, .2);
-		background: rgba($light-grey, .2);
+		background: rgba($light-gray, .2);
 		transition: $transition;
 	}
 
 	.form-control:focus {
 		border: none;
 		border-bottom: 1px solid $primary;
-		background: rgba($light-grey, .5);
+		background: rgba($light-gray, .5);
 		box-shadow: none;
 
 	}

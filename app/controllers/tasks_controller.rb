@@ -46,9 +46,11 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
+    @participants = @task.rental.dossiers.where(status: "ok_for_visit")
     respond_to do |format|
       if @task.save!
         format.html { redirect_to flats_path, notice: 'Visit was successfully created.' }
+        @participants.update(status: "visiting")
         # format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new }

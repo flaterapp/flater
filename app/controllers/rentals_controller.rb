@@ -18,10 +18,6 @@ class RentalsController < ApplicationController
     # OPTIMIZE IF OK ... else ...
   end
 
-  def my_applications
-    @pending_rentals = Rental.where(pending: true)
-  end
-
   def organize_visit
     @rental = Rental.find(params[:id])
     @flat = Rental.find(params[:flat_id])
@@ -35,8 +31,9 @@ class RentalsController < ApplicationController
 	  @flat = Flat.find(params[:flat_id])
 	  @task = Task.new
 	  @invited_participants = @rental.dossiers.where(status: "ok_for_visit")
-	  @invited_participants.update(status: "visiting")
 	end
+
+
   private
 
   def rental_params
