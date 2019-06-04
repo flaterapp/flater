@@ -11,28 +11,28 @@
 .flater-bubble {
 	background: $white;
 	border-radius: 16px;
+	margin: 1em 0;
 	padding: 1rem;
-	min-height: 300px;
-	display: grid;
 	line-height: 1.8;
 	animation: 2s zoomin;
 }
 
-.flater-bot:before {
+.flater-bubble:after {
 	content: '';
-	width: 15px;
-	height: 15px;
-	border-left: 15px solid transparent;
-	border-right: 0px solid transparent;
-	border-top: 15px solid $white;
-	margin-left: 80%;
-	animation: 2s zoomin;
+	width: 20px;
+	height: 20px;
+	border-left: 20px solid transparent;
+	border-right: 20px solid transparent;
+	border-top: 20px solid $white;
+	position: absolute;
+	bottom: 4.5rem;
+	right: 4.5rem;
+	transform: rotate(90deg);
 }
 
 .flater-bot {
 	background: url('flater-bot.svg') 100% 100% no-repeat;
 	background-size: contain;
 	height: 64px;
-	margin-top: 15px;
 	animation: 1s zoomin;
 }

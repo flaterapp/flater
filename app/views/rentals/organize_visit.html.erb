@@ -31,7 +31,6 @@
 			<%= f.input :status, :as => :hidden, :input_html => { :value => 0 } %>
 			<%= f.input :action, :as => :hidden, :input_html => { :value => 'Visit' } %>
 			<%= f.input :date, label: "Date of the visit:", html5:true,:input_html => { :value => Date.today, class: "datepicker"} %>
-			<%= f.input :time %>
 			<%= f.input :complementary_info, label: "Complementary information:" %>
 			<%= f.button :submit, "Organize Visit", class: "btn-primary" %>
 			<%= link_to "‹ Back", flat_rental_path(@flat, @rental), {:class=>"btn btn-secondary"} %>

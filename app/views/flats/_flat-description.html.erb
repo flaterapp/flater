@@ -1,13 +1,13 @@
 <% 
 flat_description = [
-	{ id: 'flat-address', data: flat.address, icon: 'map-marker-alt' },
-	{ id: 'flat-nb-rooms', data: pluralize(flat.nb_rooms, 'room'), icon: 'bed' },
-	{ id: 'flat-surface', data: "#{flat.surface.to_i} m<sup>2</sup>", icon: 'vector-square' },
-	{ id: 'flat-furniture', data: flat.furnished ? "Furnished"  : "Not furnished", icon: 'couch' },
-	{ id: 'flat-rent', data: "#{number_with_precision(flat.initial_rent, precision: 2)}€<span class=\"small text-muted\"> / month</span>", icon: 'hand-holding-usd' },
+	{ data: flat.address, icon: 'map-marker-alt' },
+	{ data: pluralize(flat.nb_rooms, 'room'), icon: 'bed' },
+	{ data: "#{flat.surface.to_i} m<sup>2</sup>", icon: 'vector-square' },
+	{ data: flat.furnished ? "Furnished"  : "Not furnished", icon: 'couch' },
+	{ data: "#{number_with_precision(flat.initial_rent, precision: 2)}€<span class=\"small text-muted\"> / month</span>", icon: 'hand-holding-usd' },
 ]
 %>
 
 <% flat_description.each do |detail| %>
-	<span <%= "id=#{detail[:id]}" if detail[:id] %>><i class="fas fa-<%= detail[:icon] %> text-primary"></i> <%= raw(detail[:data]) %></span>
+	<span><i class="fas fa-<%= detail[:icon] %> text-primary"></i> <%= raw(detail[:data]) %></span>
 <% end %>

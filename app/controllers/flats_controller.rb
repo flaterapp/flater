@@ -14,12 +14,11 @@ class FlatsController < ApplicationController
 
   def show
     @flat = Flat.find(params[:id])
-    @marker = [{
+    @markers = {
       id: @flat.id,
       lat: @flat.latitude,
       lng: @flat.longitude,
-      infoWindow: render_to_string(partial: "flats/infowindow", locals: { flat: @flat }),
       image_url: helpers.asset_url('ico_location.svg')
-    }]
+    }
   end
 end
