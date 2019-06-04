@@ -14,20 +14,20 @@ form {
 		border-radius: 0;
 		border: none;
 		border-bottom: 1px solid rgba($night, .2);
-		background: rgba($light-gray, .2);
+		background: rgba($white, .5);
 		transition: $transition;
 	}
 
 	.form-control:focus {
 		border: none;
 		border-bottom: 1px solid $primary;
-		background: rgba($light-gray, .5);
+		background: rgba($white, .75);
 		box-shadow: none;
 
 	}
 
 	.datepicker.flatpickr-input {
-		background: transparent;
+		background: rgba($white, .5);
 	}
 	/* Animate labels - NOK
 	label {
@@ -42,4 +42,8 @@ form {
 		color: red;
 	}
 	*/
+}
+
+.inputCopy:after {
+	content: 'Copy';
 }

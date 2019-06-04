@@ -20,7 +20,7 @@
 				<%= f.input :description, label: "Complementary information", input_html: { value: @flat.description } %>
 		    <%= f.input :start_date, as: :date, html5:true, input_html: { :value => Date.today, class: "datepicker"} %>
 		    <%= f.input :initial_rent, label: "Initial rent (€ / month, excl. charges)", input_html: { value: (@flat.surface*14).to_i } %>
-		    <i><%=  "(Previsous rental was #{@flat.rentals.last.initial_rent} € / month)"%></i>
+		    <small class="form-text text-muted"><%=  "Previsous rental was #{number_with_precision(@flat.initial_rent, precision: 2)}€ / month"%></small>
 		    <br> <br>
 		    <%= f.button :submit, class: "btn btn-primary" %>
       	<%= link_to "‹ Back", :back, class: 'btn btn-secondary' %>
