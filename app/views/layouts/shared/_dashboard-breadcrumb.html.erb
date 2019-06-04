@@ -9,13 +9,14 @@
 	 # 	→ ActiveRecords @flat
 
 	 # DEFAULT VALUES
+	 id = nil if local_assigns[:id].nil?
 	 title = nil if local_assigns[:title].nil?
 	 links = nil if local_assigns[:links].nil?
 	 cta = nil if local_assigns[:cta].nil?
 	 flat = nil if local_assigns[:flat].nil?
 	 dashboard_text = links.nil? ? ' My dashboard' : ''
 %>
-<header class="dashboard">
+<header <%= "id=#{id}" if id %> class="dashboard">
 	<div class="container">
 		<ul class="breadcrumb">
 			<li><%= link_to(raw("<i class=\"fas fa-tachometer-alt\"></i>#{dashboard_text}"), dashboard_path ) %></li>
