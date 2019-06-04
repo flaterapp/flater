@@ -15,7 +15,6 @@ documents = ['Latest revenues', 'Tax notice', 'ID', 'Garantors']
 			{ text: "My flat ##{@flat.id}", link: flat_path(@flat.id) },
 			{ text: "Rental ##{@rental.id} (#{@rental.pending ? "pending" : "closed"})" }
 		],
-		action: "",
 		flat: @flat
 %>
 
@@ -23,7 +22,7 @@ documents = ['Latest revenues', 'Tax notice', 'ID', 'Garantors']
 	<div class="row">
 		<div class="col col-12">
 			<div class="card-dashboard">
-			<%# THERE IS AT LEAST 1 DOSSIER %>
+			<%# RENTAL IS PENDING %>
 			<% if @rental.pending %>
 				<%# DISPLAY DOSSIERS %>
 				<% if dossier_total > 0 %>
@@ -43,6 +42,11 @@ documents = ['Latest revenues', 'Tax notice', 'ID', 'Garantors']
 								<% if status == 'ok_for_visit' && @rental.dossiers.where(status: status).count > 0 %>
 									<div>
 										<%= link_to "Organize visit", organize_visit_flat_rental_path(@flat, @rental), class: 'btn btn-primary'  %>
+									</div>
+								<% end %>
+								<% if status == 'to_improve' && @rental.dossiers.where(status: status).count > 0 %>
+									<div>
+										<%= link_to "Relaunch for validation", '#', class: 'btn btn-warning'  %>
 									</div>
 								<% end %>
 							</h3>
@@ -120,10 +124,13 @@ documents = ['Latest revenues', 'Tax notice', 'ID', 'Garantors']
 			<% end %>
 
 		<% end %>
-		<%# THERE'S NO DOSSIER %>
+		<%# RENTAL IS CLOSED %>
 		<% else %>
 			<div>
-				<%= @rental.tenant.id "is your current tenant"%>
+				<%=  "Tenant ##{@rental.tenant_id} has been selected for this rental"%>
+				<%=  " - Associated dossier ##{@rental.dossiers.where(candidate_id: @rental.tenant_id).last.id} - " %>
+				<%= link_to "Generate contract", "#"  %>
+
 			</div>
 		<% end %>
 		</div>

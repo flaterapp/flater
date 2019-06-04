@@ -1,21 +1,38 @@
+<%# HEADER %>
+<%= render 'layouts/shared/dashboard-breadcrumb',
+		title: "Rental created! <i class=\"fas fa-check text-primary\"></i>",
+		links: [
+			{ text: "My flat ##{@flat.id}", link: flat_path(@flat.id) },
+			{ text: "Rental ##{@rental.id} (created)" }
+		],
+		flat: @flat
+%>
+
 <div class="container">
-	<h1>Rental created! </h1>
+	<%# CREATE A NEW RENTAL %>
+	<div class="row">
+		<div class="col col-sm-12 col-lg-8">
+			<p class="lead">You have created a <strong>new rental</strong> for your flat located <strong><%= @flat.address %></strong>:</p>
+			<%# 1. FLATER RENTAL LINK %>
+			<p>1. You can copy and paste the following <strong>link</strong> in your ad, so candidates can provide here their application documents:</p>
+			<p><input class="inputCopy form-control" value="<%= "www.flater.co/flats/#{@flat.id}/rentals/#{@rental.id}/dossier/new" %>"></p>
 
-	<br>
-	<p>You have created a <strong>new rental</strong> for your flat located <strong><%= @flat.address %></strong>:</p>
+			<p class="lead"><strong>Alternatively</strong>, you can use:</p>
+			<%# 2. FLATER RENTAL REFERENCES %>
+			<p>2. The following <strong>references</strong> to access the right page:</p>
+			<p><input class="inputCopy form-control" value="Flater references: flat <%= @flat.id%> and rental <%=@rental.id%>"></p>
+			<%# 3. FLATER RENTAL EMAIL %>
+			<p>3. This <strong>email</strong> so notifications and applications are pushed in your dashboard:</p>
+			<p><input class="inputCopy form-control" value="f<%= @flat.id%>.r<%=@rental.id%>@flater.app"></p>
 
-
-	<p>> You can use the following <strong>link</strong> in your add, so candidates can provide their application documents:</p>
-	<div style="border: 1px solid black; padding: 4px">
-		<em><%= "www.flater.co/flats/#{@flat.id}/rentals/#{@rental.id}/dossier/new" %></em>
+			<%= link_to "Back to my flats", flats_path , {:class=>"btn btn-primary"} %>
+		</div>
+		<div class="col col-sm-12 col-lg-4">
+			<%# FLATER BOT %>
+			<%= render 'layouts/shared/flater-bot',
+					bot_message: "<p><strong class=\"text-primary\">Flater Bot:</strong> Well done! I hope you will receive dozen and dozen of applications! Don't worry, I will preselect the best one for you!</p>
+					<p>If you have any question, just ask!</p>"
+			%>
+		</div>
 	</div>
-	<br>
-	<p>> Alternatively, use the following <strong>references</strong> to access the right page:</p>
-	<div style="border: 1px solid black; padding: 4px">
-		<em>Flater references: flat <%= @flat.id%> and rental <%=@rental.id%></em>
-	</div>
-	<br>
-
-	<%= link_to "Back to my flats", flats_path , {:class=>"btn btn-primary"} %>
-
 </div>
