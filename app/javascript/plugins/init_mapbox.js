@@ -47,9 +47,17 @@ const initMapbox = () => {
   const fitMapToMarkers = (map, markers) => {
     const bounds = new mapboxgl.LngLatBounds();
     markers.forEach(marker => bounds.extend([ marker.lng, marker.lat ]));
-    map.fitBounds(bounds, { padding:200, maxZoom: 16 });
+    if (markers.length == 1){
+    // const centermap = [markers[0].lng, markers[0].lat]
+    // console.log(centermap)
+      map.fitBounds(bounds, { minZoom: 12, maxZoom: 16, duration: 0});
+      map.scrollZoom.disable();
+    }
+    else {
+      map.fitBounds(bounds, { padding:200, minZoom: 12, maxZoom: 16 });
+    }
   };
-""
+
   // BUILD MAP // only build a map if there's a div#map to inject into
   if (mapElement) {
     // MAPBOX
@@ -76,7 +84,7 @@ const initMapbox = () => {
         .addTo(map);
       markersJs[markerData.id] = markerJs
     });
-    console.log(markersJs)
+
     // DISPLAY MAP
     fitMapToMarkers(map, markers);
   };
