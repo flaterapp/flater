@@ -26,6 +26,9 @@ class Flat < ApplicationRecord
   end
 
   def initial_rent
-    # TODO How to get flat initial rent ?
+    return nil unless rentals.any?
+    return rentals.find_by(pending: true).initial_rent if pending_rental?
+
+    rentals.order(start_date: :desc).first.initial_rent
   end
 end

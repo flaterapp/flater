@@ -1,10 +1,6 @@
 <%# HEADER %>
 <%= render 'layouts/shared/dashboard-breadcrumb',
-		title: "Welcome <strong>#{current_user.first_name}</strong>!",
-		links: nil,
-		action: nil,
-		flat: nil
-		# OPTIMIZE is it possible to define default value in render params?
+		title: "Welcome <strong>#{current_user.first_name}</strong>!"
 %>
 
 <div class="container">

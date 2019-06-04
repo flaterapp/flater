@@ -1,9 +1,18 @@
 <% # VARIABLES 
 	 # title
+	 #	→ string
 	 # links (breadcrumb items)
-	 # 	[ { text: text, link: link, icon: icon} ]
-	 # action (call to action) - optional
-	 # 	string
+	 # 	→ [ { text: text, link: link, icon: icon} ]
+	 # cta (call to action) - optional
+	 # 	→ string
+	 # flat - optional
+	 # 	→ ActiveRecords @flat
+
+	 # DEFAULT VALUES
+	 title = nil if local_assigns[:title].nil?
+	 links = nil if local_assigns[:links].nil?
+	 cta = nil if local_assigns[:cta].nil?
+	 flat = nil if local_assigns[:flat].nil?
 	 dashboard_text = links.nil? ? ' My dashboard' : ''
 %>
 <header class="dashboard">
@@ -19,9 +28,9 @@
 		<%# TITLE %>
 		<h1 class="d-flex justify-content-between align-items-baseline">
 			<div><%= raw(title) %></div>
-			<% if action %>
+			<% if cta %>
 				<div>
-					<%= raw(action) %>
+					<%= raw(cta) %>
 				</div>
 			<% end %>
 		</h1>
@@ -33,6 +42,3 @@
 		<% end %>
 	</div>
 </header>
-
-<div class="container">
-</div>
