@@ -1,36 +1,31 @@
 <div class="container">
 	<h1>My visits</h1>
-
 	<br>
-	<div class="row">
-		<div class="col-4">
-			<strong>Flat:</strong>
-		</div>
-		<div class="col-4">
-			<strong>Candidates visiting:</strong>
-		</div>
-		<div class="col-4">
-			<strong>Visit dates:</strong>
-		</div>
-	</div>
+	<% if @new_visit == true %>
+		<h2><i class="fas fa-check text-primary"> Visit created!</i></h2>
+		<br>	
+	<% end %>
+	
 	<% @flats_with_pending_rentals.each do |flat| %>
-	<div class="row">
-		<div class="col-4">
-			<%= flat.address %>
-		</div>
-		<div class="col-4">
-			<li>
-			<%= link_to "#{flat.rentals.last.dossiers.where(status: "visiting").count} (for #{flat.rentals.last.dossiers.count} candidates overall)", flat_rental_path(flat, flat.pending_rental.first.id)  %>
-			</li>
-		</div>
-		<div class="col-4">
-			<% if 	flat.rentals.last.tasks.count > 0 %>
-					<% flat.rentals.last.tasks.each do |visit| %>
-						<li><%= visit.date %></li>
-					<% end %>
+		<% if 	flat.rentals.last.tasks.count > 0 %>
+			<% flat.rentals.last.tasks.each do |visit| %>
+			
+
+				<div class="row" style="background-color: white; margin:4px; padding:4px ">
+					<div class="col-3">
+						<%= link_to raw("<i class=\"fas fa-street-view\"></i>  #{visit.date}"), "#", class: "dropdown-item" %>			
+					</div>
+					<div class="col-5" >
+						<%= link_to raw("<i class=\"fas fa-building\"></i>  #{flat.address}"), flat_path(flat), class: "dropdown-item" %>
+					</div>
+					<div class="col-4">
+						<%= link_to raw("<i class=\"fas fa-street-view\"></i>  #{flat.rentals.last.dossiers.where(status: "visiting").count} candidates visiting"), flat_rental_path(flat, flat.pending_rental.first.id), class: "dropdown-item" %>
+					</div>
+				</div>
+
+
 			<% end %>
-		</div>
-	</div>
+		<% end %>
 	<% end %>
 
 </div>
