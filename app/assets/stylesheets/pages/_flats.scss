@@ -12,7 +12,7 @@ justify-content: center;
 	// left: 2vh;
 	z-index: 10;
 	text-align: left;
-	width: 640px;
+	width: 850px;
 	background: rgba($light-gray,.95);
 
 	h1 {
@@ -45,7 +45,8 @@ justify-content: center;
 	width: 240px;
 
 	.flat-img {
-		background: url('../../assets/flats/flat5.jpg') 50% 50% no-repeat;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
 		background-size: cover;
 		height: 100px;
 		padding: .5rem;

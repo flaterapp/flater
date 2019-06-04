@@ -4,9 +4,10 @@
       <h1><span><strong>Flater</strong><sup>&trade;</sup></span></h1>
       <p class="lead">As a flat owner or as a tenant<strong id="typed" data-strings="<%= [", select…", ", rent…", ", chill!"].to_json  %>"></strong></p>
 
-      <%= link_to 'Renew your rental', flats_path, class: 'btn btn-primary btn-lg' %>
-      <%= link_to 'Manage visits', my_visits_path, class: 'btn btn-outline-light btn-lg' %>
+      <%= link_to 'Manage my flats', flats_path, class: 'btn btn-primary btn-lg' %>
+      <%= link_to 'Send my application', "#", class: 'btn btn-outline-light btn-lg' %>
     </div>
+
 
     <% unless user_signed_in? %>
       <div class="form-container">

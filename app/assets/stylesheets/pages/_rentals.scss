@@ -1,3 +1,7 @@
+header#create-rental #flat-rent {
+	display: none;
+}
+
 #visiting, #ok_for_visit, #to_improve {
 		#candidate-documents .fas.text-danger {
 		@extend .text-danger;
@@ -25,7 +29,7 @@
 	}	
 }	
 
-h3 {
+.card-dashboard h3 {
 	font-weight: 900;
 	text-transform: uppercase;
 }	
