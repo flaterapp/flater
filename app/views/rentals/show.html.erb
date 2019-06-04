@@ -94,6 +94,11 @@ documents = ['Latest revenues', 'Tax notice', 'ID', 'Garantors']
 												</div>
 											</div>
 											<%# BUTTONS %>
+											<% if dossier.status == "visiting" %>
+												<div class="btn btn-warning">
+												SELECT
+												</div>
+											<% end %>
 											<div class="drag-and-drop">
 												<% if dossier.status == "ok_for_visit" %>
 													<%#= "[BOUTON Don't select]" %>

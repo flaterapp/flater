@@ -33,6 +33,11 @@ class RentalsController < ApplicationController
 	  @invited_participants = @rental.dossiers.where(status: "ok_for_visit")
 	end
 
+  def select_tenant
+    @rental = Rental.find(params[:id])
+    @flat = Flat.find(params[:flat_id])
+    @selected_dossier = Dossier.find(params[:dossier_id])
+  end
 
   private
 
