@@ -15,7 +15,6 @@ documents = ['Latest revenues', 'Tax notice', 'ID', 'Garantors']
 			{ text: "My flat ##{@flat.id}", link: flat_path(@flat.id) },
 			{ text: "Rental ##{@rental.id} (#{@rental.pending ? "pending" : "closed"})" }
 		],
-		action: "",
 		flat: @flat
 %>
 
@@ -43,6 +42,11 @@ documents = ['Latest revenues', 'Tax notice', 'ID', 'Garantors']
 								<% if status == 'ok_for_visit' && @rental.dossiers.where(status: status).count > 0 %>
 									<div>
 										<%= link_to "Organize visit", organize_visit_flat_rental_path(@flat, @rental), class: 'btn btn-primary'  %>
+									</div>
+								<% end %>
+								<% if status == 'to_improve' && @rental.dossiers.where(status: status).count > 0 %>
+									<div>
+										<%= link_to "Relaunch for validation", '#', class: 'btn btn-warning'  %>
 									</div>
 								<% end %>
 							</h3>
