@@ -88,7 +88,10 @@ other_adresses = [
 
 User.all.each do |user|
 
+#####################################################################
   # 1. FAKER - Creating flats with pending rentals (and applications)
+#####################################################################
+
   addresses_for_pending.each do |address|
     nb_rooms = rand(2..4)
     flat = Flat.create!(
@@ -133,7 +136,9 @@ User.all.each do |user|
     end
   end
 
+#########################################################################
  # 2. DEMO DAY - Creating a flat with a pending rental (and applications)
+ #########################################################################
   address_for_demo_day.each do |address|
     flat = Flat.create!(
       address: address,
@@ -223,15 +228,17 @@ User.all.each do |user|
       )
     end
   end
-
+####################################################################
   # 3. FAKER - Creating flats which are already rented
+####################################################################
+
   addresses_fo_rented.each do |address|
     nb_rooms = rand(2..4)
     flat = Flat.create!(
       address: address,
       owner: user,
       #NB: important to write "owner" and not to use "owner_id"
-      to_rent: false,
+      to_rent: true,
       # NOTE REALLY USED!
       a_type: "T#{nb_rooms + 1}",
       nb_rooms: nb_rooms,
@@ -240,7 +247,8 @@ User.all.each do |user|
       description: "Very nice flat with awesome view!"
     )
 
-    # Creating an on-going rental for each flat
+
+    # Initialization: creation of a rental and a candidate
     rental = Rental.create!(
       flat: flat,
       tenant: nil,
@@ -258,13 +266,22 @@ User.all.each do |user|
       role: nil
     )
 
-    Dossier.create!(
+    dossier = Dossier.create!(
       rental: rental,
       candidate: candidate,
       start_date: Date.today,
-      status: "contracted",
-      monthly_revenues: rand(12..50) * 100
+      status: "visiting",
+      monthly_revenues: rand(26..40) * 100,
+      identity_proof: "fake_url",
+      revenues_proof: "fake_url",
+      tax_proof: "fake_url",
     )
+
+  # Contractualization: change status of rental and candidate
+    dossier.update!(status: "contracted")
+    rental.update!(tenant_id: candidate.id, pending: false)
+    flat.update!(to_rent: false)
+
   end
 
 ########### ISSUE: need to allocate a candidate to a flat (as tenant)
