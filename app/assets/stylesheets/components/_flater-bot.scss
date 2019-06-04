@@ -1,9 +1,9 @@
 @keyframes zoomin {
-  from {
+  0%, 50% {
 		opacity: 0;
   }
 
-  to {
+  100% {
 		opacity: 1;
   }
 }
@@ -14,9 +14,7 @@
 	margin: 1em 0;
 	padding: 1rem;
 	line-height: 1.8;
-	
-	animation-duration: 1.5s;
-	animation-name: zoomin;
+	animation: 2s zoomin;
 }
 
 .flater-bubble:after {
@@ -36,4 +34,5 @@
 	background: url('flater-bot.svg') 100% 100% no-repeat;
 	background-size: contain;
 	height: 64px;
+	animation: 1s zoomin;
 }
