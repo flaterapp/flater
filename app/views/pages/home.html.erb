@@ -8,6 +8,7 @@
       <%= link_to 'Send my application', "#", class: 'btn btn-outline-light btn-lg' %>
     </div>
 
+
     <% unless user_signed_in? %>
       <div class="form-container">
         <%= render 'devise/registrations/form' %>
