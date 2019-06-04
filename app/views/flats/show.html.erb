@@ -13,9 +13,8 @@
 				<li>Furnished: <%=  @flat.furnished %></li>
 			</ul>
 			<div>
-				<%# TO DO ADD A MAP %>
-				<%#= raw(ap @flat) %>
-<div id="map" style="width: 100%; height: 400px;" data-markers="<%= @markers.to_json %>" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+		<%# TO DO ADD A MAP %>
+<div id="map" style="width: 100%; height: 400px;" data-markers="<%= @marker.to_json %>" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
 			</div>
 		</div>
 		<%# RENTAL %>
