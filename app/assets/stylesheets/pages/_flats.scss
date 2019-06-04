@@ -45,7 +45,8 @@ justify-content: center;
 	width: 240px;
 
 	.flat-img {
-		background: url('../../assets/flats/flat5.jpg') 50% 50% no-repeat;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
 		background-size: cover;
 		height: 100px;
 		padding: .5rem;
