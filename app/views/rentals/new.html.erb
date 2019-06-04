@@ -1,34 +1,34 @@
-<div class="container">
-	<h1>New rental</h1>
-	<h3><%= @flat.address %></h2>
-	<p><%= @flat.nb_rooms %> rooms - <%= @flat.surface.to_i %> m2 - <%= @flat.furnished ? "Furnished"  : "Not furnished" %> </p>
-	
-	<br>
-	<div>
-		<%= simple_form_for([@flat, @rental]) do |f| %>
-		  <div class="form-inputs">
-		    <%= f.input :description %>
-		    <%= f.input :start_date, as: :date, html5:true,:input_html => { :value => Date.today, class: "datepicker"} %>
+<%# HEADER %>
+<%= render 'layouts/shared/dashboard-breadcrumb',
+		title: 'Create a new rental',
+		links: [
+			{ text: "My flat ##{@flat.id}", link: flat_path(@flat.id) },
+			{ text: "Create a new rental" }
+		],
+		flat: @flat
+%>
 
-		    <%= f.input :initial_rent %>
-		  </div>
-		  <p><u>Info</u>: Typical rent from 
-		  	<strong><%= (@flat.surface*14).to_i %> €/m </strong>
-		  	 to 
-		  	<strong><%=(@flat.surface*16).to_i%> €/m</strong>
-		  	  for a
-		  	<strong><%= @flat.surface.to_i %> m²</strong>
-		  	  flat with
-		  	  <strong><%= @flat.nb_rooms%> rooms</strong>
-		  	  in this neighbourhood
-		  </p>
-			<br>  
-		  <div class="form-actions">
+<div class="container">
+	<%# CREATE A NEW RENTAL %>
+	<div class="row">
+		<div class="col col-sm-12 col-lg-8">
+			<%= simple_form_for([@flat, @rental]) do |f| %>
+		  <div class="form-inputs">
+				<%= f.input :description, label: "Complementary information", input_html: { value: @flat.description } %>
+		    <%= f.input :start_date, as: :date, html5:true, input_html: { :value => Date.today, class: "datepicker"} %>
+		    <%= f.input :initial_rent, label: "Initial rent (€ / month, excl. charges)", input_html: { value: (@flat.surface*14).to_i } %>
 		    <%= f.button :submit, class: "btn btn-primary" %>
+      	<%= link_to "‹ Back", :back, class: 'btn btn-secondary' %>
 		  </div>
 		<% end %>
+		</div>
+		<div class="col col-sm-12 col-lg-4">
+			<%# FLATER BOT %>
+			<%= render 'layouts/shared/flater-bot',
+					bot_message: "<p><strong class=\"text-primary\">Flater Bot:</strong> Hey #{current_user.first_name}! Do you know typical rent in this neighbourhood goes from <strong>#{(@flat.surface*14).to_i}€</strong> to <strong>#{(@flat.surface*16).to_i}€</strong> per month for a <strong>#{'furnished ' if @flat.furnished}#{@flat.surface.to_i} m²</strong> flat with <strong>#{pluralize(@flat.nb_rooms, 'room')}</strong>?</p>
+					<p>If you have any question, just ask!</p>"
+			%>
+		</div>
 	</div>
-	
-
 </div>
 

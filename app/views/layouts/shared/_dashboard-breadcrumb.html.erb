@@ -1,0 +1,44 @@
+<% # VARIABLES 
+	 # title
+	 #	→ string
+	 # links (breadcrumb items)
+	 # 	→ [ { text: text, link: link, icon: icon} ]
+	 # cta (call to action) - optional
+	 # 	→ string
+	 # flat - optional
+	 # 	→ ActiveRecords @flat
+
+	 # DEFAULT VALUES
+	 title = nil if local_assigns[:title].nil?
+	 links = nil if local_assigns[:links].nil?
+	 cta = nil if local_assigns[:cta].nil?
+	 flat = nil if local_assigns[:flat].nil?
+	 dashboard_text = links.nil? ? ' My dashboard' : ''
+%>
+<header class="dashboard">
+	<div class="container">
+		<ul class="breadcrumb">
+			<li><%= link_to(raw("<i class=\"fas fa-tachometer-alt\"></i>#{dashboard_text}"), dashboard_path ) %></li>
+			<% if links %>
+				<% links.each do |item| %>
+					<li><%= item[:link] ? raw(link_to(item[:text], item[:link])) : raw(item[:text]) %></li>
+				<% end %>
+			<% end %>
+		</ul>
+		<%# TITLE %>
+		<h1 class="d-flex justify-content-between align-items-baseline">
+			<div><%= raw(title) %></div>
+			<% if cta %>
+				<div>
+					<%= raw(cta) %>
+				</div>
+			<% end %>
+		</h1>
+		<%# FLAT INFO (optional) %>
+		<% if flat %>
+			<p class="d-flex justify-content-between">
+				<%= render 'flats/flat-description', flat: flat %>
+			</p>
+		<% end %>
+	</div>
+</header>

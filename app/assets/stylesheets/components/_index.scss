@@ -6,9 +6,12 @@
 @import "banner";
 @import "breadcrumb";
 @import "button";
+@import "cards";
+@import "flater-bot";
 @import "form";
-@import "task-card";
-@import "tasks-grid";
-@import "description-card";
-@import "card-candidate";
-@import "flat-card";
+@import "mapbox";
+@import "task-card";					// OPTIMIZE To nest in _card.scss or _task.scss
+@import "tasks-grid";					// OPTIMIZE To nest in _card.scss or _task.scss
+@import "description-card";		// OPTIMIZE To nest in _card.scss
+@import "card-candidate";			// OPTIMIZE To nest in _card.scss or _candidate.scss
+@import "paragraph";

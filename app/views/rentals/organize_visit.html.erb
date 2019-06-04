@@ -1,16 +1,17 @@
 <div class="container">
 	
 
+
 	<h1>Organize a visit</h1>
 
 	<h3><%= @flat.address %></h1>
 
 	<div>
 		<br>
-		<p>You will <strong>send a message</strong> to the following candidates for the visit:</p>
+		<p>You will <strong>send a message</strong> to the following candidates for the visit, with all flat information :</p>
 			<ul>
 				<% @rental.dossiers.each do |dossier| %>
-					<% if dossier.status == "visiting"%>
+					<% if dossier.status == "ok_for_visit"%>
 						<li>
 				<!-- DESCRIPTION -->
 							<strong>
@@ -27,13 +28,12 @@
 			<%= f.error_notification %>
 			<%= f.input :user_id, :as => :hidden, :input_html => { :value => current_user.id } %>
 			<%= f.input :rental_id, :as => :hidden, :input_html => { :value => @rental.id } %>
-			<%= f.input :location, :as => :hidden, :input_html => { :value => @rental.flat.address } %>
 			<%= f.input :status, :as => :hidden, :input_html => { :value => 0 } %>
 			<%= f.input :action, :as => :hidden, :input_html => { :value => 'Visit' } %>
 			<%= f.input :date, label: "Date of the visit:", html5:true,:input_html => { :value => Date.today, class: "datepicker"} %>
-			<%= f.input :complementary_info, label: "Complementary information (added to the message):" %>
-			<%= link_to "Back", "#" , {:class=>"btn btn-info"} %>
-			<%= f.button :submit, "Create Visit", class: "btn-primary" %>
+			<%= f.input :complementary_info, label: "Complementary information:" %>
+			<%= f.button :submit, "Organize Visit", class: "btn-primary" %>
+			<%= link_to "‹ Back", flat_rental_path(@flat, @rental), {:class=>"btn btn-secondary"} %>
 		<% end %>
 
 	</div>

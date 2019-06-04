@@ -1,13 +1,29 @@
-<div class="container">
-	<h1>Rental created! </h1>
+<%# HEADER %>
+<%= render 'layouts/shared/dashboard-breadcrumb',
+		title: "Rental created! <i class=\"fas fa-check text-primary\"></i>",
+		links: [
+			{ text: "My flat ##{@flat.id}", link: flat_path(@flat.id) },
+			{ text: "Rental ##{@rental.id} (created)" }
+		],
+		flat: @flat
+%>
 
-	<br>
+<div class="container">
 	<p>You have created a <strong>new rental</strong> for your flat located <strong><%= @flat.address %></strong>:</p>
 
-
-	<p>You can use <strong>the following link</strong> in your add, so candidates can provide their application documents:</p>
-	<p><em><%= "www.flater.co/flats/#{@flat.id}/rentals/#{@rental.id}/dossier/new" %></em></p>
-
+	<p>> You can use the following <strong>link</strong> in your add, so candidates can provide their application documents:</p>
+	<div style="border: 1px solid black; padding: 4px">
+		<em><%= "www.flater.co/flats/#{@flat.id}/rentals/#{@rental.id}/dossier/new" %></em>
+	</div>
+	<br>
+	<p>> Alternatively, use the following <strong>references</strong> to access the right page:</p>
+	<div style="border: 1px solid black; padding: 4px">
+		<em>Flater references: flat <%= @flat.id%> and rental <%=@rental.id%></em>
+	</div>
+	<p>> Alternatively, use the following <strong>references</strong> to access the right page:</p>
+	<div style="border: 1px solid black; padding: 4px">
+		<em>Flater references: flat <%= @flat.id%> and rental <%=@rental.id%></em>
+	</div>
 	<br>
 
 	<%= link_to "Back to my flats", flats_path , {:class=>"btn btn-primary"} %>

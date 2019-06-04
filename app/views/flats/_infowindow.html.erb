@@ -1,8 +1,9 @@
-<div class=flat-card >
-
-<strong>Adress:</strong> <%= flat.address %><br>
-<strong>Rooms:</strong> <%= flat.nb_rooms %><br>
-<strong>Furnished:</strong> <%= flat.furnished %><br>
-<strong>Owner:</strong> <%= flat.owner.first_name + " " + flat.owner.last_name %><br>
-
+<div class="bubble-flat">
+	<div class="flat-img">
+		<%= raw(badge('Details', 'light', 'eye', flat_path(flat.id))) %>
+	</div>
+	<div class="flat-info">
+		<%# TODO Add context to implement short_text(flat.address, 24) %>
+		<%= render 'flats/flat-description', flat: flat %>
+	</div>
 </div>

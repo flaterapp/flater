@@ -7,8 +7,4 @@ class Rental < ApplicationRecord
   def pending?
     pending == true
   end
-
-  # def initial_rent
-  #   initial_rent.round(2)
-  # end
 end

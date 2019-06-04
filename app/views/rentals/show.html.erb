@@ -1,55 +1,100 @@
 <% # VARIABLES
+flat = @flat.attributes
+flat[:initial_rent] = @rental.initial_rent
 dossier_total = @rental.dossiers.count
 dossier_to_validate = dossier_total - @rental.dossiers.where(status: 'not_selected').count
+is_are = dossier_to_validate > 1 ? 'are' : 'is'
+documents = ['Latest revenues', 'Tax notice', 'ID', 'Garantors']
+# TODO documents should supply: type of document (title), id (for modal), validation (true or false), document URL / content (for modal)
+%>
+
+<%# HEADER %>
+<%= render 'layouts/shared/dashboard-breadcrumb',
+		title: "#{pluralize(dossier_to_validate, 'applicant')} on #{dossier_total} #{is_are} waiting for validation",
+		links: [
+			{ text: "My flat ##{@flat.id}", link: flat_path(@flat.id) },
+			{ text: "Rental ##{@rental.id} (#{@rental.pending ? "pending" : "closed"})" }
+		],
+		flat: @flat
 %>
 
 <div class="container">
-	<h1 class="header d-flex justify-content-between align-items-baseline">
-		<div class="breadcrumb">
-			<%= link_to(raw("<i class=\"fas fa-tachometer-alt\"></i>"), dashboard_path ) %>
-			<%= link_to("My flat ##{@flat.id}", flat_path(@flat.id)) %>
-			Rental #<%= @rental.id %>
-		</div>
-		<div class="rent">
-			<i class="fas fa-hand-holding-usd"></i> <%= @rental.initial_rent %>€ <small class="text-muted">/ month</small>
-		</div>
-	</h1>
-	<p class="lead">Rental is <strong><%= @rental.pending ? "pending" : "closed" %></strong></p>
-
 	<div class="row">
 		<div class="col col-12">
 			<div class="card-dashboard">
-			<%# THERE IS AT LEAST 1 DOSSIER %>
+			<%# RENTAL IS PENDING %>
 			<% if @rental.pending %>
-				<% is_are = dossier_to_validate > 1 ? 'are' : 'is' %>
-				<h2><%= pluralize(dossier_to_validate, 'applicant') %> on <%= dossier_total %> <%= is_are %> currently waiting for validation</h2>
-				
 				<%# DISPLAY DOSSIERS %>
 				<% if dossier_total > 0 %>
 				<div>
 					<% ["visiting", "ok_for_visit", "to_improve", "not_selected"].each do  |status|%>
-						<div>
-							<h3 class="d-flex justify-content-between align-items-center pt-3">
-								<%= raw(badge("#{@rental.dossiers.where(status: status).count} #{status}", 'primary', 'users', '', false)) %>
+						<div id="<%= status %>" >
+							<h3 class="d-flex justify-content-between align-items-center pt-3 ">
+								<%# TITLE %>
+								<%#= raw(badge("#{@rental.dossiers.where(status: status).count} #{status}", 'primary', 'users', '', false)) %>
+								<div><i class="fas fa-users"></i> <%= "#{@rental.dossiers.where(status: status).count} #{status.gsub('_', ' ')}" %></div>
+								<%# ORGANIZE VISIT BUTTON %>
+								<% if status == 'visiting' && @rental.dossiers.where(status: status).count > 0 %>
+									<div>
+										<%= link_to "Organize another visit", "#", class: 'btn btn-info'  %>
+									</div>
+								<% end %>
 								<% if status == 'ok_for_visit' && @rental.dossiers.where(status: status).count > 0 %>
-								<div>
-									<%= link_to "Organize visit", organize_visit_flat_rental_path(@flat, @rental), class: 'btn btn-primary'  %>
-								</div>
+									<div>
+										<%= link_to "Organize visit", organize_visit_flat_rental_path(@flat, @rental), class: 'btn btn-primary'  %>
+									</div>
+								<% end %>
+								<% if status == 'to_improve' && @rental.dossiers.where(status: status).count > 0 %>
+									<div>
+										<%= link_to "Relaunch for validation", '#', class: 'btn btn-warning'  %>
+									</div>
 								<% end %>
 							</h3>
-							<ul class="list-group">
+							<%# CANDIDATE LIST %>
+							<ul class="list-group <%= status %>">
 								<% @rental.dossiers.each do |dossier| %>
 									<% if dossier.status == status%>
+										<% candidate = User.find(dossier.candidate_id) %>
+										<%# TODO Debug init_flat_selector %>
 										<li class="list-group-item d-flex justify-content-between align-items-center">
-											<!-- DESCRIPTION -->
-											<div>
-												<% candidate = User.find(dossier.candidate_id) %>
-												<%#= raw(ap candidate) %>
-												<h4><%= "#{candidate.first_name.capitalize}" %> <%= "#{candidate.last_name.upcase}" %></h4>
-												<%= "dossier ##{dossier.id} - #{dossier.monthly_revenues} €/m - [all docs?]" %>
+											<div class="w-100">
+												<h4 class="d-flex align-items-center">
+													<%= cl_image_tag("Faces/face#{rand(1..12)}",
+																:transformation=>[{ :gravity=>"face", :radius=>"max", :crop=>"crop"}, {:width=>'200', :crop=>"scale"}], :class => "avatar avatar-large mr-3"
+															) %>
+													<div>
+														<div class="dossier-details d-flex align-items-center">
+															<span class="mr-2"><%= "#{candidate.first_name.capitalize}" %> <%= "#{candidate.last_name.upcase}" %></span>
+														</div>
+														<div>
+															<% messages_count = [0, 1, rand(0..10)].sample %>
+															<% message_class = 'info' if status == 'visiting' %>
+															<% message_class = 'primary' if status == 'ok_for_visit' %>
+															<% message_class = 'warning' if status == 'to_improve' %>
+															<% message_class = 'danger' if status == 'not_selected' %>
+															<% messages_display = messages_count > 0 ? false : true %>
+															<% messages_new = messages_count > 0 ? ['new message', ''].sample : '' %>
+															<span class="mr-2"><%= raw(badge(messages_count, message_class, 'comments', '#', messages_display)) %></span>
+															<strong class="new-message"><%= messages_new %></strong>
+														</div>
+													</div>
+												</h4>
+												<div id="candidate-documents" class="d-flex justify-content-between align-items-center">
+													<strong><i class="fas fa-file-invoice-dollar text-primary"></i> <%= "#{dossier.monthly_revenues}" %>€ / month</strong>
+													<% 
+													documents.each do |document|
+														if status == 'visiting' || status == 'ok_for_visit'
+															document_ok = "<i class=\"fas fa-check text-primary\"></i>"
+														else
+															document_ok = ["<i class=\"fas fa-check text-primary\"></i>", "<i class=\"fas fa-times text-danger\"></i>"].sample
+														end
+													%>
+														<a data-toggle="modal" data-target="#exampleModal"><%= raw("#{document} #{document_ok}") %></a>
+													<% end %>
+												</div>
 											</div>
-											<!-- BUTTONS -->
-											<div>
+											<%# BUTTONS %>
+											<div class="drag-and-drop">
 												<% if dossier.status == "ok_for_visit" %>
 													<%#= "[BOUTON Don't select]" %>
 													<i class="fas fa-arrows-alt"></i>
@@ -68,11 +113,24 @@ dossier_to_validate = dossier_total - @rental.dossiers.where(status: 'not_select
 				</div>
 			</div>
 
+			<%# MODAL %>
+			<% documents.each do |document| %>
+				<%= render 'layouts/shared/modal',
+						id: 'exampleModal',
+						label: 'exampleModal',
+						title: document,
+						content: '…'
+				%>	
 			<% end %>
-		<%# THERE'S NO DOSSIER %>
+
+		<% end %>
+		<%# RENTAL IS CLOSED %>
 		<% else %>
 			<div>
-				<%= @rental.tenant.id "is your current tenant"%>
+				<%=  "Tenant ##{@rental.tenant_id} has been selected for this rental"%>
+				<%=  " - Associated dossier ##{@rental.dossiers.where(candidate_id: @rental.tenant_id).last.id} - " %>
+				<%= link_to "Generate contract", "#"  %>
+
 			</div>
 		<% end %>
 		</div>

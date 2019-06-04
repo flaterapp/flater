@@ -1,0 +1,15 @@
+header.dashboard {
+	position: fixed;
+	width: 100%;
+	background: rgba($light-gray, .95);
+	z-index: 9;
+	
+	h1 {
+		font-size: 2.5rem;
+		margin: 1.5rem 0;
+	}
+}
+
+header + .container {
+	margin-top: 220px;
+}

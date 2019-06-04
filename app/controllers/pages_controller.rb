@@ -6,4 +6,9 @@ class PagesController < ApplicationController
 
   def dashboard
   end
+
+  def my_visits
+    @all_flats = current_user.flats.order('id ASC')
+    @flats_with_pending_rentals = @all_flats.joins(:rentals).where(rentals: { pending: true }).uniq
+  end
 end

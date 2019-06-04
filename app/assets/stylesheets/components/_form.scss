@@ -2,7 +2,7 @@ form {
 
 	label {
 		color: rgba($night, .6);
-		font-size: 1rem;
+		font-size: 1.5rem;
 		margin: 0;
 
 		abbr[title="required"] {
@@ -26,6 +26,9 @@ form {
 
 	}
 
+	.datepicker.flatpickr-input {
+		background: transparent;
+	}
 	/* Animate labels - NOK
 	label {
 		position: relative;
@@ -39,9 +42,4 @@ form {
 		color: red;
 	}
 	*/
-}
-
-form {
-	width:70%,
-	
 }
