@@ -3,9 +3,7 @@
 		<%= raw(badge('Details', 'light', 'eye', flat_path(flat.id))) %>
 	</div>
 	<div class="flat-info">
-		<span><i class="fas fa-map-marker-alt text-primary"></i> <%= short_text(flat.address, 24) %></span>
-		<span><i class="fas fa-bed text-primary"></i> <%= pluralize(flat.nb_rooms, 'room') %></span>
-		<span><i class="fas fa-vector-square text-primary"></i> <%= flat.surface.to_i %> m<sup>2</sup></span>
-		<span><i class="fas fa-couch text-primary"></i> <%= flat.furnished ? "Furnished"  : "Not furnished" %></span>
+		<%# TODO Add context to implement short_text(flat.address, 24) %>
+		<%= render 'flats/flat-description', flat: flat %>
 	</div>
 </div>
