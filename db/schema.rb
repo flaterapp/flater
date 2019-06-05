@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 2019_05_31_100114) do
   create_table "tasks", force: :cascade do |t|
     t.string "action"
     t.date "date"
+    t.time "time"
     t.string "status"
     t.integer "price"
     t.bigint "user_id"
