@@ -14,16 +14,31 @@
 		<div class="col col-sm-12 col-lg-8">
 			<%# 1. FLATER RENTAL LINK %>
 			<p class="lead">1. You can <strong>copy and paste the following link</strong> in your ad, so candidates can provide here their application documents:</p>
-			<p><input class="inputCopy form-control" value="<%= "submit.flater.app/f#{@flat.id}r#{@rental.id}" %>" /></p>
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text">Copy</span>
+				</div>
+				<input class="inputCopy form-control" value="<%= "https://submit.flater.app/f#{@flat.id}r#{@rental.id}" %>" />
 				<%# link: www.flater.co/flats/#{@flat.id}/rentals/#{@rental.id}/dossier/new %>
+			</div>
 
 			<p class="lead"><strong>Alternatively</strong>, you can use:</p>
 			<%# 2. FLATER RENTAL REFERENCES %>
-			<p>2. The following <strong>references</strong> after login <a href="#">in application page</a>:</p>
-			<p><input class="inputCopy form-control" value="Flater reference: F<%= @flat.id%>R<%=@rental.id%>" /></p>
+			<p>2. The <strong>Flater dossier reference</strong> after login <a href="#">in application page</a>:</p>
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text">Copy</span>
+				</div>
+				<input class="inputCopy form-control" value="#F<%= @flat.id%>R<%=@rental.id%>" />
+			</div>
 			<%# 3. FLATER RENTAL EMAIL %>
 			<p>3. This <strong>email</strong> so notifications and applications are pushed in <%= link_to 'your dashboard', dashboard_path %>:</p>
-			<p><input class="inputCopy form-control" value="F<%= @flat.id%>R<%=@rental.id%>@flater.app" /></p>
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text">Copy</span>
+				</div>
+				<input class="inputCopy form-control" value="F<%= @flat.id%>R<%=@rental.id%>@flater.app" />
+			</div>
 
 			<%= link_to "Back to my flats", flats_path , {:class=>"btn btn-primary"} %>
 		</div>
