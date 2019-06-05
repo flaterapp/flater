@@ -1,4 +1,25 @@
-VIEW: select_tenant.html.erb
+<%# HEADER %>
+<%= render 'layouts/shared/dashboard-breadcrumb',
+		title: "You are about to select your new tenant!",
+		links: [
+			{ text: "My flat ##{@flat.id}", link: flat_path(@flat.id) },
+			{ text: "Rental ##{@rental.id} (#{@rental.pending ? "pending" : "closed"})" }
+		],
+		flat: @flat
+%>
 
-selected dossier:
-@selected_dossier
+
+<div class="container">
+	
+
+<div>
+
+	<p>You have selected <strong><%= @selected_dossier.candidate.first_name %> <%= @selected_dossier.candidate.last_name %> </strong> as your future tenant. The candidate will be informed by e-mail!</p>
+	<p>Other candidates will be noticed that they have not been retained for this rental.</p>
+
+	<div class="btn btn-primary">
+		CONFIRM (to do)
+	</div>
+
+
+</div>
