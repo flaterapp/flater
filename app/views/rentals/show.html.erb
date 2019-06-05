@@ -1,8 +1,11 @@
 <% # VARIABLES
-flat = @flat.attributes
-flat[:initial_rent] = @rental.initial_rent
+rental_status = @rental.pending ? { text: "pending", icon: "clock", color: "secondary" } : { text: "close", icon: "check", color: "primary" }
 dossier_total = @rental.dossiers.count
-dossier_to_validate = dossier_total - @rental.dossiers.where(status: 'not_selected').count
+dossier_rejected = @rental.dossiers.where(status: 'not_selected').count
+dossier_to_improve = @rental.dossiers.where(status: 'to_improve').count
+dossier_ok_for_visit = @rental.dossiers.where(status: 'ok_for_visit').count
+dossier_visiting = @rental.dossiers.where(status: 'visiting').count
+dossier_to_validate = dossier_visiting + dossier_ok_for_visit
 is_are = dossier_to_validate > 1 ? 'are' : 'is'
 documents = ['Latest revenues', 'Tax notice', 'ID', 'Garantors']
 # TODO documents should supply: type of document (title), id (for modal), validation (true or false), document URL / content (for modal)
@@ -10,10 +13,10 @@ documents = ['Latest revenues', 'Tax notice', 'ID', 'Garantors']
 
 <%# HEADER %>
 <%= render 'layouts/shared/dashboard-breadcrumb',
-		title: "#{pluralize(dossier_to_validate, 'applicant')} on #{dossier_total} #{is_are} waiting for validation",
+		title: "#{pluralize(dossier_to_validate, 'applicant')} out of #{dossier_total} #{is_are} selected for visits",
 		links: [
 			{ text: "My flat ##{@flat.id}", link: flat_path(@flat.id) },
-			{ text: "Rental ##{@rental.id} (#{@rental.pending ? "pending" : "closed"})" }
+			{ text: "Rental ##{@rental.id} #{badge(rental_status[:text], rental_status[:color], rental_status[:icon], '', false)}" }
 		],
 		flat: @flat
 %>
@@ -94,6 +97,12 @@ documents = ['Latest revenues', 'Tax notice', 'ID', 'Garantors']
 												</div>
 											</div>
 											<%# BUTTONS %>
+											<% if dossier.status == "visiting" %>
+												<div class="btn btn-warning">
+												<%= link_to "Select", select_tenant_flat_rental_path(@flat, @rental, dossier_id: dossier.id), method: :post %>
+												</div>
+												
+											<% end %>
 											<div class="drag-and-drop">
 												<% if dossier.status == "ok_for_visit" %>
 													<%#= "[BOUTON Don't select]" %>

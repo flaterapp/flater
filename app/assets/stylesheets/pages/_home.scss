@@ -26,10 +26,14 @@
 	}
 
 	form {
+		.btn[type="submit"], .btn.social-connect {
+			@extend .btn-block;
+		}
+
 		& + a {
 			display: inline-block;
 			margin-top: 1em;
-			font-size: .5em;
+			font-size: .75em;
 		}
 	}
 }

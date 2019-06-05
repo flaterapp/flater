@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     resources :rentals, only: [:index, :show, :new, :edit, :create] do
       member do
         get 'organize_visit', to: 'rentals#organize_visit'
+        post 'select_tenant', to: 'rentals#select_tenant'
+        post 'confirm_tenant', to: 'rentals#confirm_tenant'
       end 
     end
   end

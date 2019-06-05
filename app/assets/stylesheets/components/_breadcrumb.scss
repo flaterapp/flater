@@ -8,6 +8,15 @@
 		transition: $transition;
 	}
 
+	li {
+		display: flex;
+		align-items: center;
+
+		.badge-custom {
+			margin-left: 1rem;
+		}
+	}
+
 	li:hover a {
 		color: $primary;
 	}
