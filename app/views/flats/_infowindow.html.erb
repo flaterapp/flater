@@ -1,5 +1,5 @@
 <div class="bubble-flat">
-	<div class="flat-img" style="background-image: url('../../assets/flats/flat<%= rand(1..37) %>.jpg')">
+	<div class="flat-img" style="background-image: url(<%= image_path "flats/flat#{rand(1..37)}.jpg" %>)">
 		<%= raw(badge('Details', 'light', 'eye', flat_path(flat.id))) %>
 	</div>
 	<div class="flat-info">

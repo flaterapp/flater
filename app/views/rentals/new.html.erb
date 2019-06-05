@@ -20,18 +20,17 @@
 				<%= f.input :description, label: "Complementary information", input_html: { value: @flat.description } %>
 		    <%= f.input :start_date, as: :date, html5:true, input_html: { :value => Date.today, class: "datepicker"} %>
 		    <%= f.input :initial_rent, label: "Initial rent (€ / month, excl. charges)", input_html: { value: (@flat.surface*14).to_i } %>
-		    <i><%=  "(Previsous rental was #{@flat.rentals.last.initial_rent} € / month)"%></i>
+		    <small class="form-text text-muted"><%=  "Previous rental was #{number_with_precision(@flat.initial_rent, precision: 2)}€ / month"%></small>
 		    <br> <br>
 		    <%= f.button :submit, class: "btn btn-primary" %>
       	<%= link_to "‹ Back", :back, class: 'btn btn-secondary' %>
 		  </div>
 		<% end %>
 		</div>
+		<%# FLATER BOT %>
 		<div class="col col-sm-12 col-lg-4">
-			<%# FLATER BOT %>
 			<%= render 'layouts/shared/flater-bot',
-					bot_message: "<p><strong class=\"text-primary\">Flater Bot:</strong> Hey #{current_user.first_name}! Do you know typical rent in this neighbourhood goes from <strong>#{(@flat.surface*14).to_i}€</strong> to <strong>#{(@flat.surface*16).to_i}€</strong> per month for a <strong>#{'furnished ' if @flat.furnished}#{@flat.surface.to_i} m²</strong> flat with <strong>#{pluralize(@flat.nb_rooms, 'room')}</strong>?</p>
-					<p>If you have any question, just ask!</p>"
+					bot_message: "Hey #{current_user.first_name}! Do you know typical rent in this neighbourhood goes from <strong>#{(@flat.surface*14).to_i}€</strong> to <strong>#{(@flat.surface*16).to_i}€</strong> per month for a <strong>#{'furnished ' if @flat.furnished}#{@flat.surface.to_i} m²</strong> flat with <strong>#{pluralize(@flat.nb_rooms, 'room')}</strong>?"
 			%>
 		</div>
 	</div>
