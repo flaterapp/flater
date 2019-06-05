@@ -43,15 +43,18 @@ end
 
 puts separator
 puts "2. Creating flats for owners... "
-addresses_for_pending = [
-  '65 rue Bossuet, Lyon',
-  '10 rue de la Charité, Lyon'
+
+addresses_1 = [
+  '65 rue Bossuet, Lyon'
 ]
 
-address_for_demo_day = [
+addresses_2 = [
   '20 rue des Capucins, Lyon']
 
-addresses_fo_rented = [
+addresses_3 = [
+  '10 rue de la Charité, Lyon']
+
+addresses_4 = [
   '9 rue de Condé, Lyon',
   '30 rue Cuvier, Lyon',
   '34 avenue Debourg, Lyon']
@@ -92,7 +95,7 @@ User.all.each do |user|
   # 1. FAKER - Creating flats with pending rentals (and applications)
 #####################################################################
 
-  addresses_for_pending.each do |address|
+  addresses_1.each do |address|
     nb_rooms = rand(2..4)
     flat = Flat.create!(
       address: address,
@@ -139,7 +142,7 @@ User.all.each do |user|
 #########################################################################
  # 2. DEMO DAY - Creating a flat with a pending rental (and applications)
  #########################################################################
-  address_for_demo_day.each do |address|
+  addresses_2.each do |address|
     flat = Flat.create!(
       address: address,
       owner: user,
@@ -228,11 +231,71 @@ User.all.each do |user|
       )
     end
   end
+
+
+#####################################################################
+  # 3. FAKER - Creating flats with pending rentals (and applications)
+#####################################################################
+
+addresses_3.each do |address|
+    nb_rooms = rand(2..4)
+    flat = Flat.create!(
+      address: address,
+      owner: user,
+      #NB: important to write "owner" and not to use "owner_id"
+      to_rent: true,
+      # NOTE REALLY USED!
+      a_type: "T#{nb_rooms + 1}",
+      nb_rooms: nb_rooms,
+      surface: nb_rooms * rand(15..21),
+      furnished: true,
+      description: "Very nice flat with awesome view!"
+    )
+
+
+    # Initialization: creation of a rental and a candidate
+    rental = Rental.create!(
+      flat: flat,
+      tenant: nil,
+      description: "A great flat, which is now rented!",
+      start_date: Date.today,
+      pending: false,
+      initial_rent: rand(13..19) * flat.surface
+    )
+
+    candidate =  User.create!(
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      email: Faker::Internet.email,
+      password: pswd,
+      role: nil
+    )
+
+    dossier = Dossier.create!(
+      rental: rental,
+      candidate: candidate,
+      start_date: Date.today,
+      status: "visiting",
+      monthly_revenues: rand(26..40) * 100,
+      identity_proof: "fake_url",
+      revenues_proof: "fake_url",
+      tax_proof: "fake_url",
+    )
+
+  # Contractualization: change status of rental and candidate
+    dossier.update!(status: "contracted")
+    rental.update!(tenant_id: candidate.id, pending: false)
+    flat.update!(to_rent: false)
+
+  # Tenant is now about to leave! Flat is now to re-rent!
+    flat.update!(to_rent: true)
+  end
+
 ####################################################################
-  # 3. FAKER - Creating flats which are already rented
+  # 4. FAKER - Creating flats which are already rented
 ####################################################################
 
-  addresses_fo_rented.each do |address|
+  addresses_4.each do |address|
     nb_rooms = rand(2..4)
     flat = Flat.create!(
       address: address,
