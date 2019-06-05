@@ -179,7 +179,7 @@ User.all.each do |user|
       last_name: "Rena",
       email: Faker::Internet.email,
       password: pswd,
-      facebook_picture_url: "face1",
+      facebook_picture_url: "face10",
       role: nil
     )
     Dossier.create!(
@@ -200,7 +200,7 @@ User.all.each do |user|
       last_name: "Dufort",
       email: Faker::Internet.email,
       password: pswd,
-      facebook_picture_url: "face2",
+      facebook_picture_url: "face4",
       role: nil
     )
     Dossier.create!(
@@ -221,7 +221,7 @@ User.all.each do |user|
       last_name: "Tothau",
       email: Faker::Internet.email,
       password: pswd,
-      facebook_picture_url: "face3",
+      facebook_picture_url: "face6",
       role: nil
     )
     Dossier.create!(
@@ -246,7 +246,7 @@ User.all.each do |user|
       last_name: "Dutreil",
       email: Faker::Internet.email,
       password: pswd,
-      facebook_picture_url: "face4",
+      facebook_picture_url: "face11",
       role: nil
     )
     Dossier.create!(
@@ -267,7 +267,7 @@ User.all.each do |user|
       last_name: "Chabanal",
       email: Faker::Internet.email,
       password: pswd,
-      facebook_picture_url: "face5",
+      facebook_picture_url: "face13",
       role: nil
     )
     Dossier.create!(
@@ -289,7 +289,7 @@ User.all.each do |user|
       last_name: "Lafond",
       email: Faker::Internet.email,
       password: pswd,
-      facebook_picture_url: "face6",
+      facebook_picture_url: "face8",
       role: nil
     )
     Dossier.create!(
@@ -315,7 +315,7 @@ User.all.each do |user|
       last_name: "Aubert",
       email: Faker::Internet.email,
       password: pswd,
-      facebook_picture_url: "face7",
+      facebook_picture_url: "face3",
       role: nil
     )
     Dossier.create!(
@@ -336,7 +336,7 @@ User.all.each do |user|
       last_name: "Deboss",
       email: Faker::Internet.email,
       password: pswd,
-      facebook_picture_url: "face8",
+      facebook_picture_url: "face2",
       role: nil
     )
     Dossier.create!(
@@ -358,7 +358,7 @@ User.all.each do |user|
       last_name: "Menon",
       email: Faker::Internet.email,
       password: pswd,
-      facebook_picture_url: "face9",
+      facebook_picture_url: "face12",
       role: nil
     )
     Dossier.create!(
