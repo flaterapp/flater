@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_31_100114) do
+ActiveRecord::Schema.define(version: 2019_06_04_143134) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,7 +76,6 @@ ActiveRecord::Schema.define(version: 2019_05_31_100114) do
   create_table "tasks", force: :cascade do |t|
     t.string "action"
     t.date "date"
-    t.time "time"
     t.string "status"
     t.integer "price"
     t.bigint "user_id"
@@ -87,6 +86,7 @@ ActiveRecord::Schema.define(version: 2019_05_31_100114) do
     t.float "longitude"
     t.bigint "rental_id"
     t.string "complementary_info"
+    t.time "time"
     t.index ["rental_id"], name: "index_tasks_on_rental_id"
     t.index ["user_id"], name: "index_tasks_on_user_id"
   end
