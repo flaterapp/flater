@@ -10,10 +10,22 @@
     	</h1>
 
     	<ul id="flats-map" class="list-group list-group-flush">
-    	<% @flats.each do |flat| %>
-            <%= render 'layouts/shared/flat_item_in_menu',
-            flat: flat %>
-    	<% end %>
+        	<li class="list-group-item d-flex justify-content-between">
+            <strong>Flats to re-rent:</strong></li>
+                <% @flats.each do |flat| %>
+                    <% if flat.to_rent == true %>
+                        <%= render 'layouts/shared/flat_item_in_menu',
+                    flat: flat %>
+                    <% end %> 
+        	<% end %>
+            <li class="list-group-item d-flex justify-content-between">
+            <strong>Other flats:</strong></li>
+                <% @flats.each do |flat| %>
+                   <% if flat.to_rent == false %>
+                        <%= render 'layouts/shared/flat_item_in_menu',
+                    flat: flat %>
+                    <% end %> 
+            <% end %>
     	</ul>
     </div>
 

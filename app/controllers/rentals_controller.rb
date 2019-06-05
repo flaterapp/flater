@@ -15,6 +15,8 @@ class RentalsController < ApplicationController
     @rental.pending = true
     @rental.flat = @flat
     @rental.save!
+    @flat = Flat.find(@rental.flat.id)
+    @flat.update!(to_rent: true)
     # OPTIMIZE IF OK ... else ...
   end
 
