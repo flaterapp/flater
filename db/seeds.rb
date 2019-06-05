@@ -127,6 +127,7 @@ User.all.each do |user|
         last_name: Faker::Name.last_name,
         email: Faker::Internet.email,
         password: pswd,
+        facebook_picture_url: "face#{rand(2..12)}",
         role: nil
       )
       Dossier.create!(
@@ -409,6 +410,7 @@ addresses_3.each do |address|
       last_name: Faker::Name.last_name,
       email: Faker::Internet.email,
       password: pswd,
+      facebook_picture_url: "face#{rand(2..12)}",
       role: nil
     )
 
@@ -467,6 +469,7 @@ addresses_3.each do |address|
       last_name: Faker::Name.last_name,
       email: Faker::Internet.email,
       password: pswd,
+      facebook_picture_url: "face#{rand(2..12)}",
       role: nil
     )
 
