@@ -1,5 +1,5 @@
-@keyframes zoomin {
-  0%, 50% {
+@keyframes fadein {
+  0%, 60% {
 		opacity: 0;
   }
 
@@ -15,7 +15,15 @@
 	min-height: 300px;
 	display: grid;
 	line-height: 1.8;
-	animation: 2s zoomin;
+	animation: 3s fadein;
+
+	#bubble-message {
+		min-height: 250px;
+
+		.action {
+			animation: 6s fadein;
+		}
+	}
 }
 
 .flater-bot:before {
@@ -26,7 +34,7 @@
 	border-right: 0px solid transparent;
 	border-top: 15px solid $white;
 	margin-left: 80%;
-	animation: 2s zoomin;
+	animation: 3s fadein;
 }
 
 .flater-bot {
@@ -34,5 +42,5 @@
 	background-size: contain;
 	height: 64px;
 	margin-top: 15px;
-	animation: 1s zoomin;
+	animation: 1.5s fadein;
 }

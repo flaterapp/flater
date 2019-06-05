@@ -1,6 +1,15 @@
+<% # VARIABLES 
+	 bot_action = "If you have any question, <a href=\"#\">just ask</a>." if local_assigns[:bot_action].nil?
+%>
+
 <div class="flater-bubble">
 	<div id="bubble-message">
-		<%= raw(bot_message) %>
+		<p>
+			<strong class="text-primary">Flater Bot ›</strong> <span id="typed" data-strings="<%= [raw(bot_message)].to_json %>" data-speed="12" data-loop="false"></span>
+		</p>
+		<% if bot_action %>
+			<small class="action"><%= raw(bot_action) %></small>
+		<% end %>
 	</div>
 	<div id="bubble-nav" class="d-flex justify-content-between mt-3">
 		<%= link_to '‹ Previous tip', '#', class: 'btn btn-sm btn-outline-primary' %>

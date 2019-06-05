@@ -26,11 +26,10 @@
 
 			<%= link_to "Back to my flats", flats_path , {:class=>"btn btn-primary"} %>
 		</div>
+		<%# FLATER BOT %>
 		<div class="col col-sm-12 col-lg-4">
-			<%# FLATER BOT %>
 			<%= render 'layouts/shared/flater-bot',
-					bot_message: "<p><strong class=\"text-primary\">Flater Bot:</strong> Well done! I hope you will receive dozen and dozen of applications! Don't worry, I will preselect the best one for you!</p>
-					<p>If you have any question, just ask!</p>"
+					bot_message: "Well done! I hope you will receive dozen and dozen of applications! <strong>Don't worry, I will preselect the best one for you!</strong>"
 			%>
 		</div>
 	</div>

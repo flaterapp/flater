@@ -1,5 +1,6 @@
 <%# HEADER %>
 <%= render 'layouts/shared/dashboard-breadcrumb',
+		id: 'create-rental',
 		title: 'Create a new rental',
 		links: [
 			{ text: "My flat ##{@flat.id}", link: flat_path(@flat.id) },
@@ -26,11 +27,10 @@
 		  </div>
 		<% end %>
 		</div>
+		<%# FLATER BOT %>
 		<div class="col col-sm-12 col-lg-4">
-			<%# FLATER BOT %>
 			<%= render 'layouts/shared/flater-bot',
-					bot_message: "<p><strong class=\"text-primary\">Flater Bot:</strong> Hey #{current_user.first_name}! Do you know typical rent in this neighbourhood goes from <strong>#{(@flat.surface*14).to_i}€</strong> to <strong>#{(@flat.surface*16).to_i}€</strong> per month for a <strong>#{'furnished ' if @flat.furnished}#{@flat.surface.to_i} m²</strong> flat with <strong>#{pluralize(@flat.nb_rooms, 'room')}</strong>?</p>
-					<p>If you have any question, just ask!</p>"
+					bot_message: "Hey #{current_user.first_name}! Do you know typical rent in this neighbourhood goes from <strong>#{(@flat.surface*14).to_i}€</strong> to <strong>#{(@flat.surface*16).to_i}€</strong> per month for a <strong>#{'furnished ' if @flat.furnished}#{@flat.surface.to_i} m²</strong> flat with <strong>#{pluralize(@flat.nb_rooms, 'room')}</strong>?"
 			%>
 		</div>
 	</div>
