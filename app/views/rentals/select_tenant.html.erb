@@ -17,8 +17,8 @@
 	<p>You have selected <strong><%= @selected_dossier.candidate.first_name %> <%= @selected_dossier.candidate.last_name %> </strong> as your future tenant. The candidate will be informed by e-mail!</p>
 	<p>Other candidates will be noticed that they have not been retained for this rental.</p>
 
-	<div class="btn btn-primary">
-		CONFIRM (to do)
+	<div class="btn btn-warning">
+	<%= link_to "Confirm tenant", confirm_tenant_flat_rental_path(@flat, @rental, dossier_id: @selected_dossier.id), method: :post %>
 	</div>
 
 

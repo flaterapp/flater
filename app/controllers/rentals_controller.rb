@@ -39,6 +39,22 @@ class RentalsController < ApplicationController
     @selected_dossier = Dossier.find(params[:dossier_id])
   end
 
+  def confirm_tenant
+    @rental = Rental.find(params[:id])
+    @flat = Flat.find(params[:flat_id])
+    @selected_dossier = Dossier.find(params[:dossier_id])
+    respond_to do |format|
+      if @rental.update!(pending: false, tenant_id:@selected_dossier.candidate.id)
+        format.html { redirect_to flats_path, notice: 'Rental was successfully updated.' }
+        @flat.update!(to_rent: false)
+        # format.json { render :show, status: :created, location: @task }
+      else
+        format.html { render :new }
+        # format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
+    end  
+  end
+
   private
 
   def rental_params
