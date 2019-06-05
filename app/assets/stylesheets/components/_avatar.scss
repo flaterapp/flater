@@ -4,6 +4,11 @@
   object-fit: cover;
   border-radius: 50%;
 }
+.avatar-small {
+  @extend .avatar;
+  width: 24px;
+  height: 24px;
+}
 .avatar-large {
   @extend .avatar;
   width: 64px;

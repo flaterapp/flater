@@ -7,4 +7,9 @@ class Rental < ApplicationRecord
   def pending?
     pending == true
   end
+
+  def status
+    self.pending ? { text: "pending", icon: "clock", color: "secondary" } : { text: "closed", icon: "check", color: "primary" }
+  end
+
 end

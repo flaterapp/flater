@@ -1,31 +1,65 @@
-<div class="container">
-	<h1>Details of flat <%= @flat.id %></h1>
+<%# HEADER %>
+<%= render 'layouts/shared/dashboard-breadcrumb',
+		title: "<small class=\"text-muted\">##{@flat.id}</small> #{@flat.a_type} #{@flat.surface}m<sup>2</sup>",
+		links: [
+			{ text: "My flats", link: flats_path },
+			{ text: "Flat ##{@flat.id}" }
+		],
+		cta: "#{link_to 'Edit', edit_flat_path, class: 'btn btn-outline-secondary'} #{link_to 'New rental', new_flat_rental_path(@flat), class: 'btn btn-primary'}",
+		flat: @flat
+%>
 
+<div class="container">
 	<div class="row">
-		<%# FLAT INFORMATION %>
+		<%# MAP %>
 		<div class="col col-sm-12 col-lg-6">
-			<h2>Flat information</h2>
-			<ul>
-				<li>Address: <%= @flat.address %></li>
-				<li>Type: <%=  @flat.a_type %></li>
-				<li>Surface: <%=  @flat.surface %> m²</li>
-				<li>Number of rooms:<%=  @flat.nb_rooms %></li>
-				<li>Furnished: <%=  @flat.furnished %></li>
-			</ul>
-			<div>
-		<%# TO DO ADD A MAP %>
-<div id="map" style="width: 100%; height: 400px;" data-markers="<%= @marker.to_json %>" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
-			</div>
+			<div id="map" style="width: 100%; height: 540px;" data-markers="<%= @marker.to_json %>" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
 		</div>
 		<%# RENTAL %>
 		<div class="col col-sm-12 col-lg-6">
-			<h2>Flat rentals</h2>
+			<h2>Rental history</h2>
 			<% @flat.rentals.each do |rental| %>
-				<div>
-					<%= link_to "Rental #{rental.id}" , flat_rental_path(@flat, rental)%> - Status: <%= rental.pending ? "Pending" : "Closed" %> <br>
-					<%= "#{rental.initial_rent} €/month - Start date: #{rental.start_date}" %>
-					<br>
-					<%= rental.pending ? "Tenant to be selected (#{rental.dossiers.count} candidates)" : "Current tenant: #{User.find(rental.tenant_id).first_name} #{User.find(rental.tenant_id).last_name}" %> <br>
+				<div class="card-dashboard">
+					<div class="card-content no-gutters">
+						<div class="d-flex justify-content-between">
+							<h3 style="font-size: 1rem;"><%= link_to "Rental ref. #F#{@flat.id}R#{rental.id}" , flat_rental_path(@flat, rental)%></h3>
+							<%= raw(badge(rental.status[:text], rental.status[:color], rental.status[:icon], '', false)) %>
+						</div>
+						<div class="row py-3">
+							<%# RENTAL IS PENDING %>
+							<% if rental.pending %>
+								<div class="col-5">
+									<i class="fas fa-users text-primary"></i> <%= pluralize(rental.dossiers.count, 'candidate') %>
+								</div>
+								<div class="col-7">
+									<% rental.dossiers.count.times do %>
+										<%= cl_image_tag("Faces/face#{rand(1..12)}", width: 475, height: 300, crop: :fit, class: 'avatar-small') %>
+									<% end %>
+								</div>
+							<%# RENTAL IS CLOSED %>
+							<% else %>
+									<div class="col-4">
+										<i class="fas fa-user text-primary"></i> <small class="text-muted">current tenant</small><br/>
+									</div>
+									<div class="col-8">
+										<%= cl_image_tag("Faces/face#{rand(1..12)}", width: 475, height: 300, crop: :fit, class: 'avatar-small') %>
+										<strong><%= "#{User.find(rental.tenant_id).first_name} #{User.find(rental.tenant_id).last_name}" %></strong>
+									</div>
+							<% end %>
+						</div>
+						<%# RENTAL DETAILS %>
+						<div class="col-12 py-1">
+							<i class="fas fa-hand-holding-usd text-primary"></i> <strong><%= number_with_precision(rental.initial_rent, precision: 2) %>€</strong> <small class="text-muted">/ month</small>
+						</div>
+						<div class="row py-1">
+							<div class="col-6">
+								<i class="fas fa-calendar-alt text-primary"></i> <small class="text-muted">start date</small> <strong><%= rental.start_date %></strong>
+							</div>
+							<div class="col-6">
+								<i class="fas fa-calendar-alt text-primary"></i> <small class="text-muted">end date</small> <strong><%= rental.end_date ? rental.end_date : 'undefined' %></strong>
+							</div>
+						</div>
+					</div>
 				</div>
 			<% end %>
 		</div>

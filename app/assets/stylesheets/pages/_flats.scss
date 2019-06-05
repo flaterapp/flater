@@ -62,12 +62,20 @@ justify-content: center;
 		padding: 1rem;
 		font-size: 1rem;
 
-		span {
+		span[id^="flat-"] {
 			display: block;
+			padding-left: 1.75rem;
 
 			.fas {
+				position: absolute;
+				margin-top: .125rem;
+				left: .75rem;
 				min-width: 24px;
 				text-align: center;
+			}
+
+			span {
+				display: inline;
 			}
 		}
 	}

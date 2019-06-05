@@ -15,15 +15,9 @@ class RentalsController < ApplicationController
     @rental.pending = true
     @rental.flat = @flat
     @rental.save!
+    @flat = Flat.find(@rental.flat.id)
+    @flat.update!(to_rent: true)
     # OPTIMIZE IF OK ... else ...
-  end
-
-  def organize_visit
-    @rental = Rental.find(params[:id])
-    @flat = Rental.find(params[:flat_id])
-    @task = Task.new
-    @invited_participants = @rental.dossiers.where(status: "ok_for_visit")
-    @invited_participants.update(status: "visiting")
   end
 
 	def organize_visit
@@ -52,7 +46,7 @@ class RentalsController < ApplicationController
         format.html { render :new }
         # format.json { render json: @task.errors, status: :unprocessable_entity }
       end
-    end  
+    end
   end
 
   private
