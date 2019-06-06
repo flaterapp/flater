@@ -1,6 +1,19 @@
+@keyframes fadeout {
+  0%, 60% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
 .alert {
   position: fixed;
   bottom: 16px;
   right: 16px;
   z-index: 1000;
+  opacity: 0;
+
+  animation: 1.5s fadeout;
 }

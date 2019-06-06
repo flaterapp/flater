@@ -5,10 +5,6 @@ import 'bootstrap';
 import { initCopyToClipboard } from '../plugins/init_copy_to_clipboard';
 initCopyToClipboard()
 
-import { copy } from '../plugins/copy';
-copy()
-
-
 // FLATPICKR
 import flatpickr from 'flatpickr';
 flatpickr('.datepicker')

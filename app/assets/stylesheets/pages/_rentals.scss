@@ -1,13 +1,5 @@
- #t {
-      border: none
-    }
-    #t:focus {
-      outline: none
-    }
-
-
 #visiting, #ok_for_visit, #to_improve {
-		#candidate-documents .fas.text-danger {
+	#candidate-documents .fas.text-danger {
 		@extend .text-danger;
 	}
 }

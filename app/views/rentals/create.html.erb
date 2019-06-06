@@ -18,10 +18,10 @@
 				<div class="input-group-prepend align-items-center">
 					<span class="input-group-text fas fa-link"></span>
 				</div>
-				<input id="t" class="inputCopy form-control" value="<%= "https://submit.flater.app/f#{@flat.id}r#{@rental.id}" %>" />
+				<input class="inputCopy form-control" value="<%= "https://submit.flater.app/f#{@flat.id}r#{@rental.id}" %>" />
 				<%# link: www.flater.co/flats/#{@flat.id}/rentals/#{@rental.id}/dossier/new %>
         <div class="input-group-append">
-          <button class="btn btn-primary" onclick="copy('hello world')">Copy</button>
+          <button class="btn btn-primary btn-copy">Copy</button>
         </div>
 			</div>
 
@@ -33,7 +33,7 @@
 				</div>
 				<input class="inputCopy form-control" value="#F<%= @flat.id%>R<%=@rental.id%>" />
          <div class="input-group-append">
-          <button class="btn btn-secondary">Copy</button>
+          <button class="btn btn-secondary btn-copy">Copy</button>
         </div>
 			</div>
 
@@ -45,7 +45,7 @@
 				</div>
 				<input class="inputCopy form-control" value="F<%= @flat.id%>R<%=@rental.id%>@flater.app" />
 			 <div class="input-group-append">
-          <button class="btn btn-secondary"">Copy</button>
+          <button class="btn btn-secondary btn-copy">Copy</button>
         </div>
       </div>
       <br>
@@ -59,34 +59,4 @@
 			%>
 		</div>
 	</div>
-<script>
-
-  const addFlashMessage = (text, className) => {
-    const existingAlert = document.querySelector('p.alert')
-    if (existingAlert) {
-      existingAlert.remove();
-    }
-    const html = `<p class="alert alert-${className}">${text}</p>`;
-    document.querySelector('body').insertAdjacentHTML('afterbegin', html);
-  }
-
-    function copy(text) {
-      var t = document.getElementById('t')
-      t.innerHTML = text
-      t.select()
-      try {
-        var successful = document.execCommand('copy')
-        var msg = successful ? 'successfully' : 'unsuccessfully'
-        console.log('text coppied ' + msg)
-      } catch (err) {
-        console.log('Unable to copy text')
-      }
-      t.innerHTML = ''
-      addFlashMessage('Copied', 'primary')
-    }
-
-  </script>
-
-
-
 </div>
