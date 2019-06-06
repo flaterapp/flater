@@ -6,7 +6,7 @@ dossier_ok_for_visit = @rental.dossiers.where(status: 'ok_for_visit').count
 dossier_visiting = @rental.dossiers.where(status: 'visiting').count
 dossier_to_validate = dossier_visiting + dossier_ok_for_visit
 is_are = dossier_to_validate > 1 ? 'are' : 'is'
-documents = ['Latest revenues', 'Tax notice', 'ID', 'Garantors']
+documents = ['latest-revenues', 'tax-notices', 'ID', 'garantors']
 # TODO documents should supply: type of document (title), id (for modal), validation (true or false), document URL / content (for modal)
 %>
 
@@ -64,10 +64,11 @@ documents = ['Latest revenues', 'Tax notice', 'ID', 'Garantors']
 			<%# MODAL %>
 			<% documents.each do |document| %>
 				<%= render 'layouts/shared/modal',
-						id: 'exampleModal',
-						label: 'exampleModal',
-						title: document,
-						content: '…'
+						id: document,
+						label: document,
+						title: document.gsub('-', ' ').capitalize,
+						content: 	cl_image_tag("dossiers/1/tax_proof_gxkwir", crop: :fit, :effect=>"grayscale")
+
 				%>	
 			<% end %>
 
