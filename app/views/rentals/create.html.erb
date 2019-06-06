@@ -1,6 +1,6 @@
 <%# HEADER %>
 <%= render 'layouts/shared/dashboard-breadcrumb',
-		title: "Rental created! <i class=\"fas fa-check text-primary\"></i>",
+		title: "Rental created <i class=\"fas fa-check text-primary\"></i>",
 		links: [
 			{ text: "My flat ##{@flat.id}", link: flat_path(@flat.id) },
 			{ text: "Rental ##{@rental.id} (created)" }
@@ -13,34 +13,44 @@
 	<div class="row">
 		<div class="col col-sm-12 col-lg-8">
 			<%# 1. FLATER RENTAL LINK %>
-			<p class="lead">1. You can <strong>copy and paste the following link</strong> in your ad, so candidates can provide here their application documents:</p>
+			<p class="lead"><strong>1. Share link </strong></p>
 			<div class="input-group mb-3">
-				<div class="input-group-prepend">
-					<span class="input-group-text">Copy</span>
+				<div class="input-group-prepend align-items-center">
+					<span class="input-group-text fas fa-link"></span>
 				</div>
-				<input class="inputCopy form-control" value="<%= "https://submit.flater.app/f#{@flat.id}r#{@rental.id}" %>" />
+				<input id="t" class="inputCopy form-control" value="<%= "https://submit.flater.app/f#{@flat.id}r#{@rental.id}" %>" />
 				<%# link: www.flater.co/flats/#{@flat.id}/rentals/#{@rental.id}/dossier/new %>
+        <div class="input-group-append">
+          <button class="btn btn-primary" onclick="copy('hello world')">Copy</button>
+        </div>
 			</div>
 
-			<p class="lead"><strong>Alternatively</strong>, you can use:</p>
 			<%# 2. FLATER RENTAL REFERENCES %>
-			<p>2. The <strong>Flater dossier reference</strong> after login <a href="#">in application page</a>:</p>
+			<p>2. Or send flater reference</strong> <!-- after login <a href="#">in application page</a>: --></p>
 			<div class="input-group mb-3">
-				<div class="input-group-prepend">
-					<span class="input-group-text">Copy</span>
+				<div class="input-group-prepend align-items-center">
+					<span class="input-group-text fas fa-folder-open"></span>
 				</div>
 				<input class="inputCopy form-control" value="#F<%= @flat.id%>R<%=@rental.id%>" />
-			</div>
-			<%# 3. FLATER RENTAL EMAIL %>
-			<p>3. This <strong>email</strong> so notifications and applications are pushed in <%= link_to 'your dashboard', dashboard_path %>:</p>
-			<div class="input-group mb-3">
-				<div class="input-group-prepend">
-					<span class="input-group-text">Copy</span>
-				</div>
-				<input class="inputCopy form-control" value="F<%= @flat.id%>R<%=@rental.id%>@flater.app" />
+         <div class="input-group-append">
+          <button class="btn btn-secondary">Copy</button>
+        </div>
 			</div>
 
-			<%= link_to "Back to my flats", flats_path , {:class=>"btn btn-outline-primary"} %>
+			<%# 3. FLATER RENTAL EMAIL %>
+			<p>3. Or use this flater email <!--  so notifications and applications are pushed in <%= link_to 'your dashboard', dashboard_path %>: --></p>
+			<div class="input-group mb-3">
+				<div class="input-group-prepend align-items-center">
+					<span class="input-group-text far fa-envelope"></span>
+				</div>
+				<input class="inputCopy form-control" value="F<%= @flat.id%>R<%=@rental.id%>@flater.app" />
+			 <div class="input-group-append">
+          <button class="btn btn-secondary"">Copy</button>
+        </div>
+      </div>
+      <br>
+      <br>
+			<%= link_to "Back to my flats", flats_path , {:class=>"btn btn-secondary"} %>
 		</div>
 		<%# FLATER BOT %>
 		<div class="col col-sm-12 col-lg-4">
@@ -49,4 +59,34 @@
 			%>
 		</div>
 	</div>
+<script>
+
+  const addFlashMessage = (text, className) => {
+    const existingAlert = document.querySelector('p.alert')
+    if (existingAlert) {
+      existingAlert.remove();
+    }
+    const html = `<p class="alert alert-${className}">${text}</p>`;
+    document.querySelector('body').insertAdjacentHTML('afterbegin', html);
+  }
+
+    function copy(text) {
+      var t = document.getElementById('t')
+      t.innerHTML = text
+      t.select()
+      try {
+        var successful = document.execCommand('copy')
+        var msg = successful ? 'successfully' : 'unsuccessfully'
+        console.log('text coppied ' + msg)
+      } catch (err) {
+        console.log('Unable to copy text')
+      }
+      t.innerHTML = ''
+      addFlashMessage('Copied', 'primary')
+    }
+
+  </script>
+
+
+
 </div>

@@ -5,6 +5,10 @@ import 'bootstrap';
 import { initCopyToClipboard } from '../plugins/init_copy_to_clipboard';
 initCopyToClipboard()
 
+import { copy } from '../plugins/copy';
+copy()
+
+
 // FLATPICKR
 import flatpickr from 'flatpickr';
 flatpickr('.datepicker')
@@ -20,3 +24,5 @@ initAutocomplete()
 import initTyped from '../plugins/init_typed';
 import { addFlashMessage } from '../plugins/init_flash_messages';
 initTyped()
+
+
