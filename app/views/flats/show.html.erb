@@ -1,5 +1,6 @@
 <%# HEADER %>
 <%= render 'layouts/shared/dashboard-breadcrumb',
+		id: "flat-details",
 		title: "Flat details <small class=\"text-muted\">##{@flat.id}</small>",
 		links: [
 			{ text: "My flats", link: flats_path },
@@ -9,7 +10,7 @@
 		flat: @flat
 %>
 
-<div class="container">
+<div id="flat-details" class="container">
 	<div class="row">
 		<%# MAP %>
 		<div class="col col-sm-12 col-lg-6">
@@ -29,7 +30,7 @@
 							<%# RENTAL IS PENDING %>
 							<% if rental.pending %>
 								<div class="col-5">
-									<i class="fas fa-users text-primary"></i> <%= pluralize(rental.dossiers.count, 'candidate') %>
+									<i class="fas fa-users text-primary"></i> <strong><%= pluralize(rental.dossiers.count, 'candidate') %></strong>
 								</div>
 								<div class="col-7">
 									<% rental.dossiers.count.times do %>
