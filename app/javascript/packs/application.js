@@ -20,3 +20,5 @@ initAutocomplete()
 import initTyped from '../plugins/init_typed';
 import { addFlashMessage } from '../plugins/init_flash_messages';
 initTyped()
+
+

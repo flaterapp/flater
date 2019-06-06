@@ -19,12 +19,12 @@
 		<%# RENTAL %>
 		<div class="col col-sm-12 col-lg-6">
 			<h2>Rental history</h2>
-			<% @flat.rentals.each do |rental| %>
+			<% @flat.rentals.order(:start_date).reverse.each do |rental| %>
 				<div class="card-dashboard">
 					<div class="card-content no-gutters">
 						<div class="d-flex justify-content-between">
-							<h3 style="font-size: 1rem;"><%= link_to "Rental ref. #F#{@flat.id}R#{rental.id}" , flat_rental_path(@flat, rental)%></h3>
-							<%= raw(badge(rental.status[:text], rental.status[:color], rental.status[:icon], '', false)) %>
+							<h3><%= link_to "Rental ref. #F#{@flat.id}R#{rental.id}" , flat_rental_path(@flat, rental), class: 'text-secondary'%></h3>
+							<%= raw(badge(rental.status[:text], rental.status[:color], rental.status[:icon], flat_rental_path(@flat, rental.id), false)) %>
 						</div>
 						<div class="row py-3">
 							<%# RENTAL IS PENDING %>
@@ -44,7 +44,7 @@
 									</div>
 									<div class="col-8">
 										<%= cl_image_tag("Faces/#{User.find(rental.tenant_id).facebook_picture_url}",
-									:transformation=>[{ :gravity=>"face", :radius=>"max", :crop=>"crop"}, {:width=>'200', :crop=>"scale"}], :class => "avatar avatar-large mr-3") %>
+									:transformation=>[{ :gravity=>"face", :radius=>"max", :crop=>"crop"}, {:width=>'200', :crop=>"scale"}], :class => "avatar mr-3") %>
 										<strong><%= "#{User.find(rental.tenant_id).first_name} #{User.find(rental.tenant_id).last_name}" %></strong>
 									</div>
 							<% end %>

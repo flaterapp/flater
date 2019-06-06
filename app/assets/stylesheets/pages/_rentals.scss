@@ -1,5 +1,5 @@
 #visiting, #ok_for_visit, #to_improve {
-		#candidate-documents .fas.text-danger {
+	#candidate-documents .fas.text-danger {
 		@extend .text-danger;
 	}
 }
@@ -7,28 +7,34 @@
 #visiting {
 	h3, #candidate-documents .fas, .new-message {
 		@extend .text-info;
-	}	
-}	
+	}
+}
 #ok_for_visit {
 	h3, #candidate-documents .fas, .new-message {
 		@extend .text-primary;
-	}	
-}	
+	}
+}
 #to_improve {
 	h3, #candidate-documents .fas, .new-message {
 		@extend .text-warning;
-	}	
-}	
+	}
+}
 #not_selected {
 	h3 {
 		@extend .text-danger;
-	}	
-}	
+	}
+}
 
-.card-dashboard h3 {
-	font-weight: 900;
-	text-transform: uppercase;
-}	
+.card-dashboard {
+	h3 {
+		font-weight: 900;
+		font-size: 1.75rem;
+	}
+
+	h4 {
+		font-size: 1.25rem;
+	}
+}
 
 ul {
 	li * {
@@ -42,7 +48,7 @@ ul {
 
 	.new-message {
 		text-decoration: blink;
-		font-size: .75rem;
+		font-size: 1rem;
 	}
 
 	.drag-and-drop {
@@ -69,7 +75,7 @@ ul.list-group.not_selected {
 	}
 	li {
 		background: rgba($night, .125);
-		
+
 		img {
 			filter: grayscale(100%);
 			opacity: .5;

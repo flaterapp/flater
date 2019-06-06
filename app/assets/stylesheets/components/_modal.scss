@@ -1,4 +1,11 @@
 .modal-dialog {
+	h5 {
+		font-weight: 700;
+	}
+}
+
+// DOCUMENT MODAL
+.modal[id^="document-"] .modal-dialog {
 	max-width: 80%;
 
 	.modal-body {

@@ -6,6 +6,8 @@
 
 	.card-content {
 		background: rgba($white, .5);
+    border: 1px solid rgba($night,.1);
+    border-radius: 4px;
 		padding: 1rem;
 
 		a {
@@ -28,6 +30,11 @@
 			right: 2rem;
 			z-index: 1;
 			color: $primary
+		}
+
+		h3 {
+			font-size: 1.25rem;
+			color: $light-gray
 		}
 	}
 }

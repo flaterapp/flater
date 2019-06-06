@@ -6,7 +6,7 @@ dossier_ok_for_visit = @rental.dossiers.where(status: 'ok_for_visit').count
 dossier_visiting = @rental.dossiers.where(status: 'visiting').count
 dossier_to_validate = dossier_visiting + dossier_ok_for_visit
 is_are = dossier_to_validate > 1 ? 'are' : 'is'
-documents = ['latest-revenues', 'tax-notices', 'ID', 'garantors']
+documents = ['latest-revenues', 'tax-notices', 'ID', 'guarantors']
 # TODO documents should supply: type of document (title), id (for modal), validation (true or false), document URL / content (for modal)
 %>
 
@@ -33,22 +33,23 @@ documents = ['latest-revenues', 'tax-notices', 'ID', 'garantors']
 						<div id="<%= status %>" >
 							<h3 class="d-flex justify-content-between align-items-center pt-3 ">
 								<%# TITLE %>
-								<%#= raw(badge("#{@rental.dossiers.where(status: status).count} #{status}", 'primary', 'users', '', false)) %>
 								<div><i class="fas fa-users"></i> <%= "#{@rental.dossiers.where(status: status).count} #{status.gsub('_', ' ')}" %></div>
-								<%# ORGANIZE VISIT BUTTON %>
+								<%# CTA: VISITED - CONS-VISIT %>
 								<% if status == 'visiting' && @rental.dossiers.where(status: status).count > 0 %>
 									<div>
-										<%= link_to "Organize another visit", "#", class: 'btn btn-info'  %>
+										<%= link_to "Organize another visit", "#", class: 'btn btn-outline-info'  %>
 									</div>
 								<% end %>
+								<%# CTA: OK FOR VISIIT - ORGANIZE VISIT %>
 								<% if status == 'ok_for_visit' && @rental.dossiers.where(status: status).count > 0 %>
 									<div>
 										<%= link_to "Organize visit", organize_visit_flat_rental_path(@flat, @rental), class: 'btn btn-primary'  %>
 									</div>
 								<% end %>
+								<%# CTA: TO IMPROVE - RELAUNCH FOR VALIDATION %>
 								<% if status == 'to_improve' && @rental.dossiers.where(status: status).count > 0 %>
 									<div>
-										<%= link_to "Relaunch for validation", '#', class: 'btn btn-warning'  %>
+										<%= link_to "Relaunch for validation", '', class: 'btn btn-warning', data: { toggle: "modal", target: "#relaunch" } %>
 									</div>
 								<% end %>
 							</h3>
@@ -61,16 +62,24 @@ documents = ['latest-revenues', 'tax-notices', 'ID', 'garantors']
 				</div>
 			</div>
 
-			<%# MODAL %>
+			<%# PROOF MODAL %>
 			<% documents.each do |document| %>
 				<%= render 'layouts/shared/modal',
-						id: document,
+						id: "document-#{document}",
 						label: document,
-						title: document.gsub('-', ' ').capitalize,
+						title: "<i class=\"fas fa-file-alt text-primary\"></i> #{document.gsub('-', ' ').capitalize}",
 						content: 	cl_image_tag("dossiers/1/tax_proof_gxkwir", crop: :fit, :effect=>"grayscale")
-
 				%>	
 			<% end %>
+			<%# RELAUNCH MODAL %>
+			<%= render 'layouts/shared/modal',
+					id: 'relaunch',
+					label: 'relaunch',
+					title: 'Notifications sent! <i class="fas fa-check text-primary"></i>',
+					# content: (render 'layouts/shared/flater-bot',
+					# bot_message: "<strong>These #{pluralize(dossier_to_improve, 'candidate')} have been sent a notification</strong> with individual flaw details in order they complete their dossier. Hope they're going eligible to visit soon!")
+					content: "<strong>These 3 candidates have been sent a notification</strong> with individual flaw details in order they complete their dossier.</p><p>Hope they're going eligible to visit soon!</p>"
+			%>	
 
 		<% end %>
 		<%# RENTAL IS CLOSED %>
