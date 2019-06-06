@@ -80,3 +80,8 @@ justify-content: center;
 		}
 	}
 }
+
+// EXCEPTIONS
+#create-rental #flat-rent {
+	@extend .hide;
+}
