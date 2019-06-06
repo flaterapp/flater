@@ -26,10 +26,10 @@
 						<%= f.input :date, label: "Date", html5:true, input_html: { value: Date.today, class: "datepicker"} %>
 					</div>
 					<div class="col-6">
-						<%= f.input :date, label: "Schedule" %>
+						<%= f.input :time, label: "Schedule" %>
 					</div>
 				</div>
-				<%= f.input :complementary_info, as: :text, label: "Complementary information" %>
+				<%= f.input :complementary_info, as: :text, label: "Complementary information", input_html: { rows: 5, value: "Hello {first_name}! Your dossier have been selected. I'm please to invite you for a visit the {date} at #{@flat.address}."} %>
 				<%= f.button :submit, "Organize Visit", class: "btn-primary" %>
 				<%= link_to "‹ Back", flat_rental_path(@flat, @rental), {class: "btn btn-secondary"} %>
 			<% end %>

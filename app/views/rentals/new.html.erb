@@ -1,3 +1,11 @@
+<% # VARIABLES
+	 bonus = @flat.furnished ? 1.20 : 1
+	 min_rent = rand(14..16)
+	 max_rent = rand(18..20)
+	 min_rent = @flat.surface * min_rent * bonus
+	 max_rent = @flat.surface * max_rent * bonus
+%>
+
 <%# HEADER %>
 <%= render 'layouts/shared/dashboard-breadcrumb',
 		id: 'create-rental',
@@ -6,20 +14,19 @@
 			{ text: "My flat ##{@flat.id}", link: flat_path(@flat.id) },
 			{ text: "Create a new rental" }
 		],
+		cta: "#{link_to 'History', flat_path(@flat.id), class: 'btn btn-outline-secondary'}",
 		flat: @flat
 %>
 
 <div class="container">
 	<%# CREATE A NEW RENTAL %>
-	
 	<div class="row">
-
 		<div class="col col-sm-12 col-lg-8">
 			<%= simple_form_for([@flat, @rental]) do |f| %>
 		  <div class="form-inputs">
 				<%= f.input :description, label: "Complementary information", input_html: { value: @flat.description } %>
 		    <%= f.input :start_date, as: :date, html5:true, input_html: { :value => Date.today, class: "datepicker"} %>
-		    <%= f.input :initial_rent, label: "Initial rent (€ / month, excl. charges)", input_html: { value: (@flat.surface*14).to_i } %>
+		    <%= f.input :initial_rent, label: "Initial rent (€ / month, excl. charges)", input_html: { value: min_rent.to_i } %>
 		    <small class="form-text text-muted"><%=  "Previous rental was #{number_with_precision(@flat.initial_rent, precision: 2)}€ / month"%></small>
 		    <br> <br>
 		    <%= f.button :submit, class: "btn btn-primary" %>
@@ -30,7 +37,7 @@
 		<%# FLATER BOT %>
 		<div class="col col-sm-12 col-lg-4">
 			<%= render 'layouts/shared/flater-bot',
-					bot_message: "Hey #{current_user.first_name}! Do you know typical rent in this neighbourhood goes from <strong>#{(@flat.surface*14).to_i}€</strong> to <strong>#{(@flat.surface*16).to_i}€</strong> per month for a <strong>#{'furnished ' if @flat.furnished}#{@flat.surface.to_i} m²</strong> flat with <strong>#{pluralize(@flat.nb_rooms, 'room')}</strong>?"
+					bot_message: "Hey #{current_user.first_name}! Do you know typical rent in this neighbourhood goes from <strong>#{min_rent.to_i}€</strong> to <strong>#{max_rent.to_i}€</strong> per month for a <strong>#{'furnished ' if @flat.furnished}#{@flat.surface.to_i} m²</strong> flat with <strong>#{pluralize(@flat.nb_rooms, 'room')}</strong>?"
 			%>
 		</div>
 	</div>

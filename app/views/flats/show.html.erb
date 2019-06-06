@@ -1,6 +1,7 @@
 <%# HEADER %>
 <%= render 'layouts/shared/dashboard-breadcrumb',
-		title: "<small class=\"text-muted\">##{@flat.id}</small> #{@flat.a_type} #{@flat.surface}m<sup>2</sup>",
+		id: "flat-details",
+		title: "Flat details <small class=\"text-muted\">##{@flat.id}</small>",
 		links: [
 			{ text: "My flats", link: flats_path },
 			{ text: "Flat ##{@flat.id}" }
@@ -9,7 +10,7 @@
 		flat: @flat
 %>
 
-<div class="container">
+<div id="flat-details" class="container">
 	<div class="row">
 		<%# MAP %>
 		<div class="col col-sm-12 col-lg-6">
@@ -29,20 +30,21 @@
 							<%# RENTAL IS PENDING %>
 							<% if rental.pending %>
 								<div class="col-5">
-									<i class="fas fa-users text-primary"></i> <%= pluralize(rental.dossiers.count, 'candidate') %>
+									<i class="fas fa-users text-primary"></i> <strong><%= pluralize(rental.dossiers.count, 'candidate') %></strong>
 								</div>
 								<div class="col-7">
-									<% rental.dossiers.count.times do %>
-										<%= cl_image_tag("Faces/face#{rand(1..12)}", width: 475, height: 300, crop: :fit, class: 'avatar-small') %>
+									<% rental.dossiers.each do |dossier| %>
+										<%= cl_image_tag("Faces/#{dossier.candidate.facebook_picture_url}", width: 475, height: 300, crop: :fit, class: 'avatar-small') %>
 									<% end %>
 								</div>
 							<%# RENTAL IS CLOSED %>
 							<% else %>
 									<div class="col-4">
-										<i class="fas fa-user text-primary"></i> <small class="text-muted">current tenant</small><br/>
+										<i class="fas fa-user text-primary"></i> <small class="text-muted">tenant</small><br/>
 									</div>
 									<div class="col-8">
-										<%= cl_image_tag("Faces/face#{rand(1..12)}", width: 475, height: 300, crop: :fit, class: 'avatar-small') %>
+										<%= cl_image_tag("Faces/#{User.find(rental.tenant_id).facebook_picture_url}",
+									:transformation=>[{ :gravity=>"face", :radius=>"max", :crop=>"crop"}, {:width=>'200', :crop=>"scale"}], :class => "avatar avatar-large mr-3") %>
 										<strong><%= "#{User.find(rental.tenant_id).first_name} #{User.find(rental.tenant_id).last_name}" %></strong>
 									</div>
 							<% end %>

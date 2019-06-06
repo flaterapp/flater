@@ -127,6 +127,7 @@ User.all.each do |user|
         last_name: Faker::Name.last_name,
         email: Faker::Internet.email,
         password: pswd,
+        facebook_picture_url: "face#{rand(2..12)}",
         role: nil
       )
       Dossier.create!(
@@ -156,82 +157,270 @@ User.all.each do |user|
       description: "Very nice flat with awesome view!"
     )
       
-    # Creating pending rental for each flat
+    # Creating pending rental for the flat
     rental = Rental.create!(
       flat: flat,
       tenant: nil,
       description: "A great flat, which is available now!",
       start_date: Date.today,
       pending: true,
-      initial_rent: 1000,
+      initial_rent: 800,
+    )
+
+    #--------------------------------------------------#
+    # Creating several dossiers for the pending rental #
+    #--------------------------------------------------#
+    
+
+    ######## 3 DOSSIERS "OK FOR VISIT" ########
+
+    #---------------  1  ---------------#
+
+    candidate =  User.create!(
+      first_name: "Maria",
+      last_name: "Rena",
+      email: Faker::Internet.email,
+      password: pswd,
+      facebook_picture_url: "face10",
+      role: nil
+    )
+    Dossier.create!(
+      rental: rental,
+      candidate: candidate,
+      start_date: Date.today,
+      status: "ok_for_visit",
+      monthly_revenues: 2400,
+      identity_proof: "fake_url",
+      revenues_proof: "fake_url",
+      tax_proof: "fake_url"
+    )
+
+    #---------------  2  ---------------#
+
+    candidate =  User.create!(
+      first_name: "Martin",
+      last_name: "Dufort",
+      email: Faker::Internet.email,
+      password: pswd,
+      facebook_picture_url: "face4",
+      role: nil
+    )
+    Dossier.create!(
+      rental: rental,
+      candidate: candidate,
+      start_date: Date.today,
+      status: "ok_for_visit",
+      monthly_revenues: 2300,
+      identity_proof: "fake_url",
+      revenues_proof: "fake_url",
+      tax_proof: "fake_url"
+    )
+
+    #---------------  3  ---------------#
+
+    candidate =  User.create!(
+      first_name: "Joseph",
+      last_name: "Tothau",
+      email: Faker::Internet.email,
+      password: pswd,
+      facebook_picture_url: "face6",
+      role: nil
+    )
+    Dossier.create!(
+      rental: rental,
+      candidate: candidate,
+      start_date: Date.today,
+      status: "ok_for_visit",
+      monthly_revenues: 2200,
+      identity_proof: "fake_url",
+      revenues_proof: "fake_url",
+      tax_proof: "fake_url"
     )
     
-    # Creating several dossiers for each rental
-    ######## DOSSIERS "NOT SELECTED" ########
-    3.times do |dossier|
-      candidate =  User.create!(
-        first_name: Faker::Name.first_name,
-        last_name: Faker::Name.last_name,
-        email: Faker::Internet.email,
-        password: pswd,
-        role: nil
-      )
-      Dossier.create!(
-        rental: rental,
-        candidate: candidate,
-        start_date: Date.today,
-        status: "not_selected",
-        monthly_revenues: rand(10..20) * 100,
-        identity_proof: "fake_url",
-        revenues_proof: ["fake_url", nil].sample,
-        tax_proof: "fake_url"
-      )
-    end    
-    
 
-    ######## DOSSIERS "OK FOR VISIT" ########
-    3.times do |dossier|
-      candidate =  User.create!(
-        first_name: Faker::Name.first_name,
-        last_name: Faker::Name.last_name,
-        email: Faker::Internet.email,
-        password: pswd,
-        role: nil
-      )
-      Dossier.create!(
-        rental: rental,
-        candidate: candidate,
-        start_date: Date.today,
-        status: "ok_for_visit",
-        monthly_revenues: rand(26..40) * 100,
-        identity_proof: "fake_url",
-        revenues_proof: "fake_url",
-        tax_proof: "fake_url"
-      )
-    end
 
     ######## DOSSIERS "TO IMPROVE" ########
-    3.times do |dossier|
-      candidate =  User.create!(
-        first_name: Faker::Name.first_name,
-        last_name: Faker::Name.last_name,
-        email: Faker::Internet.email,
-        password: pswd,
-        role: nil
-      )
-      Dossier.create!(
-        rental: rental,
-        candidate: candidate,
-        start_date: Date.today,
-        status: "to_improve",
-        monthly_revenues: rand(26..40) * 100,
-        identity_proof: "fake_url",
-        revenues_proof: ["fake_url", nil].sample,
-        tax_proof: nil
-      )
-    end
-  end
 
+    #---------------  1  ---------------#
+
+    candidate =  User.create!(
+      first_name: "Norbert",
+      last_name: "Dutreil",
+      email: Faker::Internet.email,
+      password: pswd,
+      facebook_picture_url: "face11",
+      role: nil
+    )
+    Dossier.create!(
+      rental: rental,
+      candidate: candidate,
+      start_date: Date.today,
+      status: "to_improve",
+      monthly_revenues: 2600,
+      identity_proof: "fake_url",
+      revenues_proof: ["fake_url", nil].sample,
+      tax_proof: nil
+    )
+
+    #---------------  2  ---------------#
+
+    candidate =  User.create!(
+      first_name: "Kevin",
+      last_name: "Chabanal",
+      email: Faker::Internet.email,
+      password: pswd,
+      facebook_picture_url: "face13",
+      role: nil
+    )
+    Dossier.create!(
+      rental: rental,
+      candidate: candidate,
+      start_date: Date.today,
+      status: "to_improve",
+      monthly_revenues: 2500,
+      identity_proof: "fake_url",
+      revenues_proof: ["fake_url", nil].sample,
+      tax_proof: nil
+    )
+
+
+    #---------------  3  ---------------#
+
+    candidate =  User.create!(
+      first_name: "Patrica",
+      last_name: "Lafond",
+      email: Faker::Internet.email,
+      password: pswd,
+      facebook_picture_url: "face8",
+      role: nil
+    )
+    Dossier.create!(
+      rental: rental,
+      candidate: candidate,
+      start_date: Date.today,
+      status: "to_improve",
+      monthly_revenues: 2400,
+      identity_proof: "fake_url",
+      revenues_proof: ["fake_url", nil].sample,
+      tax_proof: nil
+    )
+
+
+
+    ######## 3 DOSSIERS "NOT SELECTED" ########
+
+
+    #---------------  1  ---------------#
+
+    candidate =  User.create!(
+      first_name: "Clément",
+      last_name: "Aubert",
+      email: Faker::Internet.email,
+      password: pswd,
+      facebook_picture_url: "face3",
+      role: nil
+    )
+    Dossier.create!(
+      rental: rental,
+      candidate: candidate,
+      start_date: Date.today,
+      status: "not_selected",
+      monthly_revenues: 1300,
+      identity_proof: "fake_url",
+      revenues_proof: ["fake_url", nil].sample,
+      tax_proof: "fake_url"
+    )
+
+    #---------------  2  ---------------#
+
+    candidate =  User.create!(
+      first_name: "Matthieu",
+      last_name: "Deboss",
+      email: Faker::Internet.email,
+      password: pswd,
+      facebook_picture_url: "face2",
+      role: nil
+    )
+    Dossier.create!(
+      rental: rental,
+      candidate: candidate,
+      start_date: Date.today,
+      status: "not_selected",
+      monthly_revenues: 1100,
+      identity_proof: "fake_url",
+      revenues_proof: ["fake_url", nil].sample,
+      tax_proof: "fake_url"
+    )
+
+
+    #---------------  3  ---------------#
+
+    candidate =  User.create!(
+      first_name: "Vincent",
+      last_name: "Menon",
+      email: Faker::Internet.email,
+      password: pswd,
+      facebook_picture_url: "face12",
+      role: nil
+    )
+    Dossier.create!(
+      rental: rental,
+      candidate: candidate,
+      start_date: Date.today,
+      status: "not_selected",
+      monthly_revenues: 1000,
+      identity_proof: "fake_url",
+      revenues_proof: ["fake_url", nil].sample,
+      tax_proof: nil
+    )
+
+
+    #--------------------------#
+    # Creating previous rentals #
+    #--------------------------#
+
+    ####### RENTAL N-1 #######
+
+    candidate =  User.create!(
+      first_name: "Cécile",
+      last_name: "Janin",
+      email: Faker::Internet.email,
+      password: pswd,
+      facebook_picture_url: "face15",
+      role: nil
+    )
+
+    rental = Rental.create!(
+      flat: flat,
+      tenant_id: candidate.id,
+      description: "A great flat!",
+      start_date: Date.today - 365,
+      end_date: Date.today,
+      pending: false,
+      initial_rent: 730,
+    )
+
+    ####### RENTAL N-2 #######
+
+    candidate =  User.create!(
+      first_name: "Andrew",
+      last_name: "Chen",
+      email: Faker::Internet.email,
+      password: pswd,
+      facebook_picture_url: "face16",
+      role: nil
+    )
+    rental = Rental.create!(
+      flat: flat,
+      tenant_id: candidate.id,
+      description: "A great flat!",
+      start_date: Date.today - 2*365,
+      end_date: Date.today - 365,
+      pending: false,
+      initial_rent: 720,
+    )
+
+end
 
 #####################################################################
   # 3. FAKER - Creating flats with pending rentals (and applications)
@@ -268,6 +457,7 @@ addresses_3.each do |address|
       last_name: Faker::Name.last_name,
       email: Faker::Internet.email,
       password: pswd,
+      facebook_picture_url: "face#{rand(2..12)}",
       role: nil
     )
 
@@ -326,6 +516,7 @@ addresses_3.each do |address|
       last_name: Faker::Name.last_name,
       email: Faker::Internet.email,
       password: pswd,
+      facebook_picture_url: "face#{rand(2..12)}",
       role: nil
     )
 

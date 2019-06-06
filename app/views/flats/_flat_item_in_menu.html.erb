@@ -1,0 +1,16 @@
+<li class="list-group-item d-flex justify-content-between" data-flat-id="<%= flat.id %>">
+	<%= short_text(flat.address) %>
+	<div class="actions">
+		<%# TO RENT BUTTON %>
+		<% if flat.pending_rental? %>
+			<%= flat.has_visits? ? raw(badge('visited', '', 'street-view')) : "" %>
+			<% badge_class = flat.num_candidates == 0 ? 'danger' : 'info' %>
+			<%= link_to raw(badge(pluralize(flat.num_candidates, 'candidate'), badge_class, 'users', flat_rental_path(flat, flat.pending_rental_id), false)) %>
+		<% else %>
+			<% badge = flat.to_rent ? { text: 'New rental', color: 'danger', icon: 'file-import', hide: false } : { text: 'New rental?', color: 'primary', icon: 'user', hide: true } %>
+			<%= link_to raw(badge(badge[:text], badge[:color], badge[:icon], new_flat_rental_path(flat.id), badge[:hide])) %>
+		<% end %>
+		<%# DETAILS BUTTON %>
+		<%#= link_to raw(badge('Flat infos', 'primary', 'building', flat_path(flat.id))) %>
+	</div>
+</li>

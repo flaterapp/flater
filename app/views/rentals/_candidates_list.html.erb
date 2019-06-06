@@ -1,0 +1,61 @@
+<% rental.dossiers.each do |dossier| %>
+		<% if dossier.status == status%>
+			<% candidate = User.find(dossier.candidate_id) %>
+			<%# TODO Debug init_flat_selector %>
+			<li class="list-group-item d-flex justify-content-between align-items-center">
+				<div class="w-100">
+					<h4 class="d-flex align-items-center">
+						<%= cl_image_tag("Faces/#{candidate.facebook_picture_url}",
+									:transformation=>[{ :gravity=>"face", :radius=>"max", :crop=>"crop"}, {:width=>'200', :crop=>"scale"}], :class => "avatar avatar-large mr-3"
+								) %>
+						<div>
+							<div class="dossier-details d-flex align-items-center">
+								<span class="mr-2"><%= "#{candidate.first_name.capitalize}" %> <%= "#{candidate.last_name.upcase}" %></span>
+							</div>
+							<div>
+								<% messages_count = [0, 1, rand(0..10)].sample %>
+								<% message_class = 'info' if status == 'visiting' %>
+								<% message_class = 'primary' if status == 'ok_for_visit' %>
+								<% message_class = 'warning' if status == 'to_improve' %>
+								<% message_class = 'danger' if status == 'not_selected' %>
+								<% messages_display = messages_count > 0 ? false : true %>
+								<% messages_new = messages_count > 0 ? ['new message', ''].sample : '' %>
+								<span class="mr-2"><%= raw(badge(messages_count, message_class, 'comments', '#', messages_display)) %></span>
+								<strong class="new-message"><%= messages_new %></strong>
+							</div>
+						</div>
+					</h4>
+					<div id="candidate-documents" class="d-flex justify-content-between align-items-center">
+						<strong><i class="fas fa-file-invoice-dollar text-primary"></i> <%= "#{dossier.monthly_revenues}" %>€ / month</strong>
+						<% 
+						documents.each do |document|
+							if status == 'visiting' || status == 'ok_for_visit'
+								document_ok = "<i class=\"fas fa-check text-primary\"></i>"
+							else
+								document_ok = ["<i class=\"fas fa-check text-primary\"></i>", "<i class=\"fas fa-times text-danger\"></i>"].sample
+							end
+						%>
+							<a data-toggle="modal" data-target="#<%= document %>"><%= raw("#{document.gsub('-', ' ').capitalize} #{document_ok}") %></a>
+						<% end %>
+					</div>
+				</div>
+				<%# BUTTONS %>
+				<% if dossier.status == "visiting" %>
+					<div>
+					<%= link_to "Select", select_tenant_flat_rental_path(@flat, @rental, dossier_id: dossier.id), method: :post, class: "btn btn-info" %>
+					</div>
+					
+				<% end %>
+				<div class="drag-and-drop">
+					<% if dossier.status == "ok_for_visit" %>
+						<%#= "[BOUTON Don't select]" %>
+						<i class="fas fa-arrows-alt"></i>
+					<% end %>
+					<% if dossier.status == "to_improve" || dossier.status == "not_selected"%>
+						<%#= "[BOUTON Ok for visits]" %>
+						<i class="fas fa-arrows-alt"></i>
+					<% end %>
+				</div>
+			</li>
+		<% end %>
+	<% end %>
