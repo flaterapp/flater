@@ -2,12 +2,11 @@
   <div class="container d-flex justify-content-between">
     <div>
       <h1><span><strong>Flater</strong><sup>&trade;</sup></span></h1>
-      <p class="lead">As a flat owner or as a tenant<strong id="typed" data-strings="<%= [", select…", ", rent…", ", chill!"].to_json  %>"></strong></p>
+      <p class="lead">As a flat owner or as a tenant<strong id="typed" data-strings="<%= [", select…", ", rent…", ", chill!"].to_json  %>" data-speed="40" data-loop="true"></strong></p>
 
       <%= link_to 'Manage my flats', flats_path, class: 'btn btn-primary btn-lg' %>
       <%= link_to 'Submit my application', '#', class: 'btn btn-outline-light btn-lg' %>
     </div>
-
 
     <% unless user_signed_in? %>
       <div class="form-container">
