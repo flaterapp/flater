@@ -25,9 +25,15 @@
 	}
 }
 
-.card-dashboard h3 {
-	font-weight: 900;
-	text-transform: uppercase;
+.card-dashboard {
+	h3 {
+		font-weight: 900;
+		font-size: 1.75rem;
+	}
+
+	h4 {
+		font-size: 1.25rem;
+	}
 }
 
 ul {
@@ -42,7 +48,7 @@ ul {
 
 	.new-message {
 		text-decoration: blink;
-		font-size: .75rem;
+		font-size: 1rem;
 	}
 
 	.drag-and-drop {
