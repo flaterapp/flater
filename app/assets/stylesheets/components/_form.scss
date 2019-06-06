@@ -44,6 +44,10 @@ form {
 	*/
 }
 
-.inputCopy:after {
-	content: 'Copy';
+
+
+.input-group-prepend.align-items-center {
+  .input-group-text {
+    padding: .7rem;
+  }
 }
