@@ -9,7 +9,15 @@ class Rental < ApplicationRecord
   end
 
   def status
-    self.pending ? { text: "pending", icon: "clock", color: "secondary" } : { text: "closed", icon: "check", color: "primary" }
+    if self.pending
+    { text: "pending", icon: "clock", color: "warning" }
+    elsif self.start_date >= Date.today
+    { text: "future rental", icon: "check", color: "info" }
+    elsif self.end_date.nil? == false && self.end_date < Date.today
+    { text: "previous rental", icon: "check", color: "secondary" }
+    else
+    { text: "current rental", icon: "check", color: "primary" }
+    end
   end
 
 end
