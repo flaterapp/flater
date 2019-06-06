@@ -37,7 +37,7 @@ documents = ['latest-revenues', 'tax-notices', 'ID', 'guarantors']
 								<%# CTA: VISITED - CONS-VISIT %>
 								<% if status == 'visiting' && @rental.dossiers.where(status: status).count > 0 %>
 									<div>
-										<%= link_to "Organize another visit", "#", class: 'btn btn-info'  %>
+										<%= link_to "Organize another visit", "#", class: 'btn btn-outline-info'  %>
 									</div>
 								<% end %>
 								<%# CTA: OK FOR VISIIT - ORGANIZE VISIT %>
