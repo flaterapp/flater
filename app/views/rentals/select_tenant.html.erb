@@ -11,25 +11,23 @@
 
 <div class="container">
 	
+		<div class="text-center">
+		   <p>You have selected <strong><%= @selected_dossier.candidate.first_name %> <%= @selected_dossier.candidate.last_name %> </strong> as your future tenant:</p>
+		</div>
 
-	<div class="row">
-	  <div class="col-3">
-	      <%= cl_image_tag("Faces/#{@selected_dossier.candidate.facebook_picture_url}",
-	      			:transformation=>[{ :gravity=>"face", :crop=>"crop"}, {:width=>'200', :crop=>"scale"}]
-	      		) %>
+		<div class="text-center">
+	      <%= cl_image_tag("Faces/#{@selected_dossier.candidate.facebook_picture_url}",:width=>300, :height=>300, :gravity=>"face", :radius=>"max", :crop=>"thumb") %>
 	    </div>
-	    <div class="col-9">
-	      <p>You have selected <strong><%= @selected_dossier.candidate.first_name %> <%= @selected_dossier.candidate.last_name %> </strong> as your future tenant:</p>
-	      <i class="fas fa-user-circle">  The candidate will be informed by e-mail.</i> 
+		<br>
+		<div class="text-center">
+	      <i class="fas fa-user-circle text-primary"></i> The candidate will be informed by e-mail.
 	      <br>
-	      <i class="fas fa-users"> Other candidates will be noticed that they have not been retained.</i> 
+	      <i class="fas fa-users text-primary"></i> Other candidates will be noticed that they have not been retained.
+	      <br><br>
 	    </div>
-	</div>
 
-	<br>
-
-	<%= link_to "Confirm tenant", confirm_tenant_flat_rental_path(@flat, @rental, dossier_id: @selected_dossier.id), method: :post, class: "btn btn-primary" %>
-
-
+		<div class="text-center">
+			<%= link_to "Confirm tenant", confirm_tenant_flat_rental_path(@flat, @rental, dossier_id: @selected_dossier.id), method: :post, class: "btn btn-primary" %>
+	    </div>
 
 </div>
