@@ -41,8 +41,8 @@
 				</div>
 				<%# BUTTONS %>
 				<% if dossier.status == "visiting" %>
-					<div class="btn btn-warning">
-					<%= link_to "Select", select_tenant_flat_rental_path(@flat, @rental, dossier_id: dossier.id), method: :post %>
+					<div>
+					<%= link_to "Select", select_tenant_flat_rental_path(@flat, @rental, dossier_id: dossier.id), method: :post, class: "btn btn-info" %>
 					</div>
 					
 				<% end %>
