@@ -1,6 +1,6 @@
 <%# HEADER %>
 <%= render 'layouts/shared/dashboard-breadcrumb',
-		title: "You are about to select your new tenant!",
+		title: "You are about to select your new tenant",
 		links: [
 			{ text: "My flat ##{@flat.id}", link: flat_path(@flat.id) },
 			{ text: "Rental ##{@rental.id} (#{@rental.pending ? "pending" : "closed"})" }
@@ -12,14 +12,24 @@
 <div class="container">
 	
 
-<div>
-
-	<p>You have selected <strong><%= @selected_dossier.candidate.first_name %> <%= @selected_dossier.candidate.last_name %> </strong> as your future tenant. The candidate will be informed by e-mail!</p>
-	<p>Other candidates will be noticed that they have not been retained for this rental.</p>
-
-	<div class="btn btn-warning">
-	<%= link_to "Confirm tenant", confirm_tenant_flat_rental_path(@flat, @rental, dossier_id: @selected_dossier.id), method: :post %>
+	<div class="row">
+	  <div class="col-3">
+	      <%= cl_image_tag("Faces/#{@selected_dossier.candidate.facebook_picture_url}",
+	      			:transformation=>[{ :gravity=>"face", :crop=>"crop"}, {:width=>'200', :crop=>"scale"}]
+	      		) %>
+	    </div>
+	    <div class="col-9">
+	      <p>You have selected <strong><%= @selected_dossier.candidate.first_name %> <%= @selected_dossier.candidate.last_name %> </strong> as your future tenant:</p>
+	      <i class="fas fa-user-circle">  The candidate will be informed by e-mail.</i> 
+	      <br>
+	      <i class="fas fa-users"> Other candidates will be noticed that they have not been retained.</i> 
+	    </div>
 	</div>
+
+	<br>
+
+	<%= link_to "Confirm tenant", confirm_tenant_flat_rental_path(@flat, @rental, dossier_id: @selected_dossier.id), method: :post, class: "btn btn-primary" %>
+
 
 
 </div>
