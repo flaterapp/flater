@@ -91,9 +91,9 @@ other_adresses = [
 
 User.all.each do |user|
 
-#####################################################################
+  ###################################################################
   # 1. FAKER - Creating flats with pending rentals (and applications)
-#####################################################################
+  ###################################################################
 
   addresses_1.each do |address|
     nb_rooms = rand(2..4)
@@ -105,8 +105,8 @@ User.all.each do |user|
       # NOTE REALLY USED!
       a_type: "T#{nb_rooms + 1}",
       nb_rooms: nb_rooms,
-      surface: nb_rooms * rand(15..21),
-      furnished: true,
+      surface: rand(9..12) + (nb_rooms * rand(15..21)),
+      furnished: [true, false].sample,
       description: "Very nice flat with awesome view!"
     )
       
@@ -140,9 +140,10 @@ User.all.each do |user|
     end
   end
 
-#########################################################################
- # 2. DEMO DAY - Creating a flat with a pending rental (and applications)
- #########################################################################
+  #########################################################################
+  # 2. DEMO DAY - Creating a flat with a pending rental (and applications)
+  #########################################################################
+
   addresses_2.each do |address|
     flat = Flat.create!(
       address: address,
@@ -171,11 +172,9 @@ User.all.each do |user|
     # Creating several dossiers for the pending rental #
     #--------------------------------------------------#
     
-
     ######## 3 DOSSIERS "OK FOR VISIT" ########
 
     #---------------  1  ---------------#
-
     candidate =  User.create!(
       first_name: "Maria",
       last_name: "Rena",
@@ -196,7 +195,6 @@ User.all.each do |user|
     )
 
     #---------------  2  ---------------#
-
     candidate =  User.create!(
       first_name: "Martin",
       last_name: "Dufort",
@@ -217,10 +215,9 @@ User.all.each do |user|
     )
 
     #---------------  3  ---------------#
-
     candidate =  User.create!(
       first_name: "Joseph",
-      last_name: "Tothau",
+      last_name: "Toteau",
       email: Faker::Internet.email,
       password: pswd,
       facebook_picture_url: "face6",
@@ -236,16 +233,13 @@ User.all.each do |user|
       revenues_proof: "fake_url",
       tax_proof: "fake_url"
     )
-    
-
 
     ######## DOSSIERS "TO IMPROVE" ########
 
     #---------------  1  ---------------#
-
     candidate =  User.create!(
-      first_name: "Norbert",
-      last_name: "Dutreil",
+      first_name: "Benjamin",
+      last_name: "Cibieau",
       email: Faker::Internet.email,
       password: pswd,
       facebook_picture_url: "face11",
@@ -263,10 +257,9 @@ User.all.each do |user|
     )
 
     #---------------  2  ---------------#
-
     candidate =  User.create!(
       first_name: "Kevin",
-      last_name: "Chabanal",
+      last_name: "Chat",
       email: Faker::Internet.email,
       password: pswd,
       facebook_picture_url: "face13",
@@ -285,7 +278,6 @@ User.all.each do |user|
 
 
     #---------------  3  ---------------#
-
     candidate =  User.create!(
       first_name: "Patrica",
       last_name: "Lafond",
@@ -305,13 +297,9 @@ User.all.each do |user|
       tax_proof: nil
     )
 
-
-
     ######## 3 DOSSIERS "NOT SELECTED" ########
 
-
     #---------------  1  ---------------#
-
     candidate =  User.create!(
       first_name: "Clément",
       last_name: "Aubert",
@@ -332,10 +320,9 @@ User.all.each do |user|
     )
 
     #---------------  2  ---------------#
-
     candidate =  User.create!(
       first_name: "Matthieu",
-      last_name: "Deboss",
+      last_name: "Debosse",
       email: Faker::Internet.email,
       password: pswd,
       facebook_picture_url: "face2",
@@ -352,9 +339,7 @@ User.all.each do |user|
       tax_proof: "fake_url"
     )
 
-
     #---------------  3  ---------------#
-
     candidate =  User.create!(
       first_name: "Vincent",
       last_name: "Menon",
@@ -374,10 +359,9 @@ User.all.each do |user|
       tax_proof: nil
     )
 
-
-    #--------------------------#
+    #---------------------------#
     # Creating previous rentals #
-    #--------------------------#
+    #---------------------------#
 
     ####### RENTAL N-1 #######
 
@@ -422,11 +406,11 @@ User.all.each do |user|
 
 end
 
-#####################################################################
+  ###################################################################
   # 3. FAKER - Creating flats with pending rentals (and applications)
-#####################################################################
+  ###################################################################
 
-addresses_3.each do |address|
+  addresses_3.each do |address|
     nb_rooms = rand(2..4)
     flat = Flat.create!(
       address: address,
@@ -472,18 +456,18 @@ addresses_3.each do |address|
       tax_proof: "fake_url",
     )
 
-  # Contractualization: change status of rental and candidate
+    # Contractualization: change status of rental and candidate
     dossier.update!(status: "contracted")
     rental.update!(tenant_id: candidate.id, pending: false)
     flat.update!(to_rent: false)
 
-  # Tenant is now about to leave! Flat is now to re-rent!
+    # Tenant is now about to leave! Flat is now to re-rent!
     flat.update!(to_rent: true)
   end
 
-####################################################################
+  ##################################################################
   # 4. FAKER - Creating flats which are already rented
-####################################################################
+  ##################################################################
 
   addresses_4.each do |address|
     nb_rooms = rand(2..4)
