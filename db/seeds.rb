@@ -427,16 +427,16 @@ end
 #####################################################################
 
 addresses_3.each do |address|
-    nb_rooms = rand(2..4)
+    
     flat = Flat.create!(
       address: address,
       owner: user,
       #NB: important to write "owner" and not to use "owner_id"
       to_rent: true,
       # NOTE REALLY USED!
-      a_type: "T#{nb_rooms + 1}",
-      nb_rooms: nb_rooms,
-      surface: nb_rooms * rand(15..21),
+      a_type: "T#{2 + 1}",
+      nb_rooms: 2,
+      surface: 48,
       furnished: true,
       description: "Very nice flat with awesome view!"
     )
@@ -449,7 +449,7 @@ addresses_3.each do |address|
       description: "A great flat, which is now rented!",
       start_date: Date.today,
       pending: false,
-      initial_rent: rand(13..19) * flat.surface
+      initial_rent: 720
     )
 
     candidate =  User.create!(
