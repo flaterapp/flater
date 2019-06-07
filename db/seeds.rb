@@ -10,7 +10,7 @@
 require 'faker'
 require 'date'
 
-separator = "------------------------------------------------"
+separator = "-------------------------------------------------"
 
 puts separator
 puts "Seed starts..."
@@ -157,7 +157,7 @@ User.all.each do |user|
       description: "Very nice flat with awesome view!"
     )
       
-    # Creating pending rental for each flat
+    # Creating pending rental for the flat
     rental = Rental.create!(
       flat: flat,
       tenant: nil,
@@ -167,8 +167,9 @@ User.all.each do |user|
       initial_rent: 800,
     )
 
-    
-    # Creating several dossiers for each rental
+    #--------------------------------------------------#
+    # Creating several dossiers for the pending rental #
+    #--------------------------------------------------#
     
 
     ######## 3 DOSSIERS "OK FOR VISIT" ########
@@ -373,7 +374,53 @@ User.all.each do |user|
       tax_proof: nil
     )
 
-  end
+
+    #--------------------------#
+    # Creating previous rentals #
+    #--------------------------#
+
+    ####### RENTAL N-1 #######
+
+    candidate =  User.create!(
+      first_name: "Cécile",
+      last_name: "Janin",
+      email: Faker::Internet.email,
+      password: pswd,
+      facebook_picture_url: "face15",
+      role: nil
+    )
+
+    rental = Rental.create!(
+      flat: flat,
+      tenant_id: candidate.id,
+      description: "A great flat!",
+      start_date: Date.today - 365,
+      end_date: Date.today,
+      pending: false,
+      initial_rent: 730,
+    )
+
+    ####### RENTAL N-2 #######
+
+    candidate =  User.create!(
+      first_name: "Andrew",
+      last_name: "Chen",
+      email: Faker::Internet.email,
+      password: pswd,
+      facebook_picture_url: "face16",
+      role: nil
+    )
+    rental = Rental.create!(
+      flat: flat,
+      tenant_id: candidate.id,
+      description: "A great flat!",
+      start_date: Date.today - 2*365,
+      end_date: Date.today - 365,
+      pending: false,
+      initial_rent: 720,
+    )
+
+end
 
 #####################################################################
   # 3. FAKER - Creating flats with pending rentals (and applications)

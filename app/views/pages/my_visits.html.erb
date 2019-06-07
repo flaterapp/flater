@@ -12,7 +12,7 @@
 		<h2>Visit created! <i class="fas fa-check text-primary"></i></h2>
 	<% end %>
 	<% @flats_with_pending_rentals.each do |flat| %>
-		<% if flat.rentals.last.tasks %>
+		<% if flat.pending_rental.last.tasks %>
 			<% flat.pending_rental.last.tasks.each do |visit| %>
 				<div class="row" style="background-color: white; margin:4px; padding:4px ">
 					<div class="col-3">
@@ -22,7 +22,7 @@
 						<%= link_to raw("<i class=\"fas fa-building\"></i>  #{flat.address}"), flat_path(flat), class: "dropdown-item" %>
 					</div>
 					<div class="col-4">
-						<%= link_to raw("<i class=\"fas fa-street-view\"></i>  #{flat.rentals.last.dossiers.where(status: "visiting").count} candidates visiting"), flat_rental_path(flat, flat.pending_rental.first.id), class: "dropdown-item" %>
+						<%= link_to raw("<i class=\"fas fa-street-view\"></i>  #{flat.pending_rental.last.dossiers.where(status: "visiting").count} candidates visiting"), flat_rental_path(flat, flat.pending_rental.last.id), class: "dropdown-item" %>
 					</div>
 				</div>
 			<% end %>
