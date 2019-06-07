@@ -14,6 +14,7 @@ documents = ['latest-revenues', 'tax-notices', 'ID', 'guarantors']
 <%= render 'layouts/shared/dashboard-breadcrumb',
 		title: "#{pluralize(dossier_to_validate, 'applicant')} out of #{dossier_total} #{is_are} selected for visits",
 		links: [
+			{ text: "My flats", link: flats_path },
 			{ text: "My flat ##{@flat.id}", link: flat_path(@flat.id) },
 			{ text: "Rental ##{@rental.id} #{badge(@rental.status[:text], @rental.status[:color], @rental.status[:icon], '', false)}" }
 		],
