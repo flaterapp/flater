@@ -3,22 +3,17 @@
 		id: 'my-visit',
 		title: '<i class="fas fa-street-view text-primary"></i> My visits',
 		links: [
-		 	{ text: "My visits" },
-		# 	{ text: "Create a new rental" }
+			 { text: "My visits" }
 		]
-		# flat: @flat
 %>
 
 <div class="container">
 	<% if @new_visit == true %>
 		<h2>Visit created! <i class="fas fa-check text-primary"></i></h2>
-		<br>	
 	<% end %>
-	
 	<% @flats_with_pending_rentals.each do |flat| %>
-		<% if flat.rentals.last.tasks.count > 0 %>
-			<% flat.rentals.last.tasks.each do |visit| %>
-			
+		<% if flat.rentals.last.tasks %>
+			<% flat.pending_rental.last.tasks.each do |visit| %>
 				<div class="row" style="background-color: white; margin:4px; padding:4px ">
 					<div class="col-3">
 						<%= link_to raw("<i class=\"fas fa-street-view\"></i>  #{visit.date}"), "#", class: "dropdown-item" %>			
@@ -30,10 +25,8 @@
 						<%= link_to raw("<i class=\"fas fa-street-view\"></i>  #{flat.rentals.last.dossiers.where(status: "visiting").count} candidates visiting"), flat_rental_path(flat, flat.pending_rental.first.id), class: "dropdown-item" %>
 					</div>
 				</div>
-
 			<% end %>
 		<% end %>
 	<% end %>
-
 </div>
 
