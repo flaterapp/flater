@@ -1,0 +1,5 @@
+meta_product_name: "Flater"
+meta_title: "Flater - Select, rent and chill"
+meta_description: "A flat management platform to rent easily!"
+meta_image: "logo_flatter-rvb.png" # cover.png should exist in `app/assets/images/`
+twitter_account: "@product_twitter_account"   # required for Twitter Cards
