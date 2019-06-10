@@ -1,7 +1,7 @@
 <% # VARIABLES
 	 bonus = @flat.furnished ? 1.20 : 1
-	 min_rent = rand(14..16)
-	 max_rent = rand(18..20)
+	 min_rent = 13 ####  €/m2 - basis
+	 max_rent = 16 ####  €/m2 - basis
 	 min_rent = @flat.surface * min_rent * bonus
 	 max_rent = @flat.surface * max_rent * bonus
 %>
