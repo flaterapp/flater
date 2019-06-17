@@ -21,6 +21,7 @@ gem 'geocoder'
 gem 'cloudinary', '~> 1.9.1'
 gem 'omniauth-facebook'
 gem 'forest_liana'
+gem 'omniauth-google-oauth2'
 
 
 group :development do

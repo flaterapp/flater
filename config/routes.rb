@@ -10,7 +10,7 @@ Rails.application.routes.draw do
         get 'organize_visit', to: 'rentals#organize_visit'
         post 'select_tenant', to: 'rentals#select_tenant'
         post 'confirm_tenant', to: 'rentals#confirm_tenant'
-      end 
+      end
     end
   end
 
@@ -35,7 +35,6 @@ Rails.application.routes.draw do
   # USERS
   # devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
 
   devise_for :users,
     controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
