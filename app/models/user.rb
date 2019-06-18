@@ -36,8 +36,9 @@ class User < ApplicationRecord
   # has_many :tasks_missed, -> { where(validated: true) where.not(user_id: current_user) }, class_name: 'Assignment'
   # has_many :tasks_missed, through: :assignments_validated, source: :tasks
 
-  # MESSAGES
+  # MESSAGES & CHATROOMS
   has_many :messages, dependent: :destroy
+  after_create :create_user_chat_room
 
   def self.find_for_facebook_oauth(auth)
     user_params = auth.slice("provider", "uid")
@@ -75,5 +76,9 @@ class User < ApplicationRecord
         )
     end
     user
+  end
+
+  def create_user_chat_room
+    ChatRoom.create!(name: user.first_name + user.last_name)
   end
 end

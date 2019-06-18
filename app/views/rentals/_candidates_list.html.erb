@@ -23,7 +23,7 @@
 							<% message_class = 'danger' if status == 'not_selected' %>
 							<% messages_display = messages_count > 0 ? false : true %>
 							<% messages_new = messages_count > 0 ? ['new message', ''].sample : '' %>
-							<span class="mr-2"><%= raw(badge(messages_count, message_class, 'comments', '#', messages_display)) %></span>
+							<span class="mr-2"><%= raw(badge(messages_count, message_class, 'comments', chat_room_path(candidate), messages_display)) %></span>
 							<strong class="new-message"><%= messages_new %></strong>
 						</div>
 					</div>
@@ -45,7 +45,7 @@
 				<%# DOCUMENTS %>
 				<div id="candidate-documents" class="d-flex justify-content-between align-items-center">
 					<strong><i class="fas fa-file-invoice-dollar text-primary"></i> <%= "#{dossier.monthly_revenues}" %>€ / month</strong>
-					<% 
+					<%
 					documents.each do |document|
 						if status == 'visiting' || status == 'ok_for_visit'
 							document_ok = "<i class=\"fas fa-check text-primary\"></i>"
