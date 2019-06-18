@@ -35,6 +35,10 @@ class User < ApplicationRecord
   has_many :tasks_missed, through: :assignments_applied, source: :task
   # has_many :tasks_missed, -> { where(validated: true) where.not(user_id: current_user) }, class_name: 'Assignment'
   # has_many :tasks_missed, through: :assignments_validated, source: :tasks
+
+  # MESSAGES
+  has_many :messages, dependent: :destroy
+
   def self.find_for_facebook_oauth(auth)
     user_params = auth.slice("provider", "uid")
     user_params.merge! auth.info.slice("email", "first_name", "last_name")
@@ -57,18 +61,19 @@ class User < ApplicationRecord
   end
 
   def self.from_omniauth(access_token)
-      data = access_token.info
-      user = User.where(email: data['email']).first
+    data = access_token.info
+    user = User.where(email: data['email']).first
 
-      # Uncomment the section below if you want users to be created if they don't exist
-      unless user
-          user = User.create(
-             email: data['email'],
-             password: Devise.friendly_token[0,20],
-             first_name: data['first_name'],
-             last_name: data['last_name']
-          )
-      end
-      user
+    # Uncomment the section below if you want users to be created if they don't exist
+    unless user
+        user = User.create(
+           email: data['email'],
+           password: Devise.friendly_token[0,20],
+           first_name: data['first_name'],
+           last_name: data['last_name'],
+           avatar_url: data['image']
+        )
+    end
+    user
   end
 end

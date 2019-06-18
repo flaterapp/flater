@@ -31,6 +31,9 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'pages#dashboard'
   get 'my-tasks', to: 'tasks#mytasks'
   get 'my_visits', to: 'pages#my_visits'
+  resources :chat_rooms, only: %i[index show create destroy] do
+    resources :messages, only: %i[create]
+  end
 
   # USERS
   # devise_for :users

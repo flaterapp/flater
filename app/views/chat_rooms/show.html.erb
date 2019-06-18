@@ -1,46 +1,52 @@
-<div class="flat-container">
-  <div class="card-flats">
-    <h1>
-      <i class="fas fa-map-marker-alt small"></i> <strong>Lyon</strong>
-      <span class="badge badge-pill badge-primary"><%= current_user.flats.count %></span>
-    </h1>
-
-    <ul id="flats-map" class="list-group list-group-flush">
-      <li class="list-group-item">
-        <i class="fas fa-building text-muted"></i> <strong>My flats to rent</strong>
-      </li>
-      <% @flats.each do |flat| %>
-        <% if flat.to_rent == true %>
-          <%= render 'flat_item_in_menu',
-              flat: flat %>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4 pr-0">
+      <div class="chat-list">
+        <h4>Chatrooms</h4>
+      </div>
+      <div class="room-list">
+        <% @chat_rooms.each do |chat_room| %>
+          <div class="d-flex justify-content-between">
+            <%= link_to chat_room_path(chat_room)  do %>
+              <p><%= chat_room.name %></p>
+            <% end %>
+            <%= link_to 'X', chat_room_path(chat_room), method: :delete  %>
+          </div>
         <% end %>
-      <% end %>
-      <li class="list-group-item">
-      <i class="fas fa-building text-muted"></i> <strong>My other flats</strong></li>
-      <% @flats.each do |flat| %>
-        <% if flat.to_rent == false %>
-          <%= render 'flat_item_in_menu',
-              flat: flat %>
+        <hr>
+        <%= simple_form_for ChatRoom.new do |f| %>
+          <%= f.input :name, label: false %>
         <% end %>
-      <% end %>
-    </ul>
+      </div>
+    </div>
+    <div class="col-sm-8 pl-0">
+      <div class="chat-header"><h4>#<%= @chat_room.name %></h4></div>
+      <div class="messages">
+        <% @chat_room.messages.each do |message| %>
+          <%= render "messages/message", message: message, user_is_messages_author: message.user == current_user %>
+        <% end %>
+      </div>
+      <div id="create-message">
+        <%= simple_form_for [ @chat_room, Message.new ], remote: true, html: {autocomplete: "off" } do |f| %>
+          <%= f.input :content, label: false %>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
+
 
 <% content_for :after_js do %>
   <script>
     scrollLastMessageIntoView();
-    App['chat_room_<%= @chat_room.id %>'] = App.cable.subscriptions.create(
-      { channel: 'ChatRoomsChannel', chat_room_id: <%= @chat_room.id %> },
-      {
-        received: (data) => {
-          if (data.current_user_id !== <%= current_user.id %>) {
-            const messagesContainer = document.querySelector('.messages');
-            messagesContainer.insertAdjacentHTML('beforeend', data.message_partial);
-            scrollLastMessageIntoView();
-          }
+    App['chat_room_<%= @chat_room.id %>'] = App.cable.subscriptions.create({ channel: 'ChatRoomsChannel', chat_room_id: <%= @chat_room.id %> }, {
+      received: (data) => {
+        if (data.current_user_id !== <%= current_user.id %>) {
+          var messagesContainer = document.querySelector('.messages');
+          messagesContainer.insertAdjacentHTML('beforeend', data.message_partial);
+          scrollLastMessageIntoView();
         }
       }
-    )
+    })
   </script>
 <% end %>

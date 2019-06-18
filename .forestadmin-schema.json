@@ -172,6 +172,22 @@
       "inverse_of": null,
       "widget": null,
       "validations": []
+    }, {
+      "field": "messages",
+      "type": ["Number"],
+      "default_value": null,
+      "enums": null,
+      "integration": null,
+      "is_filterable": false,
+      "is_read_only": false,
+      "is_required": false,
+      "is_sortable": true,
+      "is_virtual": false,
+      "reference": "Message.id",
+      "inverse_of": "chat_room",
+      "relationship": "HasMany",
+      "widget": null,
+      "validations": []
     }],
     "segments": [],
     "actions": []
@@ -659,7 +675,7 @@
       "is_sortable": true,
       "is_virtual": false,
       "reference": "User.id",
-      "inverse_of": null,
+      "inverse_of": "messages",
       "relationship": "BelongsTo",
       "widget": null,
       "validations": []
@@ -675,7 +691,7 @@
       "is_sortable": true,
       "is_virtual": false,
       "reference": "ChatRoom.id",
-      "inverse_of": null,
+      "inverse_of": "messages",
       "relationship": "BelongsTo",
       "widget": null,
       "validations": []
@@ -687,13 +703,16 @@
       "integration": null,
       "is_filterable": true,
       "is_read_only": false,
-      "is_required": false,
+      "is_required": true,
       "is_sortable": true,
       "is_virtual": false,
       "reference": null,
       "inverse_of": null,
       "widget": null,
-      "validations": []
+      "validations": [{
+        "message": null,
+        "type": "is present"
+      }]
     }, {
       "field": "created_at",
       "type": "Date",
@@ -1460,7 +1479,7 @@
     }, {
       "field": "avatar_url",
       "type": "String",
-      "default_value": "https://images.unsplash.com/photo-1537815749002-de6a533c64db?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1145&q=80",
+      "default_value": "http://placehold.it/90x90",
       "enums": null,
       "integration": null,
       "is_filterable": true,
@@ -1676,6 +1695,22 @@
       "is_sortable": true,
       "is_virtual": false,
       "reference": "Task.id",
+      "inverse_of": "user",
+      "relationship": "HasMany",
+      "widget": null,
+      "validations": []
+    }, {
+      "field": "messages",
+      "type": ["Number"],
+      "default_value": null,
+      "enums": null,
+      "integration": null,
+      "is_filterable": false,
+      "is_read_only": false,
+      "is_required": false,
+      "is_sortable": true,
+      "is_virtual": false,
+      "reference": "Message.id",
       "inverse_of": "user",
       "relationship": "HasMany",
       "widget": null,
