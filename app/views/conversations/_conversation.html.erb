@@ -11,7 +11,7 @@
           <%= render 'conversations/conversation_content', direct_messages: conversation.direct_messages, user: user %>
         </ul>
       </div>
-      <%= form_for [conversation, conversation.messages.new], remote: true do |f| %>
+      <%= form_for [conversation, conversation.direct_messages.new], remote: true, html: {autocomplete: "off" } do |f| %>
         <%= f.hidden_field :user_id, value: user.id %>
         <%= f.text_area :body, class: "form-control" %>
         <%= f.submit "Send", class: "btn btn-success" %>

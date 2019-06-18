@@ -43,3 +43,4 @@ import { scrollLastMessageIntoView } from '../plugins/init_autoscroll_messages';
     }
   });
 })();
+

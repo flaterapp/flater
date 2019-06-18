@@ -38,8 +38,8 @@ Rails.application.routes.draw do
   resources :chat_rooms, only: %i[index show create destroy] do
     resources :messages, only: %i[create]
   end
-  resources :direct_messages, only: %i[create]
   resources :conversations, only: %i[index create] do
+    resources :direct_messages, only: %i[create]
     member do
       post :close
     end
