@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'conversations/index'
+  get 'conversations/show'
   # FOREST ADMIN
   mount ForestLiana::Engine => '/forest'
 
@@ -31,8 +33,16 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'pages#dashboard'
   get 'my-tasks', to: 'tasks#mytasks'
   get 'my_visits', to: 'pages#my_visits'
+
+  #CHATROOM & CONVERSATIONS
   resources :chat_rooms, only: %i[index show create destroy] do
     resources :messages, only: %i[create]
+  end
+  resources :direct_messages, only: %i[create]
+  resources :conversations, only: %i[index create] do
+    member do
+      post :close
+    end
   end
 
   # USERS

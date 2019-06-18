@@ -38,7 +38,9 @@ class User < ApplicationRecord
 
   # MESSAGES & CHATROOMS
   has_many :messages, dependent: :destroy
-  after_create :create_user_chat_room
+  has_many :direct_messages, dependent: :destroy
+  has_many :conversations, foreign_key: :sender_id
+  has_many :chat_rooms
 
   def self.find_for_facebook_oauth(auth)
     user_params = auth.slice("provider", "uid")
@@ -76,9 +78,5 @@ class User < ApplicationRecord
         )
     end
     user
-  end
-
-  def create_user_chat_room
-    ChatRoom.create!(name: user.first_name + user.last_name)
   end
 end

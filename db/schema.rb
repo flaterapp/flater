@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_18_115352) do
+ActiveRecord::Schema.define(version: 2019_06_18_134926) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,26 @@ ActiveRecord::Schema.define(version: 2019_06_18_115352) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "conversations", force: :cascade do |t|
+    t.integer "recipient_id"
+    t.integer "sender_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipient_id", "sender_id"], name: "index_conversations_on_recipient_id_and_sender_id", unique: true
+    t.index ["recipient_id"], name: "index_conversations_on_recipient_id"
+    t.index ["sender_id"], name: "index_conversations_on_sender_id"
+  end
+
+  create_table "direct_messages", force: :cascade do |t|
+    t.text "body"
+    t.bigint "user_id"
+    t.bigint "conversation_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["conversation_id"], name: "index_direct_messages_on_conversation_id"
+    t.index ["user_id"], name: "index_direct_messages_on_user_id"
   end
 
   create_table "dossiers", force: :cascade do |t|
@@ -133,6 +153,8 @@ ActiveRecord::Schema.define(version: 2019_06_18_115352) do
 
   add_foreign_key "assignments", "tasks"
   add_foreign_key "assignments", "users"
+  add_foreign_key "direct_messages", "conversations"
+  add_foreign_key "direct_messages", "users"
   add_foreign_key "dossiers", "rentals"
   add_foreign_key "dossiers", "users", column: "candidate_id"
   add_foreign_key "flats", "users", column: "owner_id"
