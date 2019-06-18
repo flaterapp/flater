@@ -35,7 +35,7 @@
 	<%# GUESY MENU %>
 	<% else %>
 		<div class="dropdown-item"><%= link_to "Sign in with email", new_user_session_path, class: "btn btn-primary btn-block text-left" %></div>
-		<div class="dropdown-item"><%= link_to raw("Sign in with Facebook <i class=\"fab fa-facebook\"></i>"), 'users/auth/facebook', class: "btn btn-sm btn-outline-secondary btn-block text-left d-flex justify-content-between align-items-center" %></div>
+    <%= render "devise/shared/links-sidebar" %>
 		<div class="dropdown-divider"></div>
 		<div class="dropdown-item"><%= link_to "Create an account", new_user_registration_path, class: "btn btn-sm btn-outline-secondary btn-block text-left" %></div>
 	<% end %>
