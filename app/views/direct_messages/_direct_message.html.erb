@@ -1,7 +1,6 @@
 <li>
-  <div class="row">
-    <div class="<%= user.id == direct_message.user_id ? 'message-sent' : 'message-received' %>">
-      <%= direct_message.body %>
-    </div>
+  <div class="message <%= direct_message.user == current_user ? "right" : "" %>">
+    <%= image_tag direct_message.user.avatar_url, class: "avatar" %>
+    <div class="message-content"><%= direct_message.body %></div>
   </div>
 </li>
