@@ -1,17 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-4 pr-0">
-      <div class="chat-list">
-        <h4>My messages:</h4>
-      </div>
-      <div class="room-list">
-        <% @conversations.each do |conversation| %>
-          <div class="d-flex justify-content-between">
-            <p><%= link_to conversation.opposed_user(current_user).first_name + ' ' + conversation.opposed_user(current_user).last_name, conversations_path(user_id: conversation.opposed_user(current_user)), method: :post %></p>
-          </div>
-        <% end %>
-        <hr>
-      </div>
+      <%= render 'conversation_list' %>
     </div>
     <div class="col-sm-8 pl-0">
       <div class="chat-header"><h4>#<%= @conversation.opposed_user(current_user).first_name + ' ' + @conversation.opposed_user(current_user).last_name %></h4></div>

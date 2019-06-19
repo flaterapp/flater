@@ -40,6 +40,7 @@ class User < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :direct_messages, dependent: :destroy
   has_many :chat_rooms
+  has_many :conversations, through: :direct_messages
 
   def self.find_for_facebook_oauth(auth)
     user_params = auth.slice("provider", "uid")
@@ -77,5 +78,15 @@ class User < ApplicationRecord
         )
     end
     user
+  end
+
+  def avatar
+    if !avatar_url.nil?
+      avatar_url
+    elsif !facebook_picture_url.nil?
+      facebook_picture_url
+    else
+      "http://placehold.it/90x90"
+    end
   end
 end
