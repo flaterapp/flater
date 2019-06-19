@@ -1,0 +1,16 @@
+<%- if devise_mapping.omniauthable? %>
+  <div class="dropdown-item">
+    <%= link_to(user_google_oauth2_omniauth_authorize_path) do %>
+      <div class="btn btn-outline-primary w-100">
+        <i class="fab fa-google"></i> <span>Sign in with Google</span>
+      </div>
+    <% end %>
+  </div>
+  <div class="dropdown-item">
+    <%= link_to(user_facebook_omniauth_authorize_path) do %>
+      <div class="btn btn-outline-primary w-100">
+        <i class="fab fa-facebook"></i> <span>Sign in with Facebook</span>
+      </div>
+    <% end %>
+  </div>
+<% end %>

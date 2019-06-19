@@ -1,0 +1,14 @@
+<div class="chat-list">
+  <h4>My messages:</h4>
+</div>
+<div class="room-list">
+  <% @conversations.each do |conversation| %>
+    <div class="d-flex justify-content-between">
+      <span>
+        <%= link_to conversation.opposed_user(current_user).first_name + ' ' + conversation.opposed_user(current_user).last_name, conversations_path(user_id: conversation.opposed_user(current_user)), method: :post %>
+      </span>
+
+    </div>
+  <% end %>
+  <hr>
+</div>

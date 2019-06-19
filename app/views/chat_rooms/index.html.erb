@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4 pr-0">
+      <div class="chat-list">
+        <h4>Chatrooms</h4>
+      </div>
+      <div class="room-list">
+        <% @chat_rooms.each do |chat_room| %>
+          <div class="d-flex justify-content-between">
+            <%= link_to chat_room_path(chat_room)  do %>
+              <p><%= chat_room.name %></p>
+            <% end %>
+            <%= link_to 'X', chat_room_path(chat_room), method: :delete  %>
+          </div>
+        <% end %>
+        <hr>
+        <%= simple_form_for ChatRoom.new do |f| %>
+          <%= f.input :name, label: false %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-sm-8 pl-0">
+    </div>
+  </div>
+</div>

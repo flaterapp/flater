@@ -22,3 +22,7 @@ import { addFlashMessage } from '../plugins/init_flash_messages';
 initTyped()
 
 
+// AUTOSCROLL FOR MESSAGES
+import { scrollLastMessageIntoView } from '../plugins/init_autoscroll_messages';
+
+
