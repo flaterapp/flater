@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4 pr-0">
+      <%= render 'conversation_list' %>
+    </div>
+    <div class="col-sm-8 pl-0">
+      <div class="chat-header"><h4>#<%= @conversation.opposed_user(current_user).first_name + ' ' + @conversation.opposed_user(current_user).last_name %></h4></div>
+      <div class="messages">
+        <% @conversation.direct_messages.order(:created_at).each do |direct_message| %>
+          <%= render "direct_messages/direct_message", direct_message: direct_message, user_is_messages_author: direct_message.user == current_user %>
+        <% end %>
+      </div>
+      <div id="create-message">
+        <%= simple_form_for [ @conversation, DirectMessage.new ], remote: true, html: {autocomplete: "off" } do |f| %>
+          <%= f.input :body, label: false %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<% content_for :after_js do %>
+  <script>
+    function scrollLastMessageIntoView() {
+      const messages = document.querySelectorAll('.message');
+      const lastMessage = messages[messages.length - 1];
+
+      if (lastMessage !== undefined) {
+        lastMessage.scrollIntoView();
+      }
+    }
+
+    // Updating messages as read
+    function updateRead(datas) {
+      const csrf = document.querySelector("meta[name='csrf-token']").getAttribute("content");
+      fetch(`<%= "/conversations/#{@conversation.id}/direct_messages/"%>${datas.message_id}`, {
+        method: "PUT",
+        headers: {
+           'Content-Type': 'application/json',
+           'X-CSRF-Token': csrf
+         },
+        body: JSON.stringify({ query: datas })
+      })
+    };
+
+    scrollLastMessageIntoView();
+    App['conversation_<%= @conversation.id %>'] = App.cable.subscriptions.create({ channel: 'ConversationChannel', conversation_id: <%= @conversation.id %> }, {
+      received: (data) => {
+        if (data.current_user_id !== <%= current_user.id %>) {
+          var messagesContainer = document.querySelector('.messages');
+          messagesContainer.insertAdjacentHTML('beforeend', data.message_partial);
+          updateRead(data)
+          scrollLastMessageIntoView();
+        }
+      }
+    })
+  </script>
+<% end %>

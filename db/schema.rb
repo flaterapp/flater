@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_31_100114) do
+ActiveRecord::Schema.define(version: 2019_06_19_150752) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,33 @@ ActiveRecord::Schema.define(version: 2019_05_31_100114) do
     t.datetime "updated_at", null: false
     t.index ["task_id"], name: "index_assignments_on_task_id"
     t.index ["user_id"], name: "index_assignments_on_user_id"
+  end
+
+  create_table "chat_rooms", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "conversations", force: :cascade do |t|
+    t.integer "recipient_id"
+    t.integer "sender_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipient_id", "sender_id"], name: "index_conversations_on_recipient_id_and_sender_id", unique: true
+    t.index ["recipient_id"], name: "index_conversations_on_recipient_id"
+    t.index ["sender_id"], name: "index_conversations_on_sender_id"
+  end
+
+  create_table "direct_messages", force: :cascade do |t|
+    t.string "body"
+    t.bigint "user_id"
+    t.bigint "conversation_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "read", default: false
+    t.index ["conversation_id"], name: "index_direct_messages_on_conversation_id"
+    t.index ["user_id"], name: "index_direct_messages_on_user_id"
   end
 
   create_table "dossiers", force: :cascade do |t|
@@ -57,6 +84,16 @@ ActiveRecord::Schema.define(version: 2019_05_31_100114) do
     t.float "latitude"
     t.float "longitude"
     t.index ["owner_id"], name: "index_flats_on_owner_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "chat_room_id"
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chat_room_id"], name: "index_messages_on_chat_room_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "rentals", force: :cascade do |t|
@@ -110,15 +147,20 @@ ActiveRecord::Schema.define(version: 2019_05_31_100114) do
     t.string "facebook_picture_url"
     t.string "token"
     t.datetime "token_expiry"
+    t.string "avatar_url"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "assignments", "tasks"
   add_foreign_key "assignments", "users"
+  add_foreign_key "direct_messages", "conversations"
+  add_foreign_key "direct_messages", "users"
   add_foreign_key "dossiers", "rentals"
   add_foreign_key "dossiers", "users", column: "candidate_id"
   add_foreign_key "flats", "users", column: "owner_id"
+  add_foreign_key "messages", "chat_rooms"
+  add_foreign_key "messages", "users"
   add_foreign_key "rentals", "flats"
   add_foreign_key "rentals", "users", column: "tenant_id"
   add_foreign_key "tasks", "rentals"

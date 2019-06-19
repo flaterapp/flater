@@ -6,7 +6,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'pg', '~> 0.21'
 gem 'puma'
 gem 'rails', '5.2.3'
-gem 'redis'
+gem 'redis', '3.0.0'
+gem 'jquery-rails'
 
 gem 'autoprefixer-rails'
 gem 'faker'
@@ -21,6 +22,7 @@ gem 'geocoder'
 gem 'cloudinary', '~> 1.9.1'
 gem 'omniauth-facebook'
 gem 'forest_liana'
+gem 'omniauth-google-oauth2'
 
 
 group :development do

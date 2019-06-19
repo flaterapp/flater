@@ -24,6 +24,7 @@ Rental.destroy_all
 Dossier.destroy_all
 Assignment.destroy_all
 Task.destroy_all
+Conversation.destroy_all
 
 puts "... Database is empty! ✔"
 
@@ -109,7 +110,7 @@ User.all.each do |user|
       furnished: [true, false].sample,
       description: "Very nice flat with awesome view!"
     )
-      
+
     # Creating pending rental for each flat
     rental = Rental.create!(
       flat: flat,
@@ -119,7 +120,7 @@ User.all.each do |user|
       pending: true,
       initial_rent: rand(13..19) * flat.surface
     )
-    
+
     # Creating several dossiers for each rental
     rand(2..12).times do
       candidate =  User.create!(
@@ -127,7 +128,7 @@ User.all.each do |user|
         last_name: Faker::Name.last_name,
         email: Faker::Internet.email,
         password: pswd,
-        facebook_picture_url: "face#{rand(2..12)}",
+        avatar_url: "http://res.cloudinary.com/dtwpyokni/image/upload/c_crop,g_face,r_max/c_scale,w_200/v1/Faces/face#{rand(2..12)}",
         role: nil
       )
       Dossier.create!(
@@ -157,7 +158,7 @@ User.all.each do |user|
       furnished: true,
       description: "Very nice flat with awesome view!"
     )
-      
+
     # Creating pending rental for the flat
     rental = Rental.create!(
       flat: flat,
@@ -172,6 +173,7 @@ User.all.each do |user|
     # Creating several dossiers for the pending rental #
     #--------------------------------------------------#
     
+
     ######## 3 DOSSIERS "OK FOR VISIT" ########
 
     #---------------  1  ---------------#
@@ -180,7 +182,7 @@ User.all.each do |user|
       last_name: "Rena",
       email: Faker::Internet.email,
       password: pswd,
-      facebook_picture_url: "face10",
+      avatar_url: "http://res.cloudinary.com/dtwpyokni/image/upload/c_crop,g_face,r_max/c_scale,w_200/v1/Faces/face10",
       role: nil
     )
     Dossier.create!(
@@ -200,7 +202,7 @@ User.all.each do |user|
       last_name: "Dufort",
       email: Faker::Internet.email,
       password: pswd,
-      facebook_picture_url: "face4",
+      avatar_url: "http://res.cloudinary.com/dtwpyokni/image/upload/c_crop,g_face,r_max/c_scale,w_200/v1/Faces/face#{rand(2..12)}",
       role: nil
     )
     Dossier.create!(
@@ -220,7 +222,7 @@ User.all.each do |user|
       last_name: "Toteau",
       email: Faker::Internet.email,
       password: pswd,
-      facebook_picture_url: "face6",
+      avatar_url: "http://res.cloudinary.com/dtwpyokni/image/upload/c_crop,g_face,r_max/c_scale,w_200/v1/Faces/face#{rand(2..12)}",
       role: nil
     )
     Dossier.create!(
@@ -234,6 +236,7 @@ User.all.each do |user|
       tax_proof: "fake_url"
     )
 
+
     ######## DOSSIERS "TO IMPROVE" ########
 
     #---------------  1  ---------------#
@@ -242,7 +245,7 @@ User.all.each do |user|
       last_name: "Cibieau",
       email: Faker::Internet.email,
       password: pswd,
-      facebook_picture_url: "face11",
+      avatar_url: "http://res.cloudinary.com/dtwpyokni/image/upload/c_crop,g_face,r_max/c_scale,w_200/v1/Faces/face#{rand(2..12)}",
       role: nil
     )
     Dossier.create!(
@@ -262,7 +265,7 @@ User.all.each do |user|
       last_name: "Chat",
       email: Faker::Internet.email,
       password: pswd,
-      facebook_picture_url: "face13",
+      avatar_url: "http://res.cloudinary.com/dtwpyokni/image/upload/c_crop,g_face,r_max/c_scale,w_200/v1/Faces/face#{rand(2..12)}",
       role: nil
     )
     Dossier.create!(
@@ -283,7 +286,7 @@ User.all.each do |user|
       last_name: "Lafond",
       email: Faker::Internet.email,
       password: pswd,
-      facebook_picture_url: "face8",
+      avatar_url: "http://res.cloudinary.com/dtwpyokni/image/upload/c_crop,g_face,r_max/c_scale,w_200/v1/Faces/face#{rand(2..12)}",
       role: nil
     )
     Dossier.create!(
@@ -305,7 +308,7 @@ User.all.each do |user|
       last_name: "Aubert",
       email: Faker::Internet.email,
       password: pswd,
-      facebook_picture_url: "face3",
+      avatar_url: "http://res.cloudinary.com/dtwpyokni/image/upload/c_crop,g_face,r_max/c_scale,w_200/v1/Faces/face#{rand(2..12)}",
       role: nil
     )
     Dossier.create!(
@@ -325,7 +328,7 @@ User.all.each do |user|
       last_name: "Debosse",
       email: Faker::Internet.email,
       password: pswd,
-      facebook_picture_url: "face2",
+      avatar_url: "http://res.cloudinary.com/dtwpyokni/image/upload/c_crop,g_face,r_max/c_scale,w_200/v1/Faces/face#{rand(2..12)}",
       role: nil
     )
     Dossier.create!(
@@ -345,7 +348,7 @@ User.all.each do |user|
       last_name: "Menon",
       email: Faker::Internet.email,
       password: pswd,
-      facebook_picture_url: "face12",
+      avatar_url: "http://res.cloudinary.com/dtwpyokni/image/upload/c_crop,g_face,r_max/c_scale,w_200/v1/Faces/face#{rand(2..12)}",
       role: nil
     )
     Dossier.create!(
@@ -370,7 +373,7 @@ User.all.each do |user|
       last_name: "Janin",
       email: Faker::Internet.email,
       password: pswd,
-      facebook_picture_url: "face15",
+      avatar_url: "http://res.cloudinary.com/dtwpyokni/image/upload/c_crop,g_face,r_max/c_scale,w_200/v1/Faces/face#{rand(2..12)}",
       role: nil
     )
 
@@ -391,7 +394,7 @@ User.all.each do |user|
       last_name: "Chen",
       email: Faker::Internet.email,
       password: pswd,
-      facebook_picture_url: "face16",
+      avatar_url: "http://res.cloudinary.com/dtwpyokni/image/upload/c_crop,g_face,r_max/c_scale,w_200/v1/Faces/face#{rand(2..12)}",
       role: nil
     )
     rental = Rental.create!(
@@ -411,7 +414,7 @@ end
   ###################################################################
 
 addresses_3.each do |address|
-    
+
     flat = Flat.create!(
       address: address,
       owner: user,
@@ -441,7 +444,7 @@ addresses_3.each do |address|
       last_name: Faker::Name.last_name,
       email: Faker::Internet.email,
       password: pswd,
-      facebook_picture_url: "face#{rand(2..12)}",
+      avatar_url: "http://res.cloudinary.com/dtwpyokni/image/upload/c_crop,g_face,r_max/c_scale,w_200/v1/Faces/face#{rand(2..12)}",
       role: nil
     )
 
@@ -500,7 +503,7 @@ addresses_3.each do |address|
       last_name: Faker::Name.last_name,
       email: Faker::Internet.email,
       password: pswd,
-      facebook_picture_url: "face#{rand(2..12)}",
+      avatar_url: "http://res.cloudinary.com/dtwpyokni/image/upload/c_crop,g_face,r_max/c_scale,w_200/v1/Faces/face#{rand(2..12)}",
       role: nil
     )
 

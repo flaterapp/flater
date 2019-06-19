@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   # FOREST ADMIN
   mount ForestLiana::Engine => '/forest'
 
@@ -10,7 +9,7 @@ Rails.application.routes.draw do
         get 'organize_visit', to: 'rentals#organize_visit'
         post 'select_tenant', to: 'rentals#select_tenant'
         post 'confirm_tenant', to: 'rentals#confirm_tenant'
-      end 
+      end
     end
   end
 
@@ -32,10 +31,17 @@ Rails.application.routes.draw do
   get 'my-tasks', to: 'tasks#mytasks'
   get 'my_visits', to: 'pages#my_visits'
 
+  #CHATROOM & CONVERSATIONS
+  resources :chat_rooms, only: %i[index show create destroy] do
+    resources :messages, only: %i[create]
+  end
+  resources :conversations, only: %i[index show create destroy] do
+    resources :direct_messages, only: %i[create update]
+  end
+
   # USERS
   # devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
 
   devise_for :users,
     controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }

@@ -3,8 +3,7 @@
 		<h4>
 			<%# USER HEADER %>
 			<% if user_signed_in? %>
-				<% avatar_url = current_user.facebook_picture_url || "http://placehold.it/90x90" %>
-				<%= image_tag avatar_url, class: "avatar", id: "avatar" %>
+				<%= image_tag current_user.avatar, class: "avatar", id: "avatar" %>
 
 				<%#= image_tag "https://res.cloudinary.com/dtwpyokni/image/upload/v1558705228/maxime.jpg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
 				Hi <%= current_user.first_name %>!
@@ -21,7 +20,7 @@
 	<% if user_signed_in? %>
 		<h5 class="nav-link text-primary small">Renting</h5>
 		<%= link_to raw("<i class=\"fas fa-tachometer-alt\"></i> My dashboard"), dashboard_path, class: "dropdown-item" %>
-		<%= link_to raw("<i class=\"fas fa-comments\"></i> My messages <span class=\"badge badge-pill badge-primary\">#{rand(1..10)}</span>"), '#', class: "dropdown-item" %>
+		<%= link_to raw("<i class=\"fas fa-comments\"></i> My messages <span class=\"badge badge-pill badge-primary\">#{rand(1..10)}</span>"), conversations_path, class: "dropdown-item" %>
 		<%= link_to raw("<i class=\"fas fa-building\"></i> My flats <span class=\"badge badge-pill badge-primary\">#{current_user.flats.count}</span>"), flats_path, class: "dropdown-item" %>
 		<%= link_to raw("<i class=\"fas fa-file-import\"></i> My applications"), '#', class: "dropdown-item" %>
 		<%= link_to raw("<i class=\"fas fa-street-view\"></i> My visits"), my_visits_path, class: "dropdown-item" %>
@@ -35,7 +34,7 @@
 	<%# GUESY MENU %>
 	<% else %>
 		<div class="dropdown-item"><%= link_to "Sign in with email", new_user_session_path, class: "btn btn-primary btn-block text-left" %></div>
-		<div class="dropdown-item"><%= link_to raw("Sign in with Facebook <i class=\"fab fa-facebook\"></i>"), 'users/auth/facebook', class: "btn btn-sm btn-outline-secondary btn-block text-left d-flex justify-content-between align-items-center" %></div>
+    <%= render "devise/shared/links-sidebar" %>
 		<div class="dropdown-divider"></div>
 		<div class="dropdown-item"><%= link_to "Create an account", new_user_registration_path, class: "btn btn-sm btn-outline-secondary btn-block text-left" %></div>
 	<% end %>
