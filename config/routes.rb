@@ -36,7 +36,7 @@ Rails.application.routes.draw do
     resources :messages, only: %i[create]
   end
   resources :conversations, only: %i[index show create destroy] do
-    resources :direct_messages, only: %i[create]
+    resources :direct_messages, only: %i[create update]
   end
 
   # USERS

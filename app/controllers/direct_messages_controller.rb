@@ -17,6 +17,17 @@ class DirectMessagesController < ApplicationController
     end
   end
 
+  def update
+    # <ActionController::Parameters {, "controller"=>"direct_messages", "action"=>"update", "conversation_id"=>"20", "id"=>"82", "direct_message"=>{}} permitted: false>
+    p 'toto'
+    direct_message = DirectMessage.find(params['id'])
+    unless direct_message.user == current_user
+      direct_message.direct_message_read
+    end
+    p direct_message
+    p 'otot'
+  end
+
   private
 
   def direct_message_params

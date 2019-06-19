@@ -16,13 +16,18 @@
 						</div>
 						<%# CHAT MESSAGING %>
 						<div>
-							<% messages_count = [0, 1, rand(0..10)].sample %>
+              <% @conversation = Conversation.get(candidate.id, current_user.id) %>
+              <% if @conversation %>
+							  <% messages_count = @conversation.direct_messages.where(user: @conversation.opposed_user(current_user)).where(read: false).count %>
+              <% else %>
+                <% messages_count = 0 %>
+              <% end %>
 							<% message_class = 'info' if status == 'visiting' %>
 							<% message_class = 'primary' if status == 'ok_for_visit' %>
 							<% message_class = 'warning' if status == 'to_improve' %>
 							<% message_class = 'danger' if status == 'not_selected' %>
 							<% messages_display = messages_count > 0 ? false : true %>
-							<% messages_new = messages_count > 0 ? ['new message', ''].sample : '' %>
+							<% messages_new = messages_count > 0 ? 'new message' : '' %>
 							<span class="mr-2">
                 <%= raw(badge(messages_count, message_class, 'comments', conversations_path(user_id: candidate), messages_display,  methode: 'post')) %></span>
 							<strong class="new-message"><%= messages_new %></strong>

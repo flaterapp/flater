@@ -8,13 +8,18 @@ class DirectMessage < ApplicationRecord
     user == some_user
   end
 
+  def direct_message_read
+    update(read: true)
+  end
+
   def broadcast_message
     ActionCable.server.broadcast("conversation_#{conversation.id}", {
       message_partial: ApplicationController.renderer.render(
         partial: "direct_messages/direct_message",
         locals: { direct_message: self, user_is_messages_author: false }
       ),
-      current_user_id: user.id
+      current_user_id: user.id,
+      message_id: self.id
     })
   end
 end
