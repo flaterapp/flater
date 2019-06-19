@@ -39,7 +39,6 @@ class User < ApplicationRecord
   # MESSAGES & CHATROOMS
   has_many :messages, dependent: :destroy
   has_many :direct_messages, dependent: :destroy
-  has_many :conversations, foreign_key: :sender_id
   has_many :chat_rooms
 
   def self.find_for_facebook_oauth(auth)

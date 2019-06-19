@@ -4,7 +4,7 @@ module ApplicationHelper
   def resource_name
     :user
   end
- 
+
   def resource
     @resource ||= User.new
   end
@@ -12,7 +12,7 @@ module ApplicationHelper
   def resource_class
     User
   end
- 
+
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
   end
@@ -22,12 +22,12 @@ module ApplicationHelper
     return text.length > size ? "#{text.first(size / 2)}... #{text.last(size / 3)}" : text
   end
 
-  def badge(data, format = 'primary', icon = '', link = '', hide = true)
+  def badge(data, format = 'primary', icon = '', link = '', hide = true, methode = 'get')
     badge_class = "badge-custom badge-#{format}"
     icon = "<i class=\"fas fa-#{icon}\"></i>" if icon != ''
     data = hide ? "<strong>#{data}</strong>" : "<b>#{data}</b>"
     if link != ''
-      "<a href=\"#{link}\" class=\"#{badge_class}\">#{icon}#{data}</a>"
+      "<a href=\"#{link}\" data-method=\"#{methode}\" class=\"#{badge_class}\">#{icon}#{data}</a>"
     else
       "<span class=\"#{badge_class}\">#{icon}#{data}</span>"
     end

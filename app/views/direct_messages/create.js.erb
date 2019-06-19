@@ -1,0 +1,15 @@
+function insertMessage(message) {
+  const messagesContainer = document.querySelector('.messages');
+  messagesContainer.insertAdjacentHTML('beforeend', message);
+  const input = document.querySelector('#direct_message_body');
+  input.value = '';
+  input.blur();
+  scrollLastMessageIntoView();
+}
+
+
+<% if @direct_message.errors.any? %>
+  // handle validation errors later
+<% else %>
+  insertMessage('<%= j render "direct_message", direct_message: @direct_message, user_is_messages_author: true %>');
+<% end %>

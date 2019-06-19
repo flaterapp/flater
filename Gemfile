@@ -7,6 +7,7 @@ gem 'pg', '~> 0.21'
 gem 'puma'
 gem 'rails', '5.2.3'
 gem 'redis', '3.0.0'
+gem 'jquery-rails'
 
 gem 'autoprefixer-rails'
 gem 'faker'

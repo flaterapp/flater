@@ -1,39 +1,38 @@
 class ConversationsController < ApplicationController
   def index
-    session[:conversations] ||= []
+    @conversations = Conversation.includes(direct_messages: :user)
+  end
 
-    @users = User.all.where.not(id: current_user)
-    @conversations = Conversation.includes(:recipient, :direct_messages).find(session[:conversations])
+  def show
+    @conversations = Conversation.includes(direct_messages: :user)
+    @conversation = Conversation.includes(direct_messages: :user).find(params[:id])
   end
 
   def create
-    @conversation = Conversation.get(current_user.id, params[:user_id])
-
-    add_to_conversations unless conversated?
-
-    respond_to do |format|
-      format.js
+    conversation = Conversation.find_by(recipient_id: params['user_id'])
+    if conversation == nil
+      conversation = Conversation.new
+      conversation.recipient_id = params['user_id']
+      conversation.sender_id = current_user.id
+      conversation.save!
+      respond_to do |format|
+        format.html { redirect_to conversation_path(conversation) }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to conversation_path(conversation) }
+        format.json { head :no_content }
+      end
     end
   end
 
-  def close
+  def destroy
     @conversation = Conversation.find(params[:id])
-
-    session[:conversations].delete(@conversation.id)
-
+    @conversation.destroy
     respond_to do |format|
-      format.js
+      format.html { redirect_to conversations_path, notice: 'Chat-room was successfully destroyed.' }
+      format.json { head :no_content }
     end
-  end
-
-  private
-
-  def add_to_conversations
-    session[:conversations] ||= []
-    session[:conversations] << @conversation.id
-  end
-
-  def conversated?
-    session[:conversations].include?(@conversation.id)
   end
 end

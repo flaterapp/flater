@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2019_06_18_134926) do
   end
 
   create_table "direct_messages", force: :cascade do |t|
-    t.text "body"
+    t.string "body"
     t.bigint "user_id"
     t.bigint "conversation_id"
     t.datetime "created_at", null: false
